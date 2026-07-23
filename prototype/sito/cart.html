@@ -50,6 +50,7 @@
             color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            padding-top: 0;
             overflow-x: hidden;
         }
 
@@ -75,8 +76,10 @@
 
         /* Reference Glassmorphic Header */
         header.glass-header {
-            position: sticky;
+            position: fixed;
             top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
             margin: 0 auto;
             width: calc(100% - 4rem);
@@ -273,7 +276,7 @@
             position: relative;
             text-align: center;
             padding: 11rem 2rem 6rem 2rem;
-            margin-top: -6rem;
+            margin-top: 0;
             padding-top: 10.5rem;
 }
 
@@ -592,6 +595,7 @@
 
         body {
             -webkit-font-smoothing: antialiased;
+            padding-top: 0;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
