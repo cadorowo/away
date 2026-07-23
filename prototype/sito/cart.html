@@ -633,16 +633,16 @@
 
         .hero-bg-mask {
             position: absolute;
-            top: 1rem;
+            top: 0;
             left: 50%;
             transform: translateX(-50%) !important;
             width: calc(100% - 3.5rem) !important;
             max-width: 1360px !important;
-            height: calc(100% - 2rem) !important;
+            height: 100% !important;
             z-index: 1;
             overflow: hidden !important;
             pointer-events: none;
-            border-radius: 36px !important;
+            border-radius: 0 0 36px 36px !important;
         }
 
         .hero-bg-mask img {
@@ -650,7 +650,7 @@
             height: 100% !important;
             object-fit: cover !important;
             filter: brightness(0.88);
-            border-radius: 36px !important;
+            border-radius: 0 0 36px 36px !important;
             mask-image: none !important;
             -webkit-mask-image: none !important;
         }
