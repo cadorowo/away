@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Trofei</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem 0;
+        }
+
+        /* Mobile Viewport Simulation */
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        /* Header App */
+        header {
+            padding: 1rem 1.5rem;
+            min-height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 { font-size: 2rem; margin: 0; }
+        h2 { font-size: 1.8rem; line-height: 1.1; }
+        h3 { font-size: 1.3rem; line-height: 1.2; margin-bottom: 1rem; }
+        h4 { font-size: 1.05rem; line-height: 1.3; margin-bottom: 0.25rem; }
+
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Scrollable Main Content */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 90px; /* Space for fixed Tab Bar */
+        }
+
+        section {
+            padding: 1.5rem;
+            }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            padding: 1rem 0;
+        }
+
+        .stat-col {
+            flex: 1;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .stat-col:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Trophy Grid */
+        .trophy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .trophy-card {
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-color);
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .trophy-card.locked {
+            border: 1px solid var(--border-color);
+            opacity: 0.3;
+        }
+
+        .trophy-thumb {
+            width: 90px;
+            height: 90px;
+            border: 2px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .placeholder-x {
+            font-family: var(--font-main);
+            font-size: 2rem;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        .placeholder-media {
+            width: 100%;
+            height: 180px;
+            border: 2px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            margin: 0.75rem 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 10px, var(--border-color) 10px, var(--border-color) 12px);
+            border-right: 2px solid var(--border-color);
+            width: 70%;
+        }
+
+        .reward-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .reward-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.65rem;
+            font-weight: bold;
+            font-family: var(--font-main);
+            gap: 4px;
+            border-top: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            border-top: 2px solid var(--border-color);
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+        }
+    
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <h1 class="page-title">BACHECA PUNTI</h1>
+        </header>
+
+        <!-- Stats Overview -->
+        <div class="stats-row">
+            <div class="stat-col">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Premi</div>
+            </div>
+            <div class="stat-col">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Partite</div>
+            </div>
+            <div class="stat-col">
+                <div class="stat-number">450</div>
+                <div class="stat-label">Punti</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+
+            <!-- Eventi Community -->
+            <section>
+                <h3>Eventi Community</h3>
+                <p>Usa i tuoi Punti per accedere ad eventi e tornei speciali.</p>
+
+                <div class="trophy-grid">
+                    <!-- Evento 1 -->
+                    <div class="trophy-card" style="padding: 1rem; text-align: left; align-items: flex-start; cursor: pointer;" onclick="window.location.href='dettaglio-evento.html'">
+                        <div class="placeholder-media" style="width: 100%; height: 80px; margin-bottom: 0.75rem;">
+                            <span class="placeholder-x" style="font-size: 1.5rem;">X</span>
+                        </div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Torneo Hawaii</h4>
+                        <p style="font-size: 0.75rem; font-weight: bold; margin-bottom: 0;">200 PT</p>
+                    </div>
+
+                    <!-- Evento 2 -->
+                    <div class="trophy-card" style="padding: 1rem; text-align: left; align-items: flex-start; cursor: pointer; opacity: 0.6;" onclick="window.location.href='dettaglio-evento.html'">
+                        <div class="placeholder-media" style="width: 100%; height: 80px; margin-bottom: 0.75rem;">
+                            <span class="placeholder-x" style="font-size: 1.5rem;">X</span>
+                        </div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Master Padel</h4>
+                        <p style="font-size: 0.75rem; font-weight: bold; margin-bottom: 0;">400 PT</p>
+                    </div>
+
+                    <!-- Evento 3 -->
+                    <div class="trophy-card" style="padding: 1rem; text-align: left; align-items: flex-start; cursor: pointer; opacity: 0.6;" onclick="window.location.href='dettaglio-evento.html'">
+                        <div class="placeholder-media" style="width: 100%; height: 80px; margin-bottom: 0.75rem;">
+                            <span class="placeholder-x" style="font-size: 1.5rem;">X</span>
+                        </div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">DJ Set Marocco</h4>
+                        <p style="font-size: 0.75rem; font-weight: bold; margin-bottom: 0;">600 PT</p>
+                    </div>
+
+                    <!-- Evento 4 -->
+                    <div class="trophy-card" style="padding: 1rem; text-align: left; align-items: flex-start; cursor: pointer; opacity: 0.6;" onclick="window.location.href='dettaglio-evento.html'">
+                        <div class="placeholder-media" style="width: 100%; height: 80px; margin-bottom: 0.75rem;">
+                            <span class="placeholder-x" style="font-size: 1.5rem;">X</span>
+                        </div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Cena Glaciale</h4>
+                        <p style="font-size: 0.75rem; font-weight: bold; margin-bottom: 0;">800 PT</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rewards & Progress -->
+            <section style="border-bottom: none;">
+                <h3>Premi Disponibili</h3>
+                <p>Accumula punti completando partite immersive per sbloccare sconti ed eventi esclusivi.</p>
+                
+                <div class="progress-container" style="margin-bottom: 0.5rem;">
+                    <div class="progress-bar" style="width: 70%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: bold; margin-bottom: 1.5rem;">
+                    <span>450 PT Accumulati</span>
+                    <span>500 PT (Prossimo Premio)</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Premio Riscattabile (200 PT) -->
+                    <div style="border: 2px solid var(--border-color); padding: 1rem; background-color: var(--bg-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Grip Racchetta Speciale</h4>
+                            <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">Costo: 200 PT</p>
+                        </div>
+                        <button class="btn" onclick="alert('Premio riscattato! Mostra questo codice alla reception del club: AWAY-GRIP-450')">RISCATTA</button>
+                    </div>
+
+                    <!-- Premio Bloccato (500 PT) -->
+                    <div style="border: 2px solid var(--border-color); padding: 1rem; background-color: var(--bg-color); display: flex; justify-content: space-between; align-items: center; opacity: 0.6;">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Sconto 10% Partita Immersiva</h4>
+                            <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">Costo: 500 PT</p>
+                        </div>
+                        <button class="btn" disabled>RISCATTA</button>
+                    </div>
+
+                    <!-- Premio Bloccato (800 PT) -->
+                    <div style="border: 2px solid var(--border-color); padding: 1rem; background-color: var(--bg-color); display: flex; justify-content: space-between; align-items: center; opacity: 0.6;">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Clinic Masterclass con Maestro</h4>
+                            <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">Costo: 800 PT</p>
+                        </div>
+                        <button class="btn" disabled>RISCATTA</button>
+                    </div>
+
+                    <!-- Premio Bloccato (1000 PT) -->
+                    <div style="border: 2px solid var(--border-color); padding: 1rem; background-color: var(--bg-color); display: flex; justify-content: space-between; align-items: center; opacity: 0.6;">
+                        <div>
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.25rem;">Partita Immersiva Gratis</h4>
+                            <p style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 0;">Costo: 1000 PT</p>
+                        </div>
+                        <button class="btn" disabled>RISCATTA</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="prenotazioni.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="0" ry="0"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Prenotazioni</span>
+            </a>
+            <a href="minigiochi.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                </svg>
+                <span>Esperienze</span>
+            </a>
+            <a href="punti.html" class="tab-item active">
+                <!-- SVG Trofeo/Coppa per Tab Item active -->
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                    <path d="M12 2a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"></path>
+                </svg>
+                <span>Punti</span>
+            </a>
+            <a href="profilo.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v-2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profilo</span>
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>

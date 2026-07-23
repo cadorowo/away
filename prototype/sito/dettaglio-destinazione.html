@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAY | Scheda Destinazione Hawaii</title>
+
+    <style>
+        /* Canvas & Pure Charcoal Tokens */
+        :root {
+            --bg-color: #161616;
+            --color-primary: #161616;
+            --color-surface-card: #222222;
+            --color-surface-hover: #2A2A2A;
+
+            --color-secondary: #B3E5FF;
+            --color-accent: #EE3810;
+
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        h1 { font-size: 4rem; line-height: 1.05; }
+        h2 { font-size: 2.5rem; line-height: 1.1; }
+        h3 { font-size: 1.65rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Reference Glassmorphic Header */
+        header.glass-header {
+            position: sticky;
+            top: 1.5rem;
+            z-index: 1000;
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .header-logo .logo {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Central Glass Pill Nav */
+        .glass-pill-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            border-radius: 999px;
+            padding: 0.65rem 2.25rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-pill-nav a {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .glass-pill-nav a:hover {
+            color: #B3E5FF;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 300;
+            font-size: 0.85rem;
+            user-select: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-item:hover .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            color: #FFFFFF;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            text-decoration: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            background-color: #2A2A2A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Right Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cta-pill-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.4rem;
+            background-color: #FFFFFF;
+            color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-pill-white:hover {
+            background-color: #F0F0F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #161616;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Detail Container & Grid */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 10rem 2rem 6rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            transition: transform 0.25s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .detail-hero-banner {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .spec-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0 3.5rem 0;
+        }
+
+        .spec-box {
+            background-color: var(--color-surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 1.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .spec-box:hover {
+            transform: translateY(-4px);
+            background-color: var(--color-surface-hover);
+        }
+
+        .spec-box h4 {
+            font-size: 1.1rem;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.04);
+        }
+
+        /* Sticky Booking Sidebar */
+        .booking-card {
+            background-color: var(--color-surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2.5rem;
+            position: sticky;
+            top: 7rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .booking-price {
+            font-size: 2.75rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            margin: 0.5rem 0;
+        }
+
+        .booking-inclusions {
+            list-style: none;
+            margin: 2rem 0 2.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .booking-inclusions li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        .check-pill {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: rgba(238, 56, 16, 0.2);
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #D62D07;
+            border-color: #D62D07;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            
+            margin-top: 6rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            
+        }
+
+        .footer-grid h3 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+        }
+
+        .footer-grid h4 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-grid a {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            color: var(--color-secondary);
+        }
+
+        .newsletter-form input {
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+    
+        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
+        h1, h2, h3, h4 {
+            text-wrap: balance;
+        }
+
+        p, .hero p, .accordion-desc {
+            text-wrap: pretty;
+        }
+
+        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+    
+        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
+        .hero-bg-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .hero-bg-mask::after {
+            display: none !important;
+        }
+
+        .hero-bg-mask {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            height: calc(100% - 4rem);
+            top: 2rem;
+        }
+
+        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        }
+
+    
+        
+        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 2.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 3rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 1.5rem) !important;
+            margin-right: calc(-50vw + 1.5rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 32px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            transform: none !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            filter: brightness(0.95);
+        }
+
+    
+        
+        
+        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
+        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+            background-color: #161616 !important;
+            background: #161616 !important;
+        }
+
+        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 4rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 2rem) !important;
+            margin-right: calc(-50vw + 2rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Reference Glassmorphic Navbar -->
+    <header class="glass-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo">AWAY</a>
+        </div>
+
+        <nav class="glass-pill-nav">
+            <a href="servizio.html">Servizio</a>
+            <span class="nav-divider">|</span>
+            <div class="nav-item">
+                <a href="destinazioni.html" style="color: var(--color-secondary);">Destinazioni</a>
+                <div class="submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii">
+                        <span class="card-title">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=400&q=80" alt="Islanda">
+                        <span class="card-title">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=400&q=80" alt="Marocco">
+                        <span class="card-title">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=400&q=80" alt="Perù">
+                        <span class="card-title">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <span class="nav-divider">|</span>
+            <a href="app.html">App</a>
+            <span class="nav-divider">|</span>
+            <a href="partner.html">Partner</a>
+            <span class="nav-divider">|</span>
+            <a href="palavillage.html">PalaVillage</a>
+            <span class="nav-divider">|</span>
+            <a href="aiuto.html">Aiuto</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="cart.html" class="cart-btn" title="Carrello">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </a>
+            <a href="app.html" class="cta-pill-white">
+                <span>Scarica App</span>
+                <span class="cta-arrow">↗</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Back Navigation Link -->
+        <div>
+            <a href="destinazioni.html" class="back-link">← Torna a tutte le destinazioni</a>
+        </div>
+
+        <!-- High-Res Cover Banner -->
+        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1600&q=85" alt="Hawaii Padel Experience" class="detail-hero-banner">
+
+        <div class="details-grid">
+            <!-- Left Column: Specs & Gallery -->
+            <div>
+                <h1>Hawaii</h1>
+                <p style="font-size: 1.25rem; font-weight: 700; color: var(--color-secondary); margin-bottom: 2rem;">
+                    Un viaggio sensoriale totale tra spiagge vulcaniche, brezza tropicale e suoni dell'oceano.
+                </p>
+                
+                <p style="font-size: 1.05rem; color: var(--text-muted); margin-bottom: 3rem; line-height: 1.8;">
+                    Il campo immersivo Hawaii ti trasporta direttamente sulle coste del Pacifico. L'esperienza unisce la proiezione ad altissima risoluzione dei tramonti vulcanici e il rilascio temporizzato di essenze tropicali di cocco e ibisco. Il tutto è sincronizzato acusticamente con la chitarra acustica hawaiiana di sottofondo per isolarti dal mondo esterno e aumentare la concentrazione.
+                </p>
+
+                <!-- Sensory Specs Grid -->
+                <h3>Specifiche Sensoriali</h3>
+                <div class="specs-grid">
+                    <div class="spec-box">
+                        <span class="spec-badge">Proiezione Visiva</span>
+                        <h4>Visuale 360°</h4>
+                        <p>Tramonti e spiagge hawaiiane proiettati a 360° lungo le pareti perimetrali del campo panoramico.</p>
+                    </div>
+                    <div class="spec-box">
+                        <span class="spec-badge">Diffusione Olfattiva</span>
+                        <h4>Aromaterapia Sync</h4>
+                        <p>Essenze naturali di cocco selvatico, ibisco e sale marino diffuse ciclicamente durante il match.</p>
+                    </div>
+                    <div class="spec-box">
+                        <span class="spec-badge">Design Acustico</span>
+                        <h4>Audio Direzionale</h4>
+                        <p>Rumore bianco delle onde marine e chitarra acustica integrati con la tua playlist preferita.</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Grid -->
+                <h3>Galleria Atmosfere</h3>
+                <div class="gallery-grid">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Atmosfera Hawaii 1">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&q=80" alt="Atmosfera Hawaii 2">
+                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=80" alt="Atmosfera Hawaii 3">
+                </div>
+            </div>
+
+            <!-- Right Column: Sticky Booking Card -->
+            <div>
+                <div class="booking-card">
+                    <h3>Prenota Campo</h3>
+                    <div class="booking-price">€ 140,00</div>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Tariffa fissa per slot da 90 minuti</p>
+
+                    <ul class="booking-inclusions">
+                        <li>
+                            <div class="check-pill"></div>
+                            <span>Campo immersivo panoramico riservato</span>
+                        </li>
+                        <li>
+                            <div class="check-pill"></div>
+                            <span>Configurazione clima, profumo ed audio</span>
+                        </li>
+                        <li>
+                            <div class="check-pill"></div>
+                            <span>Playlist acustica personalizzata</span>
+                        </li>
+                    </ul>
+
+                    <a href="upsell.html" class="btn">Procedi alla Prenotazione</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
+            </div>
+            <div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
+            </div>
+            <div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

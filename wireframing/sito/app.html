@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titolo Pagina App - Away</title>
+    <!-- CSS INLINE per Figma -->
+    
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #F0F0F0;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 4rem; line-height: 1; }
+        h2 { font-size: 3rem; line-height: 1.1; }
+        h3 { font-size: 2rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            text-decoration: none;
+            letter-spacing: -0.05em;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Nav Dropdown Logic */
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            min-width: 200px;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover .submenu {
+            display: flex;
+        }
+
+        .submenu a {
+            font-weight: normal;
+            font-size: 0.9rem;
+            text-transform: none;
+            letter-spacing: normal;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 0.2rem;
+        }
+
+        .submenu a:hover {
+            border-bottom-color: var(--border-color);
+        }
+
+        /* Mega Menu Grid for Specific Nav Items */
+        .submenu-cards {
+            flex-direction: row;
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            /* min-width removed */
+            /* grid removed */
+            gap: 0.5rem;
+        }
+
+        .nav-item:hover .submenu-cards {
+            flex-direction: row;
+            display: flex;
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--text-color);
+            background-color: var(--text-color);
+            padding: 1.5rem 1rem;
+            text-decoration: none;
+            color: var(--bg-color);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            width: 160px;
+            box-sizing: border-box;
+        }
+
+        .menu-card:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .menu-card .card-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+            margin-bottom: 0;
+            display: inline-block;
+        }
+
+        /* Generic Section */
+        section {
+            padding: 6rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">AWAY</a>
+        <nav>
+            <a href="servizio.html">Servizio</a>
+                        <div class="nav-item">
+                <a href="destinazioni.html">Destinazioni</a>
+                <div class="submenu submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <div style="width: 120px; height: 120px; background-color: var(--secondary-color); border: 1px solid var(--bg-color); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; font-family: monospace; font-weight: bold; color: var(--text-color);"><span style="font-family: monospace; font-weight: bold;">X</span></div>
+                        <span class="card-title" style="font-weight:bold;">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <div style="width: 120px; height: 120px; background-color: var(--secondary-color); border: 1px solid var(--bg-color); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; font-family: monospace; font-weight: bold; color: var(--text-color);"><span style="font-family: monospace; font-weight: bold;">X</span></div>
+                        <span class="card-title" style="font-weight:bold;">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <div style="width: 120px; height: 120px; background-color: var(--secondary-color); border: 1px solid var(--bg-color); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; font-family: monospace; font-weight: bold; color: var(--text-color);"><span style="font-family: monospace; font-weight: bold;">X</span></div>
+                        <span class="card-title" style="font-weight:bold;">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <div style="width: 120px; height: 120px; background-color: var(--secondary-color); border: 1px solid var(--bg-color); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; font-family: monospace; font-weight: bold; color: var(--text-color);"><span style="font-family: monospace; font-weight: bold;">X</span></div>
+                        <span class="card-title" style="font-weight:bold;">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <a href="app.html">App</a>
+            <a href="partner.html">Partner</a>
+            <a href="palavillage.html">PalaVillage</a>
+            <a href="aiuto.html">Aiuto</a>
+            <a href="cart.html" style="display: flex; align-items: center; color: var(--text-color); margin-left: 2.5rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg></a>
+            <a href="app.html" class="btn" style="margin-left: 1rem;">Scarica App</a>
+        </nav>
+    </header>
+
+    <main>
+        <section style="text-align: center; padding: 4rem 1rem 2rem 1rem; margin-bottom: 3rem; background-color: transparent; border-bottom: none;">
+            <h1>L'Hub della tua Esperienza</h1>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; margin-bottom: 2rem;">Hai acquistato un viaggio sul sito? Usa l'App AWAY per sincronizzare il tuo ordine, scegliere data e ora, e confermare la prenotazione del campo. Tutto in pochi secondi.</p>
+            <a href="#" class="btn" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Scarica App</a>
+        </section>
+
+        <section id="app-mockups">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Esplora l'App AWAY</h2>
+            <div style="display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;">
+                
+                <div style="width: 250px; height: 500px; border: 1px solid var(--border-color);  position: relative; background-color: var(--bg-color); display: flex; flex-direction: column; overflow: hidden;">
+                    <div style="width: 100px; height: 20px; background-color: var(--border-color);   margin: 0 auto; margin-top: -2px;"></div>
+                    <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; text-align: center;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem;">📱</span>
+                        <h4 style="margin-bottom: 0.5rem;">Schermata Home</h4>
+                        <p style="font-size: 0.8rem;">Il tuo hub personale</p>
+                    </div>
+                </div>
+
+                <div style="width: 250px; height: 500px; border: 1px solid var(--border-color);  position: relative; background-color: var(--secondary-color); display: flex; flex-direction: column; overflow: hidden;">
+                    <div style="width: 100px; height: 20px; background-color: var(--border-color);   margin: 0 auto; margin-top: -2px;"></div>
+                    <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; text-align: center;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem;">📊</span>
+                        <h4 style="margin-bottom: 0.5rem;">Bacheca Viaggi</h4>
+                        <p style="font-size: 0.8rem;">Colleziona timbri e punti</p>
+                    </div>
+                </div>
+                
+                <div style="width: 250px; height: 500px; border: 1px solid var(--border-color);  position: relative; background-color: var(--bg-color); display: flex; flex-direction: column; overflow: hidden;">
+                    <div style="width: 100px; height: 20px; background-color: var(--border-color);   margin: 0 auto; margin-top: -2px;"></div>
+                    <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; text-align: center;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem;">🏆</span>
+                        <h4 style="margin-bottom: 0.5rem;">Schermata Punti Viaggio</h4>
+                        <p style="font-size: 0.8rem;">Controlla i tuoi punti e timbri</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="app-features" style="margin-top: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Tutto il tuo Padel a portata di tap</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="border: 2px solid var(--border-color); padding: 2rem; text-align: center; background-color: var(--bg-color);">
+                    <h3 style="margin-bottom: 0.5rem;">Prenotazioni Rapide</h3>
+                    <p style="font-size: 0.9rem;">Usa il numero ordine del viaggio acquistato sul sito per bloccare il tuo slot orario e il campo al PalaVillage in pochi secondi.</p>
+                </div>
+                <div style="border: 2px solid var(--border-color); padding: 2rem; text-align: center; background-color: var(--bg-color);">
+                    <h3 style="margin-bottom: 0.5rem;">Kit Sensoriali</h3>
+                    <p style="font-size: 0.9rem;">Gestisci le tue playlist Spotify, monitora l'attivazione delle essenze e personalizza l'atmosfera del tuo viaggio in campo.</p>
+                </div>
+                <div style="border: 2px solid var(--border-color); padding: 2rem; text-align: center; background-color: var(--bg-color);">
+                    <h3 style="margin-bottom: 0.5rem;">Esperienze & Punti</h3>
+                    <p style="font-size: 0.9rem;">Colleziona timbri digitali per ogni paese visitato in campo e accumula Punti Viaggio per sbloccare sconti.</p>
+                </div>
+                <div style="border: 2px solid var(--border-color); padding: 2rem; text-align: center; background-color: var(--bg-color);">
+                    <h3 style="margin-bottom: 0.5rem;">Notifiche Smart</h3>
+                    <p style="font-size: 0.9rem;">Ricevi alert sui nuovi viaggi disponibili, notifiche per gli eventi speciali sbloccabili e promemoria per i tuoi match.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="app-showcase" style="margin-top: 4rem; border-top: 2px solid var(--border-color); padding-top: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Oltre la Partita: Impara e Gioca</h2>
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;">
+                <!-- Scopri il Mondo -->
+                <div style="flex: 1; min-width: 300px; max-width: 450px;">
+                    <div style="width: 100%; height: 400px; border: 2px solid var(--border-color); background-color: var(--gray-color); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-bottom: 1.5rem;">
+                        <div style="width: 80%; background-color: var(--bg-color); border: 2px solid var(--border-color); padding: 1.5rem; text-align: center;">
+                            <span style="font-size: 2rem; margin-bottom: 0.5rem; display: block;">💡</span>
+                            <h4 style="margin-bottom: 0.5rem;">Fun Fact Islandese</h4>
+                            <p style="font-size: 0.8rem; font-family: var(--font-main);">Sapevi che il 100% dell'energia in Islanda proviene da fonti rinnovabili?</p>
+                        </div>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; text-align: center;">Scopri il Mondo</h3>
+                    <p style="text-align: center; font-size: 0.9rem;">L'app arricchisce l'esperienza sul campo offrendo trivia, fun fact geografici e curiosità sincronizzate con la mappa immersiva in cui stai giocando.</p>
+                </div>
+
+                <!-- Sfida i Minigiochi -->
+                <div style="flex: 1; min-width: 300px; max-width: 450px;">
+                    <div style="width: 100%; height: 400px; border: 2px solid var(--border-color); background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-bottom: 1.5rem;">
+                        <div style="text-align: center;">
+                            <h3 style="margin-bottom: 1rem; font-family: var(--font-display);">TARGET MODE</h3>
+                            <button style="display: inline-block; padding: 1rem 2rem; background-color: var(--text-color); color: var(--bg-color); text-decoration: none; font-weight: bold; border: 1px solid var(--text-color); font-family: var(--font-main); text-transform: uppercase; font-size: 1.2rem; cursor: default;">START</button>
+                            <p style="margin-top: 1rem; font-family: monospace; font-weight: bold;">RECORD: 1200</p>
+                        </div>
+                    </div>
+                    <h3 style="margin-bottom: 0.5rem; text-align: center;">Sfida i Minigiochi</h3>
+                    <p style="text-align: center; font-size: 0.9rem;">Il campo si trasforma in un videogioco gigante. Usa l'app per avviare minigiochi di precisione o riflessi basati sulle proiezioni interattive, e competi nelle classifiche locali.</p>
+                </div>
+            </div>
+        </section>
+
+                        <section id="app-gamification" style="margin-top: 4rem; border-top: 2px solid var(--border-color); padding-top: 4rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
+                <div>
+                    <h2 style="margin-bottom: 1.5rem;">Eventi Community & Punti Viaggio</h2>
+                    <p style="margin-bottom: 1.5rem;">Giocando nei campi immersivi AWAY sblocchi timbri sul tuo Bacheca Sensoriale e accumuli Punti Viaggio. Usa i tuoi punti nell'App per sbloccare l'accesso a eventi esclusivi e tornei speciali della community.</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 2rem; list-style-type: square;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Tornei Esclusivi Sbloccabili</strong>: Usa i tuoi Punti Viaggio per iscriverti a tornei speciali a tema (es. Torneo Hawaii) con premi fisici e digitali.</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Community Clinic</strong>: Partecipa a lezioni esclusive con maestri federali e campioni di padel, sbloccando gli inviti tramite i tuoi punti accumulati.</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Partite con Ospiti Speciali</strong>: Raggiungi le soglie punti indicate nell'App per sfidare influencer e sportivi professionisti in partite speciali nei campi AWAY.</li>
+                    </ul>
+                    <a href="aiuto.html" class="btn">Partecipa agli Eventi</a>
+                </div>
+                <div style="height: 300px; border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; background-color: var(--secondary-color);">
+                    <span style="font-size: 4rem; opacity: 0.5;"><span style="font-family: monospace; font-weight: bold;">X</span></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center" style="background-color: var(--bg-color); border-bottom: none;">
+            <h2>Titolo Sezione Download</h2>
+            <p style="margin-bottom: 2rem;">Testo di incoraggiamento per il download dell'app.</p>
+            <button class="btn" onclick="alert('Download in corso...')">CTA Download iOS</button>
+            <button class="btn" style="margin-left: 1rem;" onclick="alert('Download in corso...')">CTA Download Android</button>
+        </section>
+    </main>
+
+                            <footer style="padding: 4rem 2rem; border-top: 1px solid var(--border-color); margin-top: 2rem;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; text-align: left; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+            <div>
+                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">AWAY</h3>
+                <p style="margin-bottom: 2rem; line-height: 1.6;">[Breve descrizione del brand e della mission].</p>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Navigazione</h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="servizio.html" style="text-decoration: none;">Servizio</a>
+                    <a href="destinazioni.html" style="text-decoration: none;">Destinazioni</a>
+                    <a href="app.html" style="text-decoration: none;">App</a>
+                    <a href="partner.html" style="text-decoration: none;">Partner</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Supporto</h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="palavillage.html" style="text-decoration: none;">PalaVillage</a>
+                    <a href="aiuto.html" style="text-decoration: none;">Aiuto & FAQ</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Newsletter</h4>
+                <p style="margin-bottom: 1.5rem;">[Testo invito newsletter]</p>
+                <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
+                    <input type="email" placeholder="La tua email" style="padding: 1rem; border: 2px solid var(--border-color); width: 100%; font-family: var(--font-main);">
+                    <button type="submit" class="btn" style="padding: 1rem 2rem;">Iscriviti</button>
+                </form>
+            </div>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto; margin-top: 2rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <p>&copy; [Anno] AWAY. Tutti i diritti riservati.</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Termini di Servizio</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS INLINE -->
+    <script>
+        function openCartMockup(productName) {
+          const modal = document.getElementById('cart-modal');
+          const modalText = document.getElementById('cart-product-name');
+          if (modal && modalText) {
+            modalText.textContent = productName;
+            modal.classList.add('active');
+          }
+        }
+        function closeCartMockup() {
+          const modal = document.getElementById('cart-modal');
+          if (modal) {
+            modal.classList.remove('active');
+          }
+        }
+        function scrollCarousel(direction) {
+          const container = document.getElementById('destinazioni-carousel');
+          if (container) {
+            const scrollAmount = 200 + 32;
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+          }
+        }
+    </script>
+</body>
+</html>

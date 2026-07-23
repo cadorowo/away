@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Nuova Prenotazione</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem 0;
+        }
+
+        /* Mobile Viewport Simulation */
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        /* Header App */
+        header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+            gap: 1rem;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+        }
+
+        .header-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        /* Scrollable Main Content */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 90px; /* Space for fixed Tab Bar */
+        }
+
+        section {
+            padding: 1.5rem;
+            }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+        }
+
+        h3 { font-size: 1.3rem; line-height: 1.2; }
+
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Vertical Destinations list */
+        .destination-card {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .destination-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .destination-media {
+            height: 150px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .placeholder-x {
+            font-family: var(--font-main);
+            font-size: 2.5rem;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        .destination-body {
+            padding: 1rem;
+        }
+
+        .destination-title {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .destination-desc {
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .price-tag {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.65rem;
+            font-weight: bold;
+            font-family: var(--font-main);
+            gap: 4px;
+            border-top: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            border-top: 2px solid var(--border-color);
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+        }
+    
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <button class="back-btn" onclick="window.location.href='prenotazioni.html'">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <span class="header-title">Nuova Prenotazione</span>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Intro -->
+            <section>
+                <h3>Scegli Destinazione</h3>
+                <p>Seleziona lo scenario immersivo per la tua partita. Ciascun viaggio include proiezioni, suoni e fragranze sincronizzate.</p>
+
+                <!-- Hawaii -->
+                <div class="destination-card" onclick="window.location.href='dettaglio-viaggio.html'">
+                    <div class="destination-media">
+                        <span class="placeholder-x">X</span>
+                    </div>
+                    <div class="destination-body">
+                        <div class="destination-title">Hawaii - Tropical Vibes</div>
+                        <div class="destination-desc">Colori caldi, profumo di brezza oceanica ed uno sfondo di spiagge esotiche per il tuo match.</div>
+                        <div class="price-tag">€ 140,00 / 90 min</div>
+                    </div>
+                </div>
+
+                <!-- Marocco -->
+                <div class="destination-card" onclick="window.location.href='dettaglio-viaggio.html'">
+                    <div class="destination-media">
+                        <span class="placeholder-x">X</span>
+                    </div>
+                    <div class="destination-body">
+                        <div class="destination-title">Marocco - Deserto e Magia</div>
+                        <div class="destination-desc">Tonalità calde della terra, architetture moresche e fragranze speziate avvolgenti.</div>
+                        <div class="price-tag">€ 140,00 / 90 min</div>
+                    </div>
+                </div>
+
+                <!-- Perù -->
+                <div class="destination-card" onclick="window.location.href='dettaglio-viaggio.html'">
+                    <div class="destination-media">
+                        <span class="placeholder-x">X</span>
+                    </div>
+                    <div class="destination-body">
+                        <div class="destination-title">Perù - Mistero Andino</div>
+                        <div class="destination-desc">Vegetazione lussureggiante delle Ande, suoni mistici e aromi freschi legnosi.</div>
+                        <div class="price-tag">€ 140,00 / 90 min</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="prenotazioni.html" class="tab-item active">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="0" ry="0"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Prenotazioni</span>
+            </a>
+            <a href="minigiochi.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                </svg>
+                <span>Esperienze</span>
+            </a>
+            <a href="punti.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                    <path d="M12 2a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"></path>
+                </svg>
+                <span>Punti</span>
+            </a>
+            <a href="profilo.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v-2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profilo</span>
+            </a>
+        </nav>
+    </div>
+</body>
+</html>

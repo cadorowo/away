@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAY | Il Servizio - L'Esperienza Immersiva Padel & Travel</title>
+
+    <style>
+        /* Canvas & Pure Charcoal Tokens */
+        :root {
+            --bg-color: #161616;
+            --color-primary: #161616;
+            --color-surface-card: #222222;
+            --color-surface-hover: #2A2A2A;
+
+            --color-secondary: #B3E5FF;
+            --color-accent: #EE3810;
+
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        h1 { font-size: 4.5rem; line-height: 1.05; }
+        h2 { font-size: 2.75rem; line-height: 1.1; }
+        h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Reference Glassmorphic Header */
+        header.glass-header {
+            position: sticky;
+            top: 1.5rem;
+            z-index: 1000;
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .header-logo .logo {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Central Glass Pill Nav */
+        .glass-pill-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            border-radius: 999px;
+            padding: 0.65rem 2.25rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-pill-nav a {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .glass-pill-nav a:hover {
+            color: #B3E5FF;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 300;
+            font-size: 0.85rem;
+            user-select: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-item:hover .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            color: #FFFFFF;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            text-decoration: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            background-color: #2A2A2A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Right Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cta-pill-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.4rem;
+            background-color: #FFFFFF;
+            color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-pill-white:hover {
+            background-color: #F0F0F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #161616;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        
+        /* Hero Section & Radial Mask Overlay */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 10.5rem 2rem 5rem 2rem;
+            margin-top: -6rem;
+            background-color: #161616;
+            border-bottom: none;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        
+
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background-color: rgba(179, 229, 255, 0.15);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.3);
+            border-radius: var(--radius-pill);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            text-shadow: none;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 720px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #D62D07;
+            border-color: #D62D07;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+        }
+
+        /* ASYMMETRIC BENTO GRID FOR BENEFITI */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+        }
+
+        .bento-card {
+            background-color: var(--color-surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-6px);
+            background-color: var(--color-surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bento-card-large {
+            grid-row: span 2;
+            min-height: 480px;
+        }
+
+        .bento-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+        }
+
+        .bento-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 800;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            align-self: flex-start;
+        }
+
+        .bento-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* HORIZONTAL PILL TIMELINE FOR "COME FUNZIONA" */
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .process-step-card {
+            background-color: var(--color-surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 1.75rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .process-step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-secondary);
+            background-color: var(--color-surface-hover);
+        }
+
+        .step-number-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 4px 12px rgba(179, 229, 255, 0.3);
+        }
+
+        .process-step-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* SPLIT FEATURE FOR SCUOLE & AZIENDE */
+        .split-feature {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: center;
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 4.5rem 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .split-feature img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .feature-icon-pill {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(238, 56, 16, 0.2);
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .feature-item-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: #FFFFFF;
+        }
+
+        .feature-item-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* TECH HIGHLIGHT CARD */
+        .tech-card {
+            background: linear-gradient(135deg, #1E1E1E 0%, #282828 100%);
+            border-radius: var(--radius-lg);
+            padding: 4rem 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .tech-spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .tech-spec-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .tech-spec-number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .tech-spec-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            
+        }
+
+        .footer-grid h3 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+        }
+
+        .footer-grid h4 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-grid a {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            color: var(--color-secondary);
+        }
+
+        .newsletter-form input {
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+
+        /* TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) */
+        .typography-statement-section {
+            padding: 7.5rem 2rem;
+            background-color: #161616;
+            border-top: none;
+            border-bottom: none;
+        }
+
+        .statement-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .statement-index {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .statement-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 2.25rem;
+            max-width: 400px;
+        }
+
+        .statement-heading {
+            font-size: 2.85rem;
+            line-height: 1.25;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+        }
+
+        .statement-heading strong {
+            color: #FFFFFF;
+            font-weight: 900;
+        }
+
+        .btn-statement {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.6rem;
+            background-color: #222222;
+            color: #FFFFFF;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-statement:hover {
+            background-color: #2A2A2A;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .circle-arrow {
+            width: 32px;
+            height: 32px;
+            background-color: #FFFFFF;
+            color: #161616;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+    
+        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
+        h1, h2, h3, h4 {
+            text-wrap: balance;
+        }
+
+        p, .hero p, .accordion-desc {
+            text-wrap: pretty;
+        }
+
+        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+    
+        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
+        .hero-bg-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .hero-bg-mask::after {
+            display: none !important;
+        }
+
+        .hero-bg-mask {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            height: calc(100% - 4rem);
+            top: 2rem;
+        }
+
+        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        }
+
+    
+        
+        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 2.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 3rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 1.5rem) !important;
+            margin-right: calc(-50vw + 1.5rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 32px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            transform: none !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            filter: brightness(0.95);
+        }
+
+    
+        
+        
+        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
+        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+            background-color: #161616 !important;
+            background: #161616 !important;
+        }
+
+        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 4rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 2rem) !important;
+            margin-right: calc(-50vw + 2rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Reference Glassmorphic Navbar -->
+    <header class="glass-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo">AWAY</a>
+        </div>
+
+        <nav class="glass-pill-nav">
+            <a href="servizio.html" style="color: var(--color-secondary);">Servizio</a>
+            <span class="nav-divider">|</span>
+            <div class="nav-item">
+                <a href="destinazioni.html">Destinazioni</a>
+                <div class="submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii">
+                        <span class="card-title">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=400&q=80" alt="Islanda">
+                        <span class="card-title">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=400&q=80" alt="Marocco">
+                        <span class="card-title">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=400&q=80" alt="Perù">
+                        <span class="card-title">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <span class="nav-divider">|</span>
+            <a href="app.html">App</a>
+            <span class="nav-divider">|</span>
+            <a href="partner.html">Partner</a>
+            <span class="nav-divider">|</span>
+            <a href="palavillage.html">PalaVillage</a>
+            <span class="nav-divider">|</span>
+            <a href="aiuto.html">Aiuto</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="cart.html" class="cart-btn" title="Carrello">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </a>
+            <a href="app.html" class="cta-pill-white">
+                <span>Scarica App</span>
+                <span class="cta-arrow">↗</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-mask">
+                <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=85" alt="Hero Mask Background">
+            </div>
+            <div class="hero-content">
+                <h1>IL SERVIZIO AWAY</h1>
+                <p class="hero-subtitle">
+                    Dove lo sport incontra l'esplorazione. Trasformiamo ogni match in un viaggio sensoriale unico, 
+                    unendo proiezioni panoramiche sul campo, kit tecnici esclusivi e viaggi reali nelle mete più affascinanti del mondo.
+                </p>
+                <div style="display: flex; gap: 1.25rem; margin-top: 1rem;">
+                    <a href="#benefici" class="btn">Scopri I Benefici</a>
+                    <a href="configuratore-kit.html" class="btn btn-outline">Configura Il Tuo Kit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) -->
+        <section class="typography-statement-section">
+            <div class="statement-grid">
+                <div>
+                    <span class="statement-index">(02) L'Innovazione Sensoriale</span>
+                    <p class="statement-desc">
+                        Tecnologia panoramica a 360°, suoni direzionali ed essenze naturali sincronizzate per far battere il cuore prima, durante e dopo ogni partita.
+                    </p>
+                    <a href="destinazioni.html" class="btn-statement">
+                        <span>Esplora Le Mete</span>
+                        <span class="circle-arrow">↗</span>
+                    </a>
+                </div>
+                <div>
+                    <h2 class="statement-heading">
+                        Ogni match in campo diventa un <strong>viaggio multisensoriale</strong> dove <strong>proiezioni panoramiche</strong>, <strong>suoni di ambiente</strong> ed <strong>essenze sincronizzate</strong> trasformano la percezione del gioco.
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Asymmetric Bento Grid Section for Benefici -->
+        <section id="benefici">
+            <div class="container">
+                <div class="section-header">
+                    <h2>I Pilastri del Servizio</h2>
+                    <p>Tre dimensioni integrate per vivere il padel ad un livello mai visto prima</p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Bento Large Card: Esperienza Sensoriale -->
+                    <div class="bento-card bento-card-large">
+                        <div>
+                            <span class="bento-tag">Tecnologia On-Court</span>
+                            <h3>Esperienza Sensoriale Immersiva</h3>
+                            <p>
+                                I nostri campi panoramici al PalaVillage sono dotati di proiezioni a 360°, diffusione sonora direzionale 
+                                e sistemi di aromaterapia direzionale. Gioca avvolto dalle atmosfere, i suoni e i profumi delle tue destinazioni preferite.
+                            </p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80" alt="Padel Immersivo PalaVillage">
+                    </div>
+
+                    <!-- Bento Medium Card 1: Community & Passaporto -->
+                    <div class="bento-card">
+                        <div>
+                            <span class="bento-tag">App & Gamification</span>
+                            <h3>Padel & Travel Community</h3>
+                            <p>
+                                Colleziona i timbri delle destinazioni sul tuo Passaporto AWAY in App, accumula Travel Points 
+                                ad ogni vittoria e sblocca l'accesso a clinic esclusive e tornei internazionali.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bento Medium Card 2: Away Kit & Equipment -->
+                    <div class="bento-card">
+                        <div>
+                            <span class="bento-tag">Attrezzatura Premium</span>
+                            <h3>Away Kit & Equipment</h3>
+                            <p>
+                                Racchette pro firmate AWAY, abbigliamento ad alte prestazioni ed accessori esclusivi 
+                                progettati su misura per ogni condizione di gioco nel mondo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Timeline Section: Come Funziona -->
+        <section id="come-funziona">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Come Funziona l'Esperienza</h2>
+                    <p>Dalla prenotazione in App al primo colpo sul campo panoramico</p>
+                </div>
+
+                <div class="process-timeline">
+                    <!-- Step 1 -->
+                    <div class="process-step-card">
+                        <div class="step-number-badge">1</div>
+                        <h3>Prenota e Scegli</h3>
+                        <p>Scegli il pacchetto viaggio o l'atmosfera della destinazione desiderata direttamente dalla nostra App AWAY.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="process-step-card">
+                        <div class="step-number-badge">2</div>
+                        <h3>Entra in Campo</h3>
+                        <p>Arriva al PalaVillage e trova il campo panoramico già settato con proiezioni e suoni dedicati alla tua tappa.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="process-step-card">
+                        <div class="step-number-badge">3</div>
+                        <h3>Gioca e Viaggia</h3>
+                        <p>Vivi 90 minuti di padel ad altissima intensità avvolto dalle luci, i profumi ed il clima del tuo viaggio.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="process-step-card">
+                        <div class="step-number-badge">4</div>
+                        <h3>Esperienze & Punti</h3>
+                        <p>Colleziona il timbro digitale sul tuo Passaporto ed accumula Punti Viaggio da convertire in viaggi reali.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Split Feature Section: Scuole & Aziende B2B -->
+        <section id="scuole-aziende">
+            <div class="container">
+                <div class="split-feature">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Team Building & Scuole AWAY">
+                    </div>
+                    <div>
+                        <span class="bento-tag" style="background-color: var(--color-accent); color: #FFFFFF;">B2B & Didattica</span>
+                        <h2>Scuole & Aziende</h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem;">
+                            L'esperienza immersiva AWAY è uno strumento innovativo ideale per progetti didattici, formazione e team building aziendale.
+                        </p>
+
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="feature-icon-pill"></div>
+                                <div class="feature-item-content">
+                                    <h4>Progetti per le Scuole</h4>
+                                    <p>Giornate sportive multidisciplinari che integrano geografia, scienze e tecnologia digitale sul campo.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon-pill"></div>
+                                <div class="feature-item-content">
+                                    <h4>Team Building Aziendale</h4>
+                                    <p>Soluzioni su misura per aziende che desiderano stimolare la collaborazione, la leadership ed il benessere in un contesto unico.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="aiuto.html" class="btn">Richiedi Informazioni B2B</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Highlight Section -->
+        <section id="tecnologie">
+            <div class="container">
+                <div class="tech-card">
+                    <div>
+                        <span class="bento-tag" style="background-color: var(--color-secondary); color: var(--color-primary);">Ingegneria On-Court</span>
+                        <h2 style="font-size: 2.5rem;">Tecnologie Immersive</h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem;">
+                            I nostri campi panoramici utilizzano sistemi proprietari di proiezione laser ad altissima risoluzione, 
+                            diffusione acustica direzionale a 360° e sensori ambientali olfattivi sincronizzati con il ritmo di gioco.
+                        </p>
+                        <a href="destinazioni.html" class="btn btn-secondary">Scopri Le Destinazioni</a>
+                    </div>
+
+                    <div class="tech-spec-grid">
+                        <div class="tech-spec-box">
+                            <div class="tech-spec-number">360°</div>
+                            <div class="tech-spec-desc">Proiezione Laser</div>
+                        </div>
+                        <div class="tech-spec-box">
+                            <div class="tech-spec-number">3D</div>
+                            <div class="tech-spec-desc">Audio Direzionale</div>
+                        </div>
+                        <div class="tech-spec-box">
+                            <div class="tech-spec-number">100%</div>
+                            <div class="tech-spec-desc">Sync Olfattivo</div>
+                        </div>
+                        <div class="tech-spec-box">
+                            <div class="tech-spec-number">4K</div>
+                            <div class="tech-spec-desc">Visual Clarity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
+            </div>
+            <div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
+            </div>
+            <div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

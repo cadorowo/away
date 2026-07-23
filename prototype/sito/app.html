@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAY | L'App Gamification & Hub Immersivo</title>
+
+    <style>
+        /* Canvas & Pure Charcoal Tokens */
+        :root {
+            --bg-color: #161616;
+            --color-primary: #161616;
+            --color-surface-card: #222222;
+            --color-surface-hover: #2A2A2A;
+
+            --color-secondary: #B3E5FF;
+            --color-accent: #EE3810;
+
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+
+            --radius-pill: 999px;
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 10px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        h1 { font-size: 4.5rem; line-height: 1.05; }
+        h2 { font-size: 2.75rem; line-height: 1.1; }
+        h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Reference Glassmorphic Header */
+        header.glass-header {
+            position: sticky;
+            top: 1.5rem;
+            z-index: 1000;
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .header-logo .logo {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Central Glass Pill Nav */
+        .glass-pill-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            border-radius: 999px;
+            padding: 0.65rem 2.25rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-pill-nav a {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .glass-pill-nav a:hover {
+            color: #B3E5FF;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 300;
+            font-size: 0.85rem;
+            user-select: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-item:hover .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            color: #FFFFFF;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            text-decoration: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            background-color: #2A2A2A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Right Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cta-pill-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.4rem;
+            background-color: #FFFFFF;
+            color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-pill-white:hover {
+            background-color: #F0F0F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #161616;
+            background: linear-gradient(180deg, rgba(22,22,22,0.55) 0%, rgba(22,22,22,0.85) 60%, rgba(22,22,22,1) 100%), url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85") center/cover no-repeat;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        
+        /* Hero Section & Radial Mask Overlay */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 10.5rem 2rem 5rem 2rem;
+            margin-top: -6rem;
+            background-color: #161616;
+            border-bottom: none;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        
+
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .hero-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 1.25rem;
+            background-color: rgba(179, 229, 255, 0.12);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.3);
+            border-radius: var(--radius-pill);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 740px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* APP SCREEN PREVIEWS (3 PHONE MOCKUPS SHOWCASE) */
+        .mockups-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 560px;
+            border-radius: 40px;
+            background-color: #161616;
+            border: 4px solid #333333;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s ease;
+        }
+
+        .phone-mockup:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-secondary);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .phone-notch {
+            width: 120px;
+            height: 24px;
+            background-color: #161616;
+            background: linear-gradient(180deg, rgba(22,22,22,0.55) 0%, rgba(22,22,22,0.85) 60%, rgba(22,22,22,1) 100%), url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85") center/cover no-repeat;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+            background: linear-gradient(180deg, #1E1E1E 0%, #161616 100%);
+        }
+
+        .screen-badge {
+            align-self: flex-start;
+            padding: 0.35rem 0.85rem;
+            background: rgba(179, 229, 255, 0.15);
+            color: var(--color-secondary);
+            font-size: 0.72rem;
+            font-weight: 800;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+        }
+
+        .screen-title {
+            font-size: 1.35rem;
+            margin: 0.75rem 0 0.25rem 0;
+        }
+
+        .screen-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .screen-ui-box {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+        }
+
+        .screen-ui-stat {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            font-family: var(--font-mono);
+        }
+
+        /* FEATURES GRID */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 3.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--color-surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* INTERACTIVE MODES SPLIT SHOWCASE */
+        .modes-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3.5rem;
+        }
+
+        .mode-box {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mode-box-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-box h3 {
+            font-size: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .mode-box p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .mode-demo-area {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #1E1E1E 0%, #2A2A2A 100%);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        /* GAMIFICATION & COMMUNITY EVENT SECTION */
+        .gamification-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 4.5rem 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            margin-top: 4rem;
+        }
+
+        .gamification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+
+        .gamification-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .item-icon-pill {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(179, 229, 255, 0.15);
+            color: var(--color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .item-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: #FFFFFF;
+        }
+
+        .item-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* DOWNLOAD BANNER SECTION */
+        .download-banner {
+            text-align: center;
+            background: linear-gradient(135deg, #1E1E1E 0%, #262626 100%);
+            border-radius: var(--radius-lg);
+            padding: 5rem 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            margin-top: 4rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.1rem 2.5rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #D62D07;
+            border-color: #D62D07;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            
+        }
+
+        .footer-grid h3 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+        }
+
+        .footer-grid h4 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-grid a {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            color: var(--color-secondary);
+        }
+
+        .newsletter-form input {
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+    
+        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
+        h1, h2, h3, h4 {
+            text-wrap: balance;
+        }
+
+        p, .hero p, .accordion-desc {
+            text-wrap: pretty;
+        }
+
+        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+    
+        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
+        .hero-bg-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .hero-bg-mask::after {
+            display: none !important;
+        }
+
+        .hero-bg-mask {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            height: calc(100% - 4rem);
+            top: 2rem;
+        }
+
+        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        }
+
+    
+        
+        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 2.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 3rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 1.5rem) !important;
+            margin-right: calc(-50vw + 1.5rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 32px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            transform: none !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            filter: brightness(0.95);
+        }
+
+    
+        
+        
+        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
+        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+            background-color: #161616 !important;
+            background: #161616 !important;
+        }
+
+        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 4rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 2rem) !important;
+            margin-right: calc(-50vw + 2rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Reference Glassmorphic Header -->
+    <header class="glass-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo">AWAY</a>
+        </div>
+
+        <nav class="glass-pill-nav">
+            <a href="servizio.html">Servizio</a>
+            <span class="nav-divider">|</span>
+            <div class="nav-item">
+                <a href="destinazioni.html">Destinazioni</a>
+                <div class="submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii">
+                        <span class="card-title">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=400&q=80" alt="Islanda">
+                        <span class="card-title">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=400&q=80" alt="Marocco">
+                        <span class="card-title">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=400&q=80" alt="Perù">
+                        <span class="card-title">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <span class="nav-divider">|</span>
+            <a href="app.html" style="color: var(--color-secondary);">App</a>
+            <span class="nav-divider">|</span>
+            <a href="partner.html">Partner</a>
+            <span class="nav-divider">|</span>
+            <a href="palavillage.html">PalaVillage</a>
+            <span class="nav-divider">|</span>
+            <a href="aiuto.html">Aiuto</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="cart.html" class="cart-btn" title="Carrello">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </a>
+            <a href="#download" class="cta-pill-white">
+                <span>Scarica App</span>
+                <span class="cta-arrow">↗</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-mask">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=85" alt="Hero Mask Background">
+            </div>
+            <div class="hero-content">
+                <h1>L'APP GAMIFICATION AWAY</h1>
+                <p>
+                    Hai acquistato un viaggio o uno slot sul sito? Usa l'App AWAY per sincronizzare il tuo ordine, 
+                    scegliere data e ora del match, personalizzare clima ed essenze e collezionare Punti Viaggio.
+                </p>
+                <div style="display: flex; gap: 1.25rem; margin-top: 0.5rem;">
+                    <a href="#download" class="btn">Scarica L'App iOS & Android</a>
+                    <a href="#app-mockups" class="btn btn-outline">Esplora Le Schermate</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- App UI Previews Showcase (3 Phone Mockups) -->
+        <section id="app-mockups" class="container">
+            <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+                <h2>Esplora l'Interfaccia App</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">
+                    Un'esperienza digitale fluida progettata per accompagnarti prima, durante e dopo ogni match immersivo.
+                </p>
+            </div>
+
+            <div class="mockups-grid">
+                <!-- Phone 1: Home Hub -->
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div>
+                            <h4 class="screen-title">Match In Arrivo</h4>
+                            <p class="screen-desc">PalaVillage - Campo Immersivo #2</p>
+
+                            <div class="screen-ui-box">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Destinazione</div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF;">HAWAII TROPICAL</div>
+                                <div style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 0.5rem;">24 Luglio 2026 | 18:30</div>
+                            </div>
+                        </div>
+
+                        <div class="screen-ui-box" style="margin-top: auto;">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Sensory Preset</div>
+                            <div style="font-size: 0.88rem; color: #FFFFFF; font-weight: bold;">Cocco & Onde Pacifico (Sync On)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone 2: Bacheca Passaporto (Stamps) -->
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen" style="background: linear-gradient(180deg, #1C242B 0%, #161616 100%);">
+                        <div>
+                            <h4 class="screen-title">Timbri Collezionati</h4>
+                            <p class="screen-desc">4 Tappe Visitate su 12</p>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem;">
+                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px dashed rgba(255,255,255,0.2);">
+                                    <div style="font-size: 0.75rem; font-weight: 900; color: var(--color-secondary);">HAWAII</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted);">TIMBRATO</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px dashed rgba(255,255,255,0.2);">
+                                    <div style="font-size: 0.75rem; font-weight: 900; color: var(--color-secondary);">ISLANDA</div>
+                                    <div style="font-size: 0.65rem; color: var(--text-muted);">TIMBRATO</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="screen-ui-box">
+                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Status Giocatore</div>
+                            <div style="font-size: 1.1rem; font-weight: 900; color: #FFFFFF;">GLOBETROTTER PRO</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone 3: Travel Points -->
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div>
+                            <h4 class="screen-title">Saldo Punti</h4>
+                            <p class="screen-desc">Guadagnati giocati al PalaVillage</p>
+
+                            <div class="screen-ui-box">
+                                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Punti Accumulati</div>
+                                <div class="screen-ui-stat">4.850</div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">Prossimo Sconto Viaggio: 5.000 Pts</div>
+                            </div>
+                        </div>
+
+                        <div class="screen-ui-box" style="background: var(--color-accent); border: none;">
+                            <div style="font-size: 0.82rem; font-weight: 900; color: #FFFFFF; text-transform: uppercase;">Riscatta Premio Viaggio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main App Features Section -->
+        <section id="app-features">
+            <div class="container">
+                <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+                    <h2>Tutto il tuo Padel a Portata di Tap</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">
+                        Controllo totale dell'esperienza di gioco, gestione delle playlist e premi fedeltà integrati.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="feature-card">
+                        <h3>Prenotazioni Rapide</h3>
+                        <p>Inserisci il numero d'ordine del viaggio acquistato sul sito per bloccare il tuo slot orario ed il campo panoramico in pochi secondi.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="feature-card">
+                        <h3>Controllo Kit Sensoriale</h3>
+                        <p>Sincronizza le tue playlist musicali ad alta fedeltà, gestisci le essenze profumate erogate ed adatta le luci del campo.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="feature-card">
+                        <h3>Esperienze & Punti</h3>
+                        <p>Colleziona i timbri digitali per ogni viaggio visitato in campo ed accumula Punti Viaggio da convertire in viaggi reali.</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="feature-card">
+                        <h3>Notifiche Smart</h3>
+                        <p>Ricevi alert tempestivi sulle nuove mete sbloccate, promemoria per le partite imminenti ed inviti per clinic esclusive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Modes Showcase -->
+        <section id="app-showcase">
+            <div class="container">
+                <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+                    <h2>Oltre la Partita: Impara e Gioca</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">
+                        Modi di gioco interattivi basati sulla tecnologia proiettiva del PalaVillage.
+                    </p>
+                </div>
+
+                <div class="modes-split">
+                    <!-- Discover World -->
+                    <div class="mode-box">
+                        <div class="mode-box-header">
+                            <h3>Scopri il Mondo</h3>
+                            <p>
+                                L'app arricchisce l'esperienza sul campo offrendo curiosità geografiche, trivia e pillole storiche 
+                                sincronizzate con la mappa immersiva in cui stai giocando.
+                            </p>
+                        </div>
+                        <div class="mode-demo-area">
+                            <span style="font-size: 0.8rem; color: var(--color-secondary); text-transform: uppercase; font-weight: 800;">Fun Fact Islandese</span>
+                            <h4 style="font-size: 1.1rem; margin: 0.5rem 0; color: #FFFFFF;">100% Energia Rinnovabile</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Sapevi che la totalità dell'energia elettrica in Islanda proviene da fonti idroelettriche e geotermiche?</p>
+                        </div>
+                    </div>
+
+                    <!-- Target Mode Minigames -->
+                    <div class="mode-box">
+                        <div class="mode-box-header">
+                            <h3>Sfida i Minigiochi</h3>
+                            <p>
+                                Il campo si trasforma in un videogioco gigante. Usa l'app per avviare sfide di precisione o riflessi 
+                                basate sulle proiezioni interattive sul vetro e scala le classifiche locali.
+                            </p>
+                        </div>
+                        <div class="mode-demo-area" style="background: linear-gradient(135deg, #241A1A 0%, #161616 100%); border-color: rgba(238,56,16,0.3);">
+                            <span style="font-size: 0.8rem; color: var(--color-accent); text-transform: uppercase; font-weight: 800;">Mode Attiva: TARGET PRECISION</span>
+                            <div style="font-size: 1.8rem; font-weight: 900; color: #FFFFFF; font-family: var(--font-mono); margin: 0.5rem 0;">RECORD: 1.200 PTS</div>
+                            <span class="btn" style="padding: 0.5rem 1.25rem; font-size: 0.75rem; background-color: var(--color-accent);">Avvia Da App</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gamification & Community Section -->
+        <section id="app-gamification">
+            <div class="container">
+                <div class="gamification-split">
+                    <div>
+                        <h2 style="font-size: 2.5rem; margin-top: 0.75rem;">Eventi Community & Punti Viaggio</h2>
+                        <p style="color: var(--text-muted); font-size: 1.05rem;">
+                            Giocando nei campi immersivi AWAY sblocchi timbri sul tuo Passaporto ed accumuli Punti Viaggio per accedere ad inviti riservati.
+                        </p>
+
+                        <div class="gamification-list">
+                            <div class="gamification-item">
+                                <div class="item-icon-pill">✓</div>
+                                <div class="item-content">
+                                    <h4>Tornei Esclusivi Sbloccabili</h4>
+                                    <p>Usa i tuoi Punti Viaggio per iscriverti a tornei speciali a tema (es. Torneo Hawaii) con premi fisici e digitali.</p>
+                                </div>
+                            </div>
+                            <div class="gamification-item">
+                                <div class="item-icon-pill">✓</div>
+                                <div class="item-content">
+                                    <h4>Community Clinic</h4>
+                                    <p>Partecipa a lezioni esclusive con maestri federali e campioni di padel sbloccando gli inviti tramite i tuoi punti accumulati.</p>
+                                </div>
+                            </div>
+                            <div class="gamification-item">
+                                <div class="item-icon-pill">✓</div>
+                                <div class="item-content">
+                                    <h4>Partite con Ospiti Speciali</h4>
+                                    <p>Raggiungi le soglie punti indicate nell'App per sfidare influencer e sportivi professionisti in partite speciali.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="aiuto.html" class="btn">Partecipa Agli Eventi</a>
+                    </div>
+
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="AWAY Community Events" style="width: 100%; height: 380px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.1);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Download Section -->
+        <section id="download">
+            <div class="container">
+                <div class="download-banner">
+                    <h2 style="font-size: 3rem; margin-top: 1rem;">Scarica L'App AWAY</h2>
+                    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem auto; font-size: 1.1rem;">
+                        Porta la tua esperienza di padel immersivo ovunque ti trovi. Disponibile per iOS e Android.
+                    </p>
+                    <div style="display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn" onclick="alert('Download App Store avviato!')">Download App Store (iOS)</button>
+                        <button class="btn btn-outline" onclick="alert('Download Google Play avviato!')">Download Google Play (Android)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
+            </div>
+            <div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
+            </div>
+            <div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

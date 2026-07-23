@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Viaggio Interattivo</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: var(--gray-color);
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem 0;
+        }
+
+        /* Mobile Viewport Simulation */
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        /* Header App */
+        header {
+            padding: 1rem 1.5rem;
+            min-height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1;
+        }
+
+        /* Scrollable Main Content */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 90px; /* Space for fixed Tab Bar */
+        }
+
+        section {
+            padding: 1.5rem;
+            }
+
+        h2 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 1.8rem; line-height: 1.1; margin-bottom: 0.75rem; }
+        h3 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; font-size: 1.4rem; line-height: 1.2; margin-bottom: 0.75rem; }
+
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.65rem;
+            font-weight: bold;
+            font-family: var(--font-main);
+            gap: 4px;
+            border-top: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            border-top: 2px solid var(--border-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <a href="minigiochi.html" class="page-title">LE TUE ESPERIENZE</a>
+            <div style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display);">
+                <span>450 PT</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 8l4 4-4 4M8 12h8"></path>
+                </svg>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Dashboard Destinazioni (Griglia 2 Colonne) -->
+            <section style="padding-bottom: 2rem; min-height: 100%;">
+                <h2 style="font-size: 1.4rem;">Le Tue Esperienze</h2>
+                <p style="opacity: 0.8; font-size: 0.8rem;">Tutte le destinazioni disponibili. Viaggia e usa i tuoi boarding pass per sbloccare i contenuti.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+                    <!-- Islanda -->
+                    <div style="position: relative; border: 2px solid var(--text-color); height: 200px; background-color: var(--secondary-color); display: flex; flex-direction: column; padding: 1rem; overflow: hidden;">
+                        <!-- X placeholder -->
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.5; z-index: 0;">
+                            <span style="font-size: 5rem; font-family: monospace; font-weight: bold; color: var(--text-color);">X</span>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div style="margin-top: auto; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+                            <h3 style="background-color: transparent; color: var(--text-color); padding: 0; font-size: 1.1rem; margin-bottom: 0.75rem; border-bottom: 2px solid var(--text-color); display: inline-block; font-family: var(--font-display);">ISLANDA</h3>
+                            <a href="mappa-islanda.html" class="btn" style="padding: 0.5rem 1rem; font-size: 0.7rem; width: 100%;">ESPLORA</a>
+                        </div>
+                    </div>
+
+                    <!-- Aggiungi Esperienza (+) -->
+                    <div onclick="window.location.href='nfc-boarding-pass.html?next=minigiochi.html&action=unlock'" style="border: 2px solid var(--text-color); height: 200px; background-color: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; cursor: pointer; text-align: center;">
+                        <span style="font-size: 3rem; font-weight: 300; line-height: 1; margin-bottom: 0.5rem;">+</span>
+                        <span style="font-size: 0.65rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-display);">Aggiungi Viaggio</span>
+                    </div>
+
+                    <!-- World Tour -->
+                    <div onclick="window.location.href='nfc-p2p.html'" style="position: relative; border: 2px solid var(--text-color); height: 200px; background-color: var(--secondary-color); display: flex; flex-direction: column; padding: 1rem; cursor: pointer; overflow: hidden;">
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.5; z-index: 0;">
+                            <span style="font-size: 5rem; font-family: monospace; font-weight: bold; color: var(--text-color);">X</span>
+                        </div>
+                        <div style="margin-top: auto; position: relative; z-index: 10; display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+                            <span style="font-size: 0.55rem; font-weight: bold; border: 1px solid var(--text-color); padding: 0.15rem 0.3rem; text-transform: uppercase; font-family: var(--font-display); background-color: transparent; color: var(--text-color); margin-bottom: 0.4rem;">SPECIAL</span>
+                            <h3 style="font-size: 1rem; margin-bottom: 0.2rem; font-family: var(--font-display); text-transform: uppercase; border-bottom: 2px solid var(--text-color); display: inline-block;">WORLD TOUR</h3>
+                            <p style="font-size: 0.65rem; line-height: 1.3; opacity: 0.8; margin-bottom: 0;">Sfida la community. Avvicinati a un giocatore.</p>
+                        </div>
+                    </div>
+
+                    <!-- Bloccato 2 -->
+                    <div style="border: 2px solid var(--gray-color); height: 200px; background-color: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem; opacity: 0.4;">
+                        <span style="font-size: 1.8rem; font-weight: bold; color: var(--gray-color); font-family: var(--font-display);">?</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="prenotazioni.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="0" ry="0"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Prenotazioni</span>
+            </a>
+            <a href="minigiochi.html" class="tab-item active">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                </svg>
+                <span>Esperienze</span>
+            </a>
+            <a href="punti.html" class="tab-item">
+                 <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                     <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                     <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                     <path d="M4 22h16"></path>
+                     <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                     <path d="M12 2a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"></path>
+                 </svg>
+                 <span>Punti</span>
+             </a>
+            <a href="profilo.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v-2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profilo</span>
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>

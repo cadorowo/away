@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAY | Viaggia per il mondo mentre giochi a padel</title>
+
+    <style>
+        /* Canvas & Pure Charcoal Tokens */
+        :root {
+            --bg-color: #161616;
+            --color-primary: #161616;
+            --color-surface-card: #222222;
+            --color-surface-hover: #2A2A2A;
+
+            --color-secondary: #B3E5FF;
+            --color-accent: #EE3810;
+
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+
+            --radius-pill: 999px;
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 10px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        h1 { font-size: 4.5rem; line-height: 1.05; }
+        h2 { font-size: 2.75rem; line-height: 1.1; }
+        h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Reference Glassmorphic Header */
+        header.glass-header {
+            position: sticky;
+            top: 1.5rem;
+            z-index: 1000;
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .header-logo .logo {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Central Glass Pill Nav */
+        .glass-pill-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            border-radius: 999px;
+            padding: 0.65rem 2.25rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-pill-nav a {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .glass-pill-nav a:hover {
+            color: #B3E5FF;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 300;
+            font-size: 0.85rem;
+            user-select: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-item:hover .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            color: #FFFFFF;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            text-decoration: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            background-color: #2A2A2A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Right Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cta-pill-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.4rem;
+            background-color: #FFFFFF;
+            color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-pill-white:hover {
+            background-color: #F0F0F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #161616;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* HERO SECTION WITH 3D ROTATING CARDS DECK */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 10rem 2rem 5rem 2rem;
+            margin-top: 0;
+            background-color: #161616;
+            border-bottom: none;
+            min-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            user-select: none;
+        
+            margin-top: -6rem;
+            padding-top: 10.5rem;
+}
+
+        .hero-3d-deck-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1320px;
+            height: 440px;
+            margin-bottom: 3rem;
+            perspective: 1600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-3d-deck {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease-out;
+        }
+
+        .deck-card {
+            position: absolute;
+            width: 270px;
+            height: 380px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            will-change: transform;
+            text-decoration: none;
+        }
+
+        .deck-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 1.25rem;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(16,16,16,0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+            text-align: left;
+        }
+
+        .card-pill {
+            padding: 0.35rem 0.85rem;
+            background: #FFFFFF;
+            color: #161616;
+            font-size: 0.75rem;
+            font-weight: 900;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .card-overlay h4 {
+            font-size: 1rem;
+            color: #FFFFFF;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* 3D Fan Angles Spaced Across Horizontal Viewport */
+        .card-hawaii {
+            transform: rotateZ(-16deg) rotateY(18deg) translateX(-380px) translateY(15px) translateZ(-40px);
+            z-index: 2;
+        }
+
+        .card-islanda {
+            transform: rotateZ(-5deg) rotateY(8deg) translateX(-130px) translateY(-18px) translateZ(50px);
+            z-index: 5;
+        }
+
+        .card-marocco {
+            transform: rotateZ(5deg) rotateY(-8deg) translateX(130px) translateY(-8px) translateZ(70px);
+            z-index: 6;
+        }
+
+        .card-peru {
+            transform: rotateZ(16deg) rotateY(-18deg) translateX(380px) translateY(15px) translateZ(-20px);
+            z-index: 3;
+        }
+
+        .deck-card:hover {
+            transform: scale(1.15) rotateZ(0deg) rotateY(0deg) translateY(-30px) translateZ(160px) !important;
+            z-index: 30 !important;
+            border-color: var(--color-secondary);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.75rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            text-shadow: none;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #D62D07;
+            border-color: #D62D07;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            
+        }
+
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* ACCORDION IMAGE CARDS (HORIZONTAL EXPANSION) SHOWCASE IN HOME */
+        .accordion-container {
+            display: flex;
+            gap: 1.25rem;
+            width: 100%;
+            height: 560px;
+        }
+
+        .accordion-card {
+            flex: 1;
+            min-width: 140px;
+            height: 100%;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow-lg);
+            text-decoration: none;
+        }
+
+        .accordion-card.active, .accordion-card:hover {
+            flex: 3.2;
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .accordion-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .accordion-card:hover .accordion-bg {
+            transform: scale(1.06);
+        }
+
+        .accordion-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(16,16,16,0.65) 60%, rgba(16,16,16,0.95) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2.25rem;
+            z-index: 2;
+        }
+
+        .accordion-top-badges {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            opacity: 0.4;
+            transition: opacity 0.4s ease;
+        }
+
+        .accordion-card.active .accordion-top-badges,
+        .accordion-card:hover .accordion-top-badges {
+            opacity: 1;
+        }
+
+        .glass-pill-tag {
+            padding: 0.4rem 1.1rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border: none;
+            border-radius: var(--radius-pill);
+            color: #FFFFFF;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+
+        .accordion-bottom-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .accordion-bottom-content h3 {
+            font-size: 2.25rem;
+            margin-bottom: 0.25rem;
+            color: #FFFFFF;
+            white-space: nowrap;
+        }
+
+        .accordion-desc {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            max-width: 580px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .accordion-card.active .accordion-desc,
+        .accordion-card:hover .accordion-desc {
+            display: block;
+            opacity: 1;
+        }
+
+        .accordion-cta-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 0.85rem 1.75rem;
+            background: #FFFFFF;
+            color: #161616 !important;
+            border-radius: var(--radius-pill);
+            font-weight: 900;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .accordion-card:hover .accordion-cta-pill {
+            background: #F2F2F2;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .cta-icon-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #161616;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 900;
+        }
+
+        /* Grid Section for PalaVillage & Services */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface-card);
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card h2 {
+            color: #FFFFFF;
+            font-size: 2.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) */
+        .typography-statement-section {
+            padding: 7.5rem 2rem;
+            background-color: #161616;
+            border-top: none;
+            border-bottom: none;
+        }
+
+        .statement-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .statement-index {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .statement-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 2.25rem;
+            max-width: 400px;
+        }
+
+        .statement-heading {
+            font-size: 2.85rem;
+            line-height: 1.25;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: -0.02em;
+            text-wrap: balance;
+        }
+
+        .statement-heading strong {
+            color: #FFFFFF;
+            font-weight: 900;
+        }
+
+        .btn-statement {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.6rem;
+            background-color: #222222;
+            color: #FFFFFF;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-statement:hover {
+            background-color: #2A2A2A;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .circle-arrow {
+            width: 32px;
+            height: 32px;
+            background-color: #FFFFFF;
+            color: #161616;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            
+        }
+
+        .footer-grid h3 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+        }
+
+        .footer-grid h4 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-grid a {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            color: var(--color-secondary);
+        }
+
+        .newsletter-form input {
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+    
+        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
+        h1, h2, h3, h4 {
+            text-wrap: balance;
+        }
+
+        p, .hero p, .accordion-desc {
+            text-wrap: pretty;
+        }
+
+        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+    
+        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
+        .hero-bg-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .hero-bg-mask::after {
+            display: none !important;
+        }
+
+        .hero-bg-mask {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            height: calc(100% - 4rem);
+            top: 2rem;
+        }
+
+        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        }
+
+    
+        
+        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 2.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 3rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 1.5rem) !important;
+            margin-right: calc(-50vw + 1.5rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 32px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            transform: none !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            filter: brightness(0.95);
+        }
+
+    
+        
+        
+        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
+        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+            background-color: #161616 !important;
+            background: #161616 !important;
+        }
+
+        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 4rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 2rem) !important;
+            margin-right: calc(-50vw + 2rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+        }
+
+    </style>
+
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+    <!-- Reference Glassmorphic Header -->
+    <header class="glass-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo">AWAY</a>
+        </div>
+
+        <nav class="glass-pill-nav">
+            <a href="servizio.html">Servizio</a>
+            <span class="nav-divider">|</span>
+            <div class="nav-item">
+                <a href="destinazioni.html">Destinazioni</a>
+                <div class="submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii">
+                        <span class="card-title">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=400&q=80" alt="Islanda">
+                        <span class="card-title">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=400&q=80" alt="Marocco">
+                        <span class="card-title">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=400&q=80" alt="Perù">
+                        <span class="card-title">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <span class="nav-divider">|</span>
+            <a href="app.html">App</a>
+            <span class="nav-divider">|</span>
+            <a href="partner.html">Partner</a>
+            <span class="nav-divider">|</span>
+            <a href="palavillage.html">PalaVillage</a>
+            <span class="nav-divider">|</span>
+            <a href="aiuto.html">Aiuto</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="cart.html" class="cart-btn" title="Carrello">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </a>
+            <a href="app.html" class="cta-pill-white">
+                <span>Scarica App</span>
+                <span class="cta-arrow">↗</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Interactive 3D Rotating Destination Deck Hero Section -->
+        <section class="hero" id="hero-section">
+            
+            <div class="hero-3d-deck-wrapper">
+                <div class="hero-3d-deck" id="3d-deck">
+                    <!-- Hawaii Card -->
+                    <a href="dettaglio-destinazione.html#hawaii" class="deck-card card-hawaii">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=600&q=80" alt="Hawaii">
+                        <div class="card-overlay">
+                            <span class="card-pill">HAWAII</span>
+                            <h4>Tropical Vibes</h4>
+                        </div>
+                    </a>
+
+                    <!-- Islanda Card -->
+                    <a href="dettaglio-destinazione.html#islanda" class="deck-card card-islanda">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=600&q=80" alt="Islanda">
+                        <div class="card-overlay">
+                            <span class="card-pill" style="background: var(--color-secondary); color: #161616;">ISLANDA</span>
+                            <h4>Ghiaccio e Aurora</h4>
+                        </div>
+                    </a>
+
+                    <!-- Marocco Card -->
+                    <a href="dettaglio-destinazione.html#marocco" class="deck-card card-marocco">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=600&q=80" alt="Marocco">
+                        <div class="card-overlay">
+                            <span class="card-pill" style="background: var(--color-accent); color: #FFFFFF;">MAROCCO</span>
+                            <h4>Deserto e Magia</h4>
+                        </div>
+                    </a>
+
+                    <!-- Perù Card -->
+                    <a href="dettaglio-destinazione.html#peru" class="deck-card card-peru">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80" alt="Perù">
+                        <div class="card-overlay">
+                            <span class="card-pill">PERÙ</span>
+                            <h4>Mistero Andino</h4>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-content">
+                <h1>Viaggia per il mondo mentre giochi a padel</h1>
+
+                <div class="hero-cta-group">
+                    <a href="destinazioni.html" class="btn">Esplora Destinazioni</a>
+                    <a href="configuratore-kit.html" class="btn btn-outline">Configura il tuo Kit</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) -->
+        <section class="typography-statement-section">
+            <div class="statement-grid">
+                <div>
+                    <span class="statement-index">(01) Visione & Format</span>
+                    <p class="statement-desc">
+                        AWAY trasforma il padel da semplice disciplina sportiva ad avventura immersiva, dove la competizione sul campo incontra l'esplorazione del mondo.
+                    </p>
+                    <a href="servizio.html" class="btn-statement">
+                        <span>Scopri Il Format</span>
+                        <span class="circle-arrow">↗</span>
+                    </a>
+                </div>
+                <div>
+                    <h2 class="statement-heading">
+                        <strong>AWAY</strong> unisce la passione per il <strong>padel agonistico</strong> con la scoperta di <strong>destinazioni straordinarie</strong>, trasformando ogni match in un'<strong>esperienza sensoriale totale</strong>.
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destinazioni Accordion Showcase Section (Matching Reference Style) -->
+        <section id="destinazioni">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Destinazioni Esclusive</h2>
+                    <p>Scegli la tua prossima tappa di gioco ed esplorazione in giro per il pianeta</p>
+                </div>
+
+                <div class="accordion-container" id="home-destinations-accordion">
+                    
+                    <!-- Hawaii Card (Default Active) -->
+                    <a href="dettaglio-destinazione.html#hawaii" class="accordion-card active">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85" alt="Hawaii Padel" class="accordion-bg">
+                        <div class="accordion-overlay">
+                            <div class="accordion-top-badges">
+                                <span class="glass-pill-tag">Pacific Experience</span>
+                                <span class="glass-pill-tag">Tropical Vibes</span>
+                                <span class="glass-pill-tag">da € 1.890</span>
+                            </div>
+
+                            <div class="accordion-bottom-content">
+                                <div>
+                                    <h3>HAWAII</h3>
+                                    <p class="accordion-desc">Oceano, campi sul mare e sessioni intensive tra vulcani e spiagge bianche.</p>
+                                </div>
+                                <div class="accordion-cta-pill">
+                                    <span>SELEZIONA VIAGGIO</span>
+                                    <div class="cta-icon-circle">↗</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Islanda Card -->
+                    <a href="dettaglio-destinazione.html#islanda" class="accordion-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85" alt="Islanda Padel" class="accordion-bg">
+                        <div class="accordion-overlay">
+                            <div class="accordion-top-badges">
+                                <span class="glass-pill-tag">Nordic Magic</span>
+                                <span class="glass-pill-tag">Aurora & Ice</span>
+                                <span class="glass-pill-tag">da € 2.150</span>
+                            </div>
+
+                            <div class="accordion-bottom-content">
+                                <div>
+                                    <h3>ISLANDA</h3>
+                                    <p class="accordion-desc">Partite sotto l'aurora boreale e campi circondati da ghiacciai e geyser incandescenti.</p>
+                                </div>
+                                <div class="accordion-cta-pill">
+                                    <span>SELEZIONA VIAGGIO</span>
+                                    <div class="cta-icon-circle">↗</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Marocco Card -->
+                    <a href="dettaglio-destinazione.html#marocco" class="accordion-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1200&q=85" alt="Marocco Padel" class="accordion-bg">
+                        <div class="accordion-overlay">
+                            <div class="accordion-top-badges">
+                                <span class="glass-pill-tag">Desert & Luxury</span>
+                                <span class="glass-pill-tag">Warm Sunset</span>
+                                <span class="glass-pill-tag">da € 1.450</span>
+                            </div>
+
+                            <div class="accordion-bottom-content">
+                                <div>
+                                    <h3>MAROCCO</h3>
+                                    <p class="accordion-desc">Campi nel deserto di Agafay, riad di lusso e cene esclusive al tramonto sulle dune.</p>
+                                </div>
+                                <div class="accordion-cta-pill">
+                                    <span>SELEZIONA VIAGGIO</span>
+                                    <div class="cta-icon-circle">↗</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Perù Card -->
+                    <a href="dettaglio-destinazione.html#peru" class="accordion-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1200&q=85" alt="Perù Padel" class="accordion-bg">
+                        <div class="accordion-overlay">
+                            <div class="accordion-top-badges">
+                                <span class="glass-pill-tag">Andean Expedition</span>
+                                <span class="glass-pill-tag">Sacred Valley</span>
+                                <span class="glass-pill-tag">da € 2.390</span>
+                            </div>
+
+                            <div class="accordion-bottom-content">
+                                <div>
+                                    <h3>PERÙ</h3>
+                                    <p class="accordion-desc">Gioca nella Valle Sacra degli Inca tra montagne maestose e cultura millenaria.</p>
+                                </div>
+                                <div class="accordion-cta-pill">
+                                    <span>SELEZIONA VIAGGIO</span>
+                                    <div class="cta-icon-circle">↗</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section PalaVillage -->
+        <section id="away-palavillage" style="background-color: #161616;">
+            <div class="container">
+                <div class="feature-card">
+                    <div class="grid-2">
+                        <div>
+                            <h2>CAMPUS PALAVILLAGE</h2>
+                            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
+                                Il nostro hub di riferimento dotato dei primi campi da padel panoramici immersivi al mondo. 
+                                Qui tecnologia e sport si fondeno per regalarti l'esperienza AWAY prima di partire.
+                            </p>
+                            <a href="palavillage.html" class="btn">Scopri il PalaVillage</a>
+                        </div>
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80" alt="PalaVillage Away" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-lg);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
+            </div>
+            <div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
+            </div>
+            <div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 3D Deck Parallax Effect in Hero
+            const heroSection = document.getElementById('hero-section');
+            const deck = document.getElementById('3d-deck');
+
+            if (heroSection && deck) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+                    const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+
+                    gsap.to(deck, {
+                        rotationY: mouseX * 32,
+                        rotationX: -mouseY * 24,
+                        duration: 0.7,
+                        ease: 'power2.out'
+                    });
+                });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    gsap.to(deck, {
+                        rotationY: 0,
+                        rotationX: 0,
+                        duration: 1.2,
+                        ease: 'power2.out'
+                    });
+                });
+            }
+
+            // Accordion Horizontal Expansion Interaction
+            const homeAccordionCards = document.querySelectorAll('#home-destinations-accordion .accordion-card');
+            homeAccordionCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    homeAccordionCards.forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

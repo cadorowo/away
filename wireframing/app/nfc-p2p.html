@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away - World Tour Connect</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: var(--gray-color);
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        header {
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--bg-color);
+        }
+
+        .back-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .p2p-container {
+            width: 240px;
+            height: 200px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            background-color: var(--secondary-color);
+            gap: 1rem;
+        }
+
+        .phone-mock {
+            width: 70px;
+            height: 120px;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.55rem;
+            
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .phone-left {
+            transform: rotate(-5deg);
+        }
+
+        .phone-right {
+            transform: rotate(5deg);
+            opacity: 0.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <header style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <a href="minigiochi.html" class="back-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span style="font-weight: bold; font-size: 0.8rem; margin-left: 0.5rem;">INDIETRO</span>
+            </a>
+            <div style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display);">
+                <span>450 PT</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 8l4 4-4 4M8 12h8"></path>
+                </svg>
+            </div>
+        </header>
+
+        <main>
+            <div style="font-size: 0.75rem; font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; border: 2px solid var(--border-color); padding: 0.3rem 0.6rem; display: inline-block;">
+                MULTIGIOCATORE P2P
+            </div>
+
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 1rem; text-transform: uppercase;">Trova un Avversario</h2>
+            
+            <p style="font-size: 0.8rem; margin-bottom: 2.5rem; opacity: 0.8; line-height: 1.4;">Avvicina il retro del tuo smartphone a quello di un altro giocatore per connettervi tramite NFC e avviare la sfida World Tour.</p>
+
+            <div class="p2p-container">
+                <div class="phone-mock phone-left" id="phone1">
+                    <span>P1 (TU)</span>
+                </div>
+                <div style="font-size: 1.2rem; font-weight: bold; opacity: 0.5;" id="connectIcon">⚡</div>
+                <div class="phone-mock phone-right" id="phone2">
+                    <span>P2</span>
+                </div>
+            </div>
+
+            <div id="status-text" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 1.5rem; min-height: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                RICERCA DISPOSITIVI...
+            </div>
+
+            <button onclick="simulateConnection()" class="btn">Simula Connessione</button>
+        </main>
+    </div>
+
+    <script>
+        function simulateConnection() {
+            const p1 = document.getElementById('phone1');
+            const p2 = document.getElementById('phone2');
+            const icon = document.getElementById('connectIcon');
+            const status = document.getElementById('status-text');
+            
+            // Animazione di accoppiamento
+            p1.style.transform = 'rotate(0deg) translateX(10px)';
+            p2.style.transform = 'rotate(0deg) translateX(-10px)';
+            p2.style.opacity = '1';
+            status.textContent = 'Accoppiamento NFC...';
+            
+            setTimeout(() => {
+                status.textContent = 'Giocatore 2 Connesso!';
+                icon.textContent = '✅';
+                
+                setTimeout(() => {
+                    alert('Connessione P2P riuscita! Avversario trovato: Alex90. La partita multiplayer World Tour sta per iniziare.');
+                    window.location.href = 'minigiochi.html';
+                }, 800);
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

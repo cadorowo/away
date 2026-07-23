@@ -1,0 +1,4129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Figma Export - Away Segreteria</title>
+<style>
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--font-main);
+}
+
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Area */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.header h2 {
+    margin-bottom: 0;
+}
+
+.content {
+    padding: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Components */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* Destinazioni Custom */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.placeholder-media {
+    width: 100%;
+    height: 140px;
+    border: 2px solid var(--border-color);
+    background-color: #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.placeholder-x {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0.5;
+    color: var(--text-color);
+}
+
+.card h4 {
+    margin-bottom: 0.25rem;
+}
+
+.card p.desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.card .stat {
+    font-size: 0.75rem;
+    opacity: 0.7; font-weight: 300;
+    margin-top: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.card-actions .btn-secondary {
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+}
+.header-actions {
+    display: flex;
+}
+
+/* Modale Overlay */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal {
+    width: 500px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    padding: 2rem;
+}
+
+/* Modale Form */
+input, select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.75rem;
+    background-color: var(--bg-color);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.modal-actions .btn, .modal-actions .btn-secondary {
+    flex: 1;
+}
+
+/* Opacity wrapper for background */
+.opacity-wrapper {
+    opacity: 0.3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+}
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* MAIN AREA */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    justify-content: space-between;
+}
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* COMPONENTS */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* PLACEHOLDER */
+.placeholder-media {
+    width: 100%;
+    border: 2px solid var(--border-color);
+    background-color: #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.placeholder-x {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0.5;
+    color: var(--text-color);
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    position: relative;
+}
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* MAIN AREA */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    justify-content: space-between;
+}
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* COMPONENTS */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.75rem;
+    background-color: var(--bg-color);
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* GRID SPECIFIC */
+.time-cell {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; font-weight: bold;
+}
+.slot-free {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: var(--bg-color); color: rgba(0,0,0,0.4);
+}
+.slot-occupied {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: #F0F0F0; font-weight: bold; color: var(--text-color);
+}
+.slot-current {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: var(--text-color); color: var(--bg-color); font-weight: bold;
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        body {
+            background-color: #E0E0E0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: var(--font-main);
+            color: var(--text-color);
+        }
+
+        #app-frame {
+            width: 1440px;
+            height: 900px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+        .nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+        .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+        .nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+        .nav-item.active {
+            border-left: 3px solid var(--text-color);
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            color: var(--text-color);
+        }
+
+        .content {
+            padding: 2rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Livello 1: KPI */
+        .kpi-grid {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .kpi-card {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .kpi-label {
+            font-size: 0.7rem;
+            opacity: 0.7; font-weight: 300;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .kpi-value {
+            font-family: var(--font-display);
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: -0.03em;
+        }
+
+        /* Livello 2: Grafici */
+        .charts-grid {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .chart-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-title {
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .chart-placeholder {
+            height: 200px;
+            background-color: #F0F0F0;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        /* Livello 3: Classifica + Filtri */
+        .bottom-grid {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .ranking-col {
+            flex: 2;
+        }
+
+        .filters-col {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            background-color: #F9F9F9;
+        }
+
+        .ranking-title, .filters-title {
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: flex;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            margin-top: 1.5rem;
+        }
+
+    
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        body {
+            background-color: #E0E0E0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: var(--font-main);
+            color: var(--text-color);
+        }
+
+        #app-frame {
+            width: 1440px;
+            height: 900px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+        .nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+        .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+        .nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+        .nav-item.active {
+            border-left: 3px solid var(--text-color);
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .layout-master-detail {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .panel-left {
+            width: 60%;
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .panel-right {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+        }
+
+        .search-bar {
+            width: 300px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            color: var(--text-color);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.75rem;
+            background-color: var(--bg-color);
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .table-container {
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr.selected {
+            background-color: #F0F0F0;
+        }
+
+        .detail-email {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .detail-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .detail-section h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .passport-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 50px);
+            gap: 1rem;
+        }
+
+        .passport-stamp {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            background-color: #F0F0F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .passport-stamp.empty {
+            background-color: transparent;
+            border-style: dashed; /* Note: prompt says border solid, I'll use solid to be safe with rules */
+            border: 2px solid var(--border-color);
+        }
+
+        .list-row {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .list-row:last-child {
+            border-bottom: none;
+        }
+    
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+}
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* MAIN AREA */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    justify-content: space-between;
+}
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* COMPONENTS */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* DASHBOARD SPECIFIC */
+.dashboard-layout {
+    display: flex;
+    gap: 2rem;
+    height: 100%;
+}
+.col-left {
+    flex: 0 0 70%;
+    display: flex;
+    flex-direction: column;
+}
+.col-right {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.campi-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.campo-card {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.campo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.text-small {
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+}
+.text-muted {
+    opacity: 0.7; font-weight: 300;
+    font-size: 0.75rem;
+}
+.list-section {
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+}
+.list-row {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+}
+.list-row:last-child {
+    border-bottom: none;
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--font-main);
+}
+
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Area */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    flex-shrink: 0;
+}
+
+.header h2 {
+    margin-bottom: 0;
+}
+
+.content {
+    padding: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Components */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+th, td {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    text-align: left;
+}
+
+th {
+    background-color: #F0F0F0;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table-action {
+    text-decoration: underline;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Forms */
+input[type="text"], input[type="date"], input[type="time"], select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    background-color: var(--bg-color);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+.form-row .form-group {
+    flex: 1;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.checkbox-item input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--border-color);
+    outline: none;
+    cursor: pointer;
+    background-color: var(--bg-color);
+}
+
+.checkbox-item input[type="checkbox"]:checked {
+    background-color: var(--text-color);
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.form-section-title {
+    margin-bottom: 1rem;
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        body {
+            background-color: #E0E0E0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: var(--font-main);
+            color: var(--text-color);
+        }
+
+        #app-frame {
+            width: 1440px;
+            height: 900px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+        .nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+        .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+        .nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+        .nav-item.active {
+            border-left: 3px solid var(--text-color);
+            background-color: #F0F0F0;
+            font-weight: bold;
+        }
+
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            color: var(--text-color);
+        }
+
+        .content {
+            padding: 2rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .btn {
+            display: flex;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pill {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+        }
+
+        .pill.active {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: var(--font-main);
+            letter-spacing: 0.05em;
+        }
+        .badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+        .badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+        .form-section {
+            border-top: 2px solid var(--border-color);
+            padding-top: 2rem;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .form-grid {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            height: 42px;
+            align-items: center;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .radio-label input {
+            width: auto;
+            margin: 0;
+        }
+    
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--font-main);
+}
+
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Area */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.header h2 {
+    margin-bottom: 0;
+}
+
+.content {
+    padding: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Components */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* Destinazioni Custom */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.placeholder-media {
+    width: 100%;
+    height: 140px;
+    border: 2px solid var(--border-color);
+    background-color: #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.placeholder-x {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0.5;
+    color: var(--text-color);
+}
+
+.card h4 {
+    margin-bottom: 0.25rem;
+}
+
+.card p.desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.card .stat {
+    font-size: 0.75rem;
+    opacity: 0.7; font-weight: 300;
+    margin-top: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.card-actions .btn-secondary {
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+}
+.header-actions {
+    display: flex;
+}
+
+
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+}
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* MAIN AREA */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    justify-content: space-between;
+}
+.content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* COMPONENTS */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+}
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* GRID SPECIFIC */
+.time-cell {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; font-weight: bold;
+}
+.slot-free {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: var(--bg-color); color: rgba(0,0,0,0.4);
+}
+.slot-occupied {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: #F0F0F0; font-weight: bold; color: var(--text-color);
+}
+.slot-current {
+    padding: 0.75rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-family: var(--font-main); font-size: 0.85rem; background-color: var(--text-color); color: var(--bg-color); font-weight: bold;
+}
+
+
+body {
+    background-color: #1A1A1A !important;
+    color: #FFFFFF !important;
+    padding: 4rem 2rem;
+    display: block !important;
+    min-height: auto !important;
+}
+.canvas-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.canvas-header h1 {
+    color: #FF00FF;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+.canvas-header p {
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    font-family: "Courier New", Courier, monospace;
+}
+.frames-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    justify-content: center;
+}
+.figma-frame-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.figma-frame-title {
+    color: #FF00FF;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.figma-frame {
+    width: 1440px;
+    height: 900px;
+    border: 4px solid #FF00FF;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    position: relative;
+    /* Reset text color for inner content */
+    color: #000000;
+}
+.figma-frame * {
+    color: inherit;
+}
+</style>
+</head>
+<body>
+<div class="canvas-header">
+    <h1>AWAY — APP GESTIONALE STAFF</h1>
+    <p>Wireframe Export — 10 Frame — Figma Optimized</p>
+</div>
+<div class="frames-grid">
+
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">1. Dashboard</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">AWAY</div>
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                Dashboard
+            </a>
+            <a href="prenotazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Prenotazioni
+            </a>
+            <a href="campi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Campi
+            </a>
+            <a href="destinazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                Destinazioni
+            </a>
+            <a href="eventi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Eventi
+            </a>
+            <a href="clienti.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Clienti
+            </a>
+            <a href="codici-promo.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                Codici Promo
+            </a>
+            <a href="report.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Report
+            </a>
+        </div>
+    </div>
+    
+    <!-- MAIN AREA -->
+    <div class="main-area">
+        <div class="header">
+            <h2>Dashboard</h2>
+            <div class="header-actions">
+                <button class="btn">+ Nuova Prenotazione</button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="dashboard-layout">
+                <div class="col-left">
+                    <h3>Stato Campi</h3>
+                    <div class="campi-grid">
+                        <div class="campo-card">
+                            <div class="campo-header">
+                                <h4>CAMPO 1</h4>
+                                <span class="badge badge-dark">OCCUPATO</span>
+                            </div>
+                            <div class="text-small">Hawaii Tropical Vibes</div>
+                            <div class="text-muted">Si libera tra 12 min</div>
+
+                        </div>
+                        <div class="campo-card">
+                            <div class="campo-header">
+                                <h4>CAMPO 2</h4>
+                                <span class="badge badge-light">LIBERO</span>
+                            </div>
+                            <div class="text-small">Tokyo Neon Nights</div>
+                            <div class="text-muted">Prossimo: 18:00 — Mario R.</div>
+
+                        </div>
+                        <div class="campo-card">
+                            <div class="campo-header">
+                                <h4>CAMPO 3</h4>
+                                <span class="badge badge-dark">OCCUPATO</span>
+                            </div>
+                            <div class="text-small">Hawaii Tropical Vibes</div>
+                            <div class="text-muted">Si libera tra 45 min</div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-right">
+                    <div class="list-section">
+                        <h3>Prossime Prenotazioni</h3>
+                        <div class="list-row">18:00 — Mario R. — Campo 3 — Hawaii</div>
+                        <div class="list-row">19:30 — Luca F. — Campo 1 — Tokyo</div>
+                        <div class="list-row">19:30 — Anna G. — Campo 2 — Islanda</div>
+                        <div class="list-row">21:00 — Marco B. — Campo 3 — Hawaii</div>
+                        <div class="list-row">21:00 — Giulia S. — Campo 1 — Sahara</div>
+                    </div>
+                    <div class="list-section">
+                        <h3>Attività Recenti</h3>
+                        <div class="list-row"><span class="text-muted">14:32</span> — Campo 2 sbloccato manualmente</div>
+                        <div class="list-row"><span class="text-muted">14:15</span> — Nuova prenotazione da app</div>
+                        <div class="list-row"><span class="text-muted">13:45</span> — Codice promo AWAY-10 riscattato</div>
+                        <div class="list-row"><span class="text-muted">13:30</span> — Fine partita Campo 1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">2. Prenotazioni (Vista Giornaliera)</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">AWAY</div>
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                Dashboard
+            </a>
+            <a href="prenotazioni.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Prenotazioni
+            </a>
+            <a href="campi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Campi
+            </a>
+            <a href="destinazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                Destinazioni
+            </a>
+            <a href="eventi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Eventi
+            </a>
+            <a href="clienti.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Clienti
+            </a>
+            <a href="codici-promo.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                Codici Promo
+            </a>
+            <a href="report.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Report
+            </a>
+        </div>
+    </div>
+    
+    <!-- MAIN AREA -->
+    <div class="main-area">
+        <div class="header" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 2rem;">
+                <h2 style="margin: 0;">Prenotazioni</h2>
+                <div style="display: flex; align-items: center; gap: 1rem; font-family: var(--font-main); font-weight: bold; font-size: 0.9rem;">
+                    <span style="cursor: pointer;">&larr;</span>
+                    <span>Lun 14 Luglio 2026</span>
+                    <span style="cursor: pointer;">&rarr;</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="border: 1px solid var(--border-color); display: flex; font-family: var(--font-main); font-size: 0.8rem; font-weight: bold;">
+                    <div style="padding: 0.5rem 1rem; background-color: var(--text-color); color: var(--bg-color); cursor: pointer;">Giorno</div>
+                    <div style="padding: 0.5rem 1rem; cursor: pointer;">Settimana</div>
+                </div>
+                <button class="btn">+ Nuova Prenotazione</button>
+            </div>
+        </div>
+        <div class="content">
+            <div style="display: grid; grid-template-columns: 100px 1fr 1fr 1fr; border-top: 1px solid var(--border-color); border-left: 1px solid var(--border-color);">
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-main); font-size: 0.85rem;">Orario</div>
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 1</div>
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 2</div>
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 3</div>
+
+                <!-- 09:00 -->
+                <div class="time-cell">09:00</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-free">Disponibile</div>
+                
+                <!-- 10:30 -->
+                <div class="time-cell">10:30</div>
+                <div class="slot-occupied">Anna G. — Islanda</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-occupied">Luca F. — Sahara</div>
+
+                <!-- 12:00 -->
+                <div class="time-cell">12:00</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-free">Disponibile</div>
+
+                <!-- 13:30 -->
+                <div class="time-cell">13:30</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-occupied">Marco B. — Hawaii</div>
+                <div class="slot-free">Disponibile</div>
+
+                <!-- 15:00 -->
+                <div class="time-cell">15:00</div>
+                <div class="slot-occupied">Giulia S. — Tokyo</div>
+                <div class="slot-occupied">Elena V. — Santorini</div>
+                <div class="slot-free">Disponibile</div>
+
+                <!-- 16:30 -->
+                <div class="time-cell">16:30</div>
+                <div class="slot-current">Mario R. — Hawaii</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-current">Sofia L. — Amazzonia</div>
+
+                <!-- 18:00 -->
+                <div class="time-cell">18:00</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-occupied">Andrea M. — Tokyo</div>
+                <div class="slot-occupied">Paolo T. — Hawaii</div>
+
+                <!-- 19:30 -->
+                <div class="time-cell">19:30</div>
+                <div class="slot-occupied">Giorgia C. — Sahara</div>
+                <div class="slot-occupied">Lorenzo P. — Islanda</div>
+                <div class="slot-free">Disponibile</div>
+
+                <!-- 21:00 -->
+                <div class="time-cell">21:00</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-free">Disponibile</div>
+                <div class="slot-occupied">Francesca D. — Santorini</div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">3. Modale Crea Prenotazione</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- BACKGROUND CONTENT (OPACITY 0.3) -->
+    <div style="opacity: 0.3; display: flex; width: 100%; height: 100%;">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo-container">
+                <div class="logo">AWAY</div>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+        
+        <!-- MAIN AREA -->
+        <div class="main-area">
+            <div class="header" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 2rem;">
+                    <h2 style="margin: 0;">Prenotazioni</h2>
+                    <div style="display: flex; align-items: center; gap: 1rem; font-family: var(--font-main); font-weight: bold; font-size: 0.9rem;">
+                        <span>&larr;</span>
+                        <span>Lun 14 Luglio 2026</span>
+                        <span>&rarr;</span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="border: 1px solid var(--border-color); display: flex; font-family: var(--font-main); font-size: 0.8rem; font-weight: bold;">
+                        <div style="padding: 0.5rem 1rem; background-color: var(--text-color); color: var(--bg-color);">Giorno</div>
+                        <div style="padding: 0.5rem 1rem;">Settimana</div>
+                    </div>
+                    <button class="btn">+ Nuova Prenotazione</button>
+                </div>
+            </div>
+            <div class="content">
+                <div style="display: grid; grid-template-columns: 100px 1fr 1fr 1fr; border-top: 1px solid var(--border-color); border-left: 1px solid var(--border-color);">
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-main); font-size: 0.85rem;">Orario</div>
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 1</div>
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 2</div>
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-weight: bold; font-family: var(--font-display); font-size: 0.9rem; text-align: center;">CAMPO 3</div>
+
+                    <!-- 09:00 -->
+                    <div class="time-cell">09:00</div>
+                    <div class="slot-free">Disponibile</div>
+                    <div class="slot-free">Disponibile</div>
+                    <div class="slot-free">Disponibile</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; display: flex; justify-content: center; align-items: center; z-index: 10;">
+        <div style="width: 500px; border: 2px solid var(--border-color); background-color: var(--bg-color); padding: 2.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h3 style="margin-bottom: 1.5rem;">Nuova Prenotazione Manuale</h3>
+            <div>
+                <input type="text" placeholder="Cliente">
+                <select>
+                    <option>Seleziona Campo...</option>
+                    <option>Campo 1</option>
+                    <option>Campo 2</option>
+                    <option>Campo 3</option>
+                </select>
+                <select>
+                    <option>Destinazione...</option>
+                    <option>Hawaii</option>
+                    <option>Tokyo</option>
+                    <option>Islanda</option>
+                </select>
+                <input type="date">
+                <select>
+                    <option>Fascia Oraria...</option>
+                    <option>09:00 - 10:30</option>
+                    <option>10:30 - 12:00</option>
+                    <option>12:00 - 13:30</option>
+                    <option>13:30 - 15:00</option>
+                    <option>15:00 - 16:30</option>
+                    <option>16:30 - 18:00</option>
+                    <option>18:00 - 19:30</option>
+                    <option>19:30 - 21:00</option>
+                    <option>21:00 - 22:30</option>
+                </select>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn" style="flex: 1;">Conferma Prenotazione</button>
+                    <button class="btn-secondary" style="flex: 1;">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">4. Campi (Stato Live)</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">AWAY</div>
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                Dashboard
+            </a>
+            <a href="prenotazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Prenotazioni
+            </a>
+            <a href="campi.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                Campi
+            </a>
+            <a href="destinazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                Destinazioni
+            </a>
+            <a href="eventi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                Eventi
+            </a>
+            <a href="clienti.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Clienti
+            </a>
+            <a href="codici-promo.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                Codici Promo
+            </a>
+            <a href="report.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Report
+            </a>
+        </div>
+    </div>
+    
+    <!-- MAIN AREA -->
+    <div class="main-area">
+        <div class="header">
+            <h2 style="margin: 0;">Campi</h2>
+        </div>
+        <div class="content">
+            <div style="display: flex; gap: 2rem; height: 100%;">
+                
+                <!-- CAMPO 1 -->
+                <div style="flex: 1; border: 1px solid var(--border-color); display: flex; flex-direction: column;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start;">
+                        <h3 style="margin: 0;">CAMPO 1</h3>
+                        <span class="badge badge-dark">OCCUPATO</span>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Destinazione Attiva</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 1rem;">Hawaii Tropical Vibes</div>
+                        <div class="placeholder-media" style="height: 100px;">
+                            <span class="placeholder-x" style="font-size: 2rem;">X</span>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prenotazione Attuale</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 0.5rem;">Mario R.</div>
+                        <div style="font-family: var(--font-main); font-size: 0.85rem; opacity: 0.7; font-weight: 300; margin-bottom: 1rem;">Inizio: 16:30 — Fine: 18:00</div>
+                        <div style="width: 100%; height: 6px; background-color: #F0F0F0; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-color);">
+                            <div style="width: 40%; height: 100%; background-color: var(--text-color);"></div>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); flex: 1;">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prossima Prenotazione</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; font-size: 0.85rem;">18:00 — Anna G.</div>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Manutenzione</button>
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Cambia Destinazione</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMPO 2 -->
+                <div style="flex: 1; border: 1px solid var(--border-color); display: flex; flex-direction: column;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start;">
+                        <h3 style="margin: 0;">CAMPO 2</h3>
+                        <span class="badge badge-light">LIBERO</span>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Destinazione Attiva</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 1rem;">Tokyo Neon Nights</div>
+                        <div class="placeholder-media" style="height: 100px;">
+                            <span class="placeholder-x" style="font-size: 2rem;">X</span>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prenotazione Attuale</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 0.5rem; opacity: 0.4;">Nessuna</div>
+                        <div style="font-family: var(--font-main); font-size: 0.85rem; opacity: 0.4; margin-bottom: 1rem;">--</div>
+                        <div style="width: 100%; height: 6px; background-color: #F0F0F0; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-color);">
+                            <div style="width: 0%; height: 100%; background-color: var(--text-color);"></div>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); flex: 1;">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prossima Prenotazione</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; font-size: 0.85rem;">18:00 — Mario R.</div>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Manutenzione</button>
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Cambia Destinazione</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMPO 3 -->
+                <div style="flex: 1; border: 1px solid var(--border-color); display: flex; flex-direction: column;">
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-start;">
+                        <h3 style="margin: 0;">CAMPO 3</h3>
+                        <span class="badge badge-dark">OCCUPATO</span>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Destinazione Attiva</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 1rem;">Hawaii Tropical Vibes</div>
+                        <div class="placeholder-media" style="height: 100px;">
+                            <span class="placeholder-x" style="font-size: 2rem;">X</span>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prenotazione Attuale</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; margin-bottom: 0.5rem;">Sofia L.</div>
+                        <div style="font-family: var(--font-main); font-size: 0.85rem; opacity: 0.7; font-weight: 300; margin-bottom: 1rem;">Inizio: 16:30 — Fine: 18:00</div>
+                        <div style="width: 100%; height: 6px; background-color: #F0F0F0; border-radius: 3px; overflow: hidden; border: 1px solid var(--border-color);">
+                            <div style="width: 60%; height: 100%; background-color: var(--text-color);"></div>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-color); flex: 1;">
+                        <div style="font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem; font-size: 0.85rem; text-transform: uppercase;">Prossima Prenotazione</div>
+                        <div style="font-family: var(--font-main); font-weight: bold; font-size: 0.85rem;">18:00 — Paolo T.</div>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Manutenzione</button>
+                            <button class="btn-secondary" style="flex: 1; font-size: 0.7rem; padding: 0.75rem 0.5rem;">Cambia Destinazione</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">5. Destinazioni (Catalogo)</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-container">
+
+            <div class="logo">AWAY</div>
+
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                Dashboard
+            </a>
+            <a href="prenotazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Prenotazioni
+            </a>
+            <a href="campi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Campi
+            </a>
+            <a href="destinazioni.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                Destinazioni
+            </a>
+            <a href="eventi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Eventi
+            </a>
+            <a href="clienti.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Clienti
+            </a>
+            <a href="codici-promo.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                Codici Promo
+            </a>
+            <a href="report.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Report
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+        <header class="header">
+            <h2>Destinazioni</h2>
+            <div class="header-actions">
+                <button class="btn">+ Richiedi Nuova Destinazione</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="grid-3">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Hawaii — Tropical Vibes</h4>
+                    <p class="desc">Spiaggia, sole, cocktail. Un'esperienza immersiva al caldo delle isole hawaiane.</p>
+                    <div><span class="badge badge-dark">ATTIVA</span></div>
+                    <p class="stat">127 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Disattiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Tokyo — Neon Nights</h4>
+                    <p class="desc">Cyberpunk, neon, pioggia. Atmosfera futuristica per partite ad alta tensione.</p>
+                    <div><span class="badge badge-dark">ATTIVA</span></div>
+                    <p class="stat">94 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Disattiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Islanda — Northern Lights</h4>
+                    <p class="desc">Ghiaccio e aurore boreali. Partite in un'atmosfera magica e glaciale.</p>
+                    <div><span class="badge badge-dark">ATTIVA</span></div>
+                    <p class="stat">65 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Disattiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Sahara — Desert Heat</h4>
+                    <p class="desc">Dune di sabbia e calore estremo. Un'esperienza per i giocatori più tenaci.</p>
+                    <div><span class="badge badge-light">DISATTIVATA</span></div>
+                    <p class="stat">32 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Attiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Amazzonia — Wild Jungle</h4>
+                    <p class="desc">Foresta pluviale, suoni della natura e vegetazione rigogliosa ovunque.</p>
+                    <div><span class="badge badge-dark">ATTIVA</span></div>
+                    <p class="stat">108 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Disattiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="card">
+                    <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                    <h4>Santorini — Blue & White</h4>
+                    <p class="desc">Atmosfera mediterranea, tramonti mozzafiato e architettura cicladica.</p>
+                    <div><span class="badge badge-light">DISATTIVATA</span></div>
+                    <p class="stat">41 partite giocate</p>
+                    <div class="card-actions">
+                        <button class="btn-secondary">Attiva</button>
+                        <button class="btn-secondary">Modifica</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">6. Modale Richiedi Nuova Destinazione</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- OPACITY WRAPPER (Frame 5 background) -->
+    <div class="opacity-wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo-container">
+
+                <div class="logo">AWAY</div>
+
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+
+        <!-- MAIN AREA -->
+        <div class="main-area">
+            <header class="header">
+                <h2>Destinazioni</h2>
+                <div class="header-actions">
+                    <button class="btn">+ Richiedi Nuova Destinazione</button>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Hawaii — Tropical Vibes</h4>
+                        <p class="desc">Spiaggia, sole, cocktail. Un'esperienza immersiva al caldo delle isole hawaiane.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">127 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Tokyo — Neon Nights</h4>
+                        <p class="desc">Cyberpunk, neon, pioggia. Atmosfera futuristica per partite ad alta tensione.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">94 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Islanda — Northern Lights</h4>
+                        <p class="desc">Ghiaccio e aurore boreali. Partite in un'atmosfera magica e glaciale.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">65 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Sahara — Desert Heat</h4>
+                        <p class="desc">Dune di sabbia e calore estremo. Un'esperienza per i giocatori più tenaci.</p>
+                        <div><span class="badge badge-light">DISATTIVATA</span></div>
+                        <p class="stat">32 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Attiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Amazzonia — Wild Jungle</h4>
+                        <p class="desc">Foresta pluviale, suoni della natura e vegetazione rigogliosa ovunque.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">108 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Santorini — Blue & White</h4>
+                        <p class="desc">Atmosfera mediterranea, tramonti mozzafiato e architettura cicladica.</p>
+                        <div><span class="badge badge-light">DISATTIVATA</span></div>
+                        <p class="stat">41 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Attiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <h3>Richiedi Nuova Destinazione</h3>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label>Nome proposto</label>
+                <input type="text" placeholder="Es. Marte - Red Planet" />
+            </div>
+            
+            <div class="form-group">
+                <label>Descrizione esperienza</label>
+                <textarea style="height: 100px;" placeholder="Descrivi l'atmosfera e gli elementi visivi..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Motivazione</label>
+                <textarea style="height: 80px;" placeholder="Perché questa destinazione funzionerebbe?"></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn">Invia Richiesta</button>
+                <button class="btn-secondary">Annulla</button>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">7. Eventi Speciali</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="logo-container">
+
+            <div class="logo">AWAY</div>
+
+        </div>
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                Dashboard
+            </a>
+            <a href="prenotazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Prenotazioni
+            </a>
+            <a href="campi.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Campi
+            </a>
+            <a href="destinazioni.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                Destinazioni
+            </a>
+            <a href="eventi.html" class="nav-item active">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Eventi
+            </a>
+            <a href="clienti.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Clienti
+            </a>
+            <a href="codici-promo.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                Codici Promo
+            </a>
+            <a href="report.html" class="nav-item">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Report
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+        <!-- Top Section -->
+        <div>
+            <header class="header">
+                <h2>Eventi Speciali</h2>
+                <div class="header-actions">
+                    <button class="btn">+ Crea Evento</button>
+                </div>
+            </header>
+
+            <div class="content" style="padding-bottom: 0;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Orario</th>
+                            <th>Campi</th>
+                            <th>Stato</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Notte Tropicale</td>
+                            <td>20 Lug</td>
+                            <td>20:00–23:00</td>
+                            <td>Campo 1, 2</td>
+                            <td><span class="badge badge-dark">PUBBLICATO</span></td>
+                            <td><span class="table-action">Modifica</span></td>
+                        </tr>
+                        <tr>
+                            <td>Aperitivo & Padel</td>
+                            <td>25 Lug</td>
+                            <td>19:00–22:00</td>
+                            <td>Tutti</td>
+                            <td><span class="badge badge-light">BOZZA</span></td>
+                            <td><span class="table-action">Modifica</span></td>
+                        </tr>
+                        <tr style="opacity: 0.5;">
+                            <td>Torneo Estivo</td>
+                            <td>10 Lug</td>
+                            <td>15:00–21:00</td>
+                            <td>Tutti</td>
+                            <td><span class="badge badge-light">CONCLUSO</span></td>
+                            <td><span class="table-action">Vedi</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bottom Section (Form) -->
+        <div class="content">
+            <h3 class="form-section-title">Crea Nuovo Evento</h3>
+            <div class="form-layout">
+                <!-- Left Column -->
+                <div>
+                    <div class="form-group">
+                        <label>Nome Evento</label>
+                        <input type="text" placeholder="Es. Notte Tropicale" />
+                    </div>
+                    <div class="form-group">
+                        <label>Descrizione</label>
+                        <textarea placeholder="Dettagli dell'evento..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Data</label>
+                        <input type="text" placeholder="GG/MM/AAAA" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Orario Inizio</label>
+                            <input type="text" placeholder="00:00" />
+                        </div>
+                        <div class="form-group">
+                            <label>Orario Fine</label>
+                            <input type="text" placeholder="00:00" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <div class="form-group">
+                        <label>Campi da riservare</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item"><input type="checkbox" checked /> Campo 1</label>
+                            <label class="checkbox-item"><input type="checkbox" checked /> Campo 2</label>
+                            <label class="checkbox-item"><input type="checkbox" /> Campo 3</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prezzo</label>
+                        <input type="text" placeholder="Es. € 25,00" />
+                    </div>
+                    <div class="form-group">
+                        <label>Capacità Max (partecipanti)</label>
+                        <input type="text" placeholder="Es. 20" />
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn">Pubblica Evento</button>
+                        <button class="btn-secondary">Salva Bozza</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">8. Clienti</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+
+                <div class="logo">AWAY</div>
+
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Area -->
+        <div class="main-area">
+            <div class="layout-master-detail">
+                
+                <!-- Pannello Sinistro -->
+                <div class="panel-left">
+                    <div class="header">
+                        <h1>Clienti</h1>
+                        <div class="search-bar">
+                            <input type="text" placeholder="Cerca cliente..." style="margin: 0;">
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Partite</th>
+                                    <th>Ultima Visita</th>
+                                    <th>Timbri</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Giulia Rossi</td>
+                                    <td>giulia.rossi@email.com</td>
+                                    <td>12</td>
+                                    <td>10 Lug 2026</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Alessandro Verdi</td>
+                                    <td>ale.verdi@email.com</td>
+                                    <td>5</td>
+                                    <td>08 Lug 2026</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr class="selected">
+                                    <td>Marco Bianchi</td>
+                                    <td>marco.bianchi@email.com</td>
+                                    <td>8</td>
+                                    <td>12 Lug 2026</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Laura Neri</td>
+                                    <td>laura.n@email.com</td>
+                                    <td>22</td>
+                                    <td>14 Lug 2026</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>Francesca Gialli</td>
+                                    <td>fra.g@email.com</td>
+                                    <td>1</td>
+                                    <td>01 Lug 2026</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Matteo Ferrari</td>
+                                    <td>m.ferrari@email.com</td>
+                                    <td>15</td>
+                                    <td>13 Lug 2026</td>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <td>Sara Esposito</td>
+                                    <td>s.esposito@email.com</td>
+                                    <td>3</td>
+                                    <td>25 Giu 2026</td>
+                                    <td>3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pannello Destro -->
+                <div class="panel-right">
+                    <h3>MARCO BIANCHI</h3>
+                    <div class="detail-email">marco.bianchi@email.com</div>
+
+                    <div class="detail-section">
+                        <h4>Bacheca Digitale</h4>
+                        <div class="passport-grid">
+                            <div class="passport-stamp">X</div>
+                            <div class="passport-stamp">X</div>
+                            <div class="passport-stamp">X</div>
+                            <div class="passport-stamp">X</div>
+                            <div class="passport-stamp" style="background-color: transparent;"></div>
+                            <div class="passport-stamp" style="background-color: transparent;"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Ultime Partite</h4>
+                        <div class="list-row">12 Lug — Hawaii — Campo 3</div>
+                        <div class="list-row">05 Lug — Tokyo — Campo 1</div>
+                        <div class="list-row">20 Giu — Sahara — Campo 2</div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Codici Utilizzati</h4>
+                        <div class="list-row">AWAY-HAWAII-123 — Riscattato il 10 Lug</div>
+                        <div class="list-row">WELCOME-AWAY — Riscattato il 15 Gen</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">9. Codici Promo</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+
+                <div class="logo">AWAY</div>
+
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Area -->
+        <div class="main-area">
+            <div class="header">
+                <h1>Codici Promozionali</h1>
+                <button class="btn">+ Crea Codice</button>
+            </div>
+            
+            <div class="content">
+                <div class="filters">
+                    <button class="pill active">Tutti</button>
+                    <button class="pill">Attivi</button>
+                    <button class="pill">Utilizzati</button>
+                    <button class="pill">Scaduti</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Codice</th>
+                            <th>Tipo</th>
+                            <th>Destinazione</th>
+                            <th>Stato</th>
+                            <th>Creato</th>
+                            <th>Scadenza</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SUMMER26</strong></td>
+                            <td>Sconto 20%</td>
+                            <td>Tutte</td>
+                            <td><span class="badge badge-dark">ATTIVO</span></td>
+                            <td>01 Lug 2026</td>
+                            <td>31 Ago 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HAWAII-PRO</strong></td>
+                            <td>Sconto €10</td>
+                            <td>Hawaii</td>
+                            <td><span class="badge badge-dark">ATTIVO</span></td>
+                            <td>10 Lug 2026</td>
+                            <td>20 Lug 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WELCOME-AWAY</strong></td>
+                            <td>Partita Gratuita</td>
+                            <td>Tutte</td>
+                            <td><span class="badge badge-light">UTILIZZATO</span></td>
+                            <td>15 Gen 2026</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOKYO-NIGHT</strong></td>
+                            <td>Sconto 15%</td>
+                            <td>Tokyo</td>
+                            <td><span class="badge badge-dark">ATTIVO</span></td>
+                            <td>12 Lug 2026</td>
+                            <td>15 Ago 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SPRING26</strong></td>
+                            <td>Sconto 10%</td>
+                            <td>Tutte</td>
+                            <td><span class="badge badge-light" style="opacity: 0.5;">SCADUTO</span></td>
+                            <td>01 Mar 2026</td>
+                            <td>31 Mag 2026</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VIP-SAHARA</strong></td>
+                            <td>Partita Gratuita</td>
+                            <td>Sahara</td>
+                            <td><span class="badge badge-light">UTILIZZATO</span></td>
+                            <td>20 Mag 2026</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-section">
+                    <h3>Crea Codice</h3>
+                    <div class="form-grid">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label>Tipo di Sconto</label>
+                                <select>
+                                    <option>Sconto Percentuale (%)</option>
+                                    <option>Sconto Fisso (€)</option>
+                                    <option>Partita Gratuita</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Valore</label>
+                                <input type="text" placeholder="Es. 15%">
+                            </div>
+                            <div class="form-group">
+                                <label>Destinazione</label>
+                                <select>
+                                    <option>Qualsiasi Destinazione</option>
+                                    <option>Hawaii — Tropical Vibes</option>
+                                    <option>Tokyo — Neon Nights</option>
+                                    <option>Sahara — Desert Storm</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label>Scadenza</label>
+                                <input type="date">
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo di Uso</label>
+                                <div class="radio-group">
+                                    <label class="radio-label">
+                                        <input type="radio" name="uso" checked> Singolo
+                                    </label>
+                                    <label class="radio-label">
+                                        <input type="radio" name="uso"> Multiplo
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantità da Generare</label>
+                                <input type="text" placeholder="Es. 10">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" style="width: 200px;">Genera Codici</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+    <div class="figma-frame-container">
+        <div class="figma-frame-title">10. Report</div>
+        <div class="figma-frame">
+            <div id="app-frame" style="width: 100%; height: 100%; border: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo-container">
+
+                <div class="logo">AWAY</div>
+
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Area -->
+        <div class="main-area">
+            <div class="header">
+                <h1>Report e Statistiche</h1>
+            </div>
+            
+            <div class="content">
+                <!-- Livello 1: KPI -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Incasso Oggi</div>
+                        <h2 class="kpi-value">€ 1.260</h2>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Incasso Mese</div>
+                        <h2 class="kpi-value">€ 18.740</h2>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Occupazione</div>
+                        <h2 class="kpi-value">72%</h2>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Partite Mese</div>
+                        <h2 class="kpi-value">134</h2>
+                    </div>
+                </div>
+
+                <!-- Livello 2: Grafici -->
+                <div class="charts-grid">
+                    <div class="chart-box">
+                        <div class="chart-title">Occupazione per Fascia Oraria</div>
+                        <div class="chart-placeholder">X</div>
+                    </div>
+                    <div class="chart-box">
+                        <div class="chart-title">Andamento Incassi Settimanale</div>
+                        <div class="chart-placeholder">X</div>
+                    </div>
+                </div>
+
+                <!-- Livello 3: Classifica + Filtri -->
+                <div class="bottom-grid">
+                    <div class="ranking-col">
+                        <div class="ranking-title">Destinazioni più gettonate</div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pos</th>
+                                    <th>Destinazione</th>
+                                    <th>Partite</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><strong>Hawaii</strong> — Tropical Vibes</td>
+                                    <td>47</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><strong>Tokyo</strong> — Neon Nights</td>
+                                    <td>38</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><strong>Islanda</strong> — Aurora Borealis</td>
+                                    <td>29</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><strong>Sahara</strong> — Desert Storm</td>
+                                    <td>14</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><strong>Amazzonia</strong> — Wild Jungle</td>
+                                    <td>6</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="filters-col">
+                        <div class="filters-title">Filtri Statistiche</div>
+                        <div class="filter-group">
+                            <label>Periodo</label>
+                            <select>
+                                <option>Ultimi 30 giorni</option>
+                                <option>Questa Settimana</option>
+                                <option>Oggi</option>
+                                <option>Questo Anno</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Campo</label>
+                            <select>
+                                <option>Tutti i Campi</option>
+                                <option>Campo 1</option>
+                                <option>Campo 2</option>
+                                <option>Campo 3</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Destinazione</label>
+                            <select>
+                                <option>Tutte le Destinazioni</option>
+                                <option>Hawaii</option>
+                                <option>Tokyo</option>
+                                <option>Islanda</option>
+                            </select>
+                        </div>
+                        <button class="btn">Applica Filtri</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+    
+</div>
+</body>
+</html>

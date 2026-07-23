@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Profilo</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: #FFFFFF;
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem 0;
+        }
+
+        /* Mobile Viewport Simulation */
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .placeholder-x {
+            font-family: var(--font-main);
+            font-size: 2.5rem;
+            font-weight: bold;
+            opacity: 0.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 { font-size: 1.6rem; line-height: 1.1; margin-bottom: 0.25rem; }
+        h3 { font-size: 1.3rem; line-height: 1.2; margin-bottom: 1rem; }
+        h4 { font-size: 1.05rem; line-height: 1.3; }
+
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Scrollable Main Content */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 90px; /* Space for fixed Tab Bar */
+        }
+
+        section {
+            padding: 1.5rem;
+            }
+
+        /* Stat Grid (2x2) */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            padding: 1.2rem 1rem;
+            text-align: center;
+        }
+
+        .stat-card-number {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-card-label {
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Locker List */
+        .locker-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .locker-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .locker-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .locker-thumb {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .locker-details {
+            flex-grow: 1;
+        }
+
+        .locker-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* Settings List */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-row {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .settings-row:last-child {
+            border-bottom: none;
+        }
+
+        .settings-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .settings-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 0.65rem;
+            font-weight: bold;
+            font-family: var(--font-main);
+            gap: 4px;
+            border-top: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            border-top: 2px solid var(--border-color);
+        }
+
+        .tab-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Booking Cards */
+        .booking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .booking-card {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .booking-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .placeholder-thumb {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--border-color);
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .booking-details {
+            flex-grow: 1;
+        }
+        .booking-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 0.15rem;
+        }
+        .badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: bold;
+            padding: 0.15rem 0.4rem;
+            border: 1px solid var(--border-color);
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+    
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="avatar-placeholder">
+                <span class="placeholder-x">X</span>
+            </div>
+            <h2>Mario Rossi</h2>
+            <p style="margin: 0; font-size: 0.75rem; opacity: 0.7;">Membro dal Luglio 2026</p>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Statistiche di Gioco -->
+            <section>
+                <h3>Statistiche Di Gioco</h3>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-number">5</div>
+                        <div class="stat-card-label">Partite</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-number">3</div>
+                        <div class="stat-card-label">Vittorie</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-number">2</div>
+                        <div class="stat-card-label">Sconfitte</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-number">60%</div>
+                        <div class="stat-card-label">Win Rate</div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Storico Partite (Partite Passate) -->
+            <section style="opacity: 0.85;">
+                <h3>Storico Partite</h3>
+                <p>Visualizza le partite immersive giocate ed i punti accumulati.</p>
+                <div class="booking-list">
+                    <!-- Partita Passata 1 -->
+                    <div class="booking-card" onclick="window.location.href='dettaglio-storico.html'" style="cursor: pointer;">
+                        <div class="placeholder-thumb">
+                            <span class="placeholder-x">X</span>
+                        </div>
+                        <div class="booking-details">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.15rem;">Islanda - Ghiaccio e Natura</h4>
+                            <div class="booking-meta">Venerdì 4 Luglio, 18:00</div>
+                            <div class="booking-meta">Campo 1 — 90 min</div>
+                            <span class="badge" style="background: var(--secondary-color);">+100 Punti</span>
+                        </div>
+                    </div>
+
+                    <!-- Partita Passata 2 -->
+                    <div class="booking-card" onclick="window.location.href='dettaglio-storico.html'" style="cursor: pointer;">
+                        <div class="placeholder-thumb">
+                            <span class="placeholder-x">X</span>
+                        </div>
+                        <div class="booking-details">
+                            <h4 style="font-size: 0.9rem; margin-bottom: 0.15rem;">Marocco - Deserto e Magia</h4>
+                            <div class="booking-meta">Sabato 20 Giugno, 17:30</div>
+                            <div class="booking-meta">Campo 2 — 90 min</div>
+                            <span class="badge" style="background: var(--secondary-color);">+100 Punti</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impostazioni -->
+            <section style="border-bottom: none;">
+                <h3>Impostazioni</h3>
+                <div class="settings-list">
+                    <div class="settings-row" onclick="window.location.href='modifica-profilo.html'">
+                        <span class="settings-label">Modifica Profilo</span>
+                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="settings-row" onclick="window.location.href='notifiche.html'">
+                        <span class="settings-label">Notifiche</span>
+                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="settings-row" onclick="window.location.href='metodo-pagamento.html'">
+                        <span class="settings-label">Metodo di Pagamento</span>
+                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="settings-row" onclick="alert('Disconnessione...')">
+                        <span class="settings-label" style="font-weight: 900;">Esci</span>
+                        <svg class="settings-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <a href="home.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="prenotazioni.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="0" ry="0"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Prenotazioni</span>
+            </a>
+            <a href="minigiochi.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                </svg>
+                <span>Esperienze</span>
+            </a>
+            <a href="punti.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                    <path d="M12 2a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V6a4 4 0 0 0-4-4z"></path>
+                </svg>
+                <span>Punti</span>
+            </a>
+            <a href="profilo.html" class="tab-item active">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v-2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profilo</span>
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>

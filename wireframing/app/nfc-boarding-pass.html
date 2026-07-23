@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away - NFC Scan</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --gray-color: #E5E5E5;
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --secondary-color: var(--gray-color);
+            --border-color: #000000;
+            --font-main: 'Maison Neue Mono', monospace;
+            --font-display: 'Maison Neue', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--gray-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            border: 2px solid var(--border-color);
+            position: relative;
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Status Bar Simulation */
+        .status-bar {
+            height: 44px;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            flex-shrink: 0;
+        }
+
+        header {
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: var(--bg-color);
+        }
+
+        .back-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .nfc-container {
+            width: 220px;
+            height: 220px;
+            border: 2px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            background-color: var(--secondary-color);
+        }
+
+        .nfc-card {
+            width: 130px;
+            height: 85px;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.7rem;
+            transform: rotate(-10deg);
+            position: absolute;
+            top: 110px;
+            left: 45px;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--text-color);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span style="font-family: monospace;">· · ·</span>
+        </div>
+
+        <header style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="javascript:history.back()" class="back-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <span class="logo" style="font-size: 1rem;">NFC</span>
+            </div>
+            <div style="font-weight: bold; display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-display);">
+                <span>450 PT</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 8l4 4-4 4M8 12h8"></path>
+                </svg>
+            </div>
+        </header>
+
+        <main>
+            <div style="font-size: 0.75rem; font-weight: bold; margin-bottom: 1.5rem; text-transform: uppercase; border: 2px solid var(--border-color); padding: 0.3rem 0.6rem; display: inline-block;">
+                VERIFICA DISPOSITIVO
+            </div>
+
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; margin-bottom: 1rem; text-transform: uppercase;">Avvicina il Boarding Pass</h2>
+            
+            <p style="font-size: 0.8rem; margin-bottom: 2.5rem; opacity: 0.8; line-height: 1.4;">Avvicina il tuo Boarding Pass NFC cartaceo o digitale al retro dello smartphone per verificare la sessione di gioco.</p>
+
+            <div class="nfc-container">
+                <!-- Simbolo Wireless/NFC -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.7;">
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10m-4-20a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"></path>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                <div class="nfc-card" id="nfcCard">
+                    <span style="font-family: var(--font-display); font-weight: 900; font-size: 0.75rem;">BOARDING PASS</span>
+                    <span style="font-size: 0.5rem; opacity: 0.6; margin-top: 0.2rem;">AWAY • NFC TAG</span>
+                </div>
+            </div>
+
+            <div id="status-text" style="font-weight: bold; font-size: 0.85rem; margin-bottom: 1.5rem; min-height: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                In attesa dell'NFC...
+            </div>
+
+            <button onclick="simulateTap()" class="btn">Simula Scan NFC</button>
+        </main>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = urlParams.get('next') || 'gioca.html';
+        const action = urlParams.get('action');
+
+        function simulateTap() {
+            const card = document.getElementById('nfcCard');
+            const status = document.getElementById('status-text');
+            
+            // Animazione fisica della carta NFC che si allinea al sensore
+            card.style.transform = 'rotate(0deg) scale(1.05)';
+            card.style.top = '68px';
+            card.style.left = '45px';
+            status.textContent = 'Rilevamento in corso...';
+            
+            setTimeout(() => {
+                if (action === 'unlock') {
+                    status.textContent = 'Nuovo Viaggio Rilevato!';
+                } else {
+                    status.textContent = 'NFC Verificato!';
+                }
+                card.style.border = '2px solid #000';
+                card.style.backgroundColor = 'var(--gray-color)';
+                
+                setTimeout(() => {
+                    if (action === 'unlock') {
+                        alert('Viaggio sbloccato con successo! Hawaii - Tropical Vibes è ora disponibile tra i tuoi viaggi.');
+                    }
+                    window.location.href = nextUrl;
+                }, 800);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinazioni (Modale) - Away Digital</title>
+<style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+:root {
+    --bg-color: #FFFFFF;
+    --text-color: #000000;
+    --secondary-color: #FFFFFF;
+    --border-color: #000000;
+    --font-main: 'Maison Neue Mono', monospace;
+    --font-display: 'Maison Neue', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #E0E0E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--font-main);
+}
+
+#app-frame {
+    width: 1440px;
+    height: 900px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background-color: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.logo {
+    font-family: var(--font-display);
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    gap: 1rem;
+}
+
+.nav-item.active {
+    border-left: 3px solid var(--text-color);
+    background-color: #F0F0F0;
+    font-weight: bold;
+}
+
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Area */
+.main-area {
+    width: 1220px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.header h2 {
+    margin-bottom: 0;
+}
+
+.content {
+    padding: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Components */
+.btn {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary {
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: var(--font-main);
+    letter-spacing: 0.05em;
+}
+.badge-dark { background-color: var(--text-color); color: var(--bg-color); }
+.badge-light { background-color: var(--bg-color); color: var(--text-color); border: 1px solid var(--border-color); }
+
+/* Destinazioni Custom */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.placeholder-media {
+    width: 100%;
+    height: 140px;
+    border: 2px solid var(--border-color);
+    background-color: #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.placeholder-x {
+    font-family: var(--font-main);
+    font-size: 3rem;
+    font-weight: bold;
+    opacity: 0.5;
+    color: var(--text-color);
+}
+
+.card h4 {
+    margin-bottom: 0.25rem;
+}
+
+.card p.desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.card .stat {
+    font-size: 0.75rem;
+    opacity: 0.7; font-weight: 300;
+    margin-top: 0.5rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.card-actions .btn-secondary {
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+}
+.header-actions {
+    display: flex;
+}
+
+/* Modale Overlay */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal {
+    width: 500px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    padding: 2rem;
+}
+
+/* Modale Form */
+input, select, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.75rem;
+    background-color: var(--bg-color);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.modal-actions .btn, .modal-actions .btn-secondary {
+    flex: 1;
+}
+
+/* Opacity wrapper for background */
+.opacity-wrapper {
+    opacity: 0.3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+</style>
+</head>
+<body>
+<div id="app-frame">
+    <!-- OPACITY WRAPPER (Frame 5 background) -->
+    <div class="opacity-wrapper">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="logo-container">
+
+                <div class="logo">AWAY</div>
+
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                    Dashboard
+                </a>
+                <a href="prenotazioni.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Prenotazioni
+                </a>
+                <a href="campi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Campi
+                </a>
+                <a href="destinazioni.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    Destinazioni
+                </a>
+                <a href="eventi.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    Eventi
+                </a>
+                <a href="clienti.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Clienti
+                </a>
+                <a href="codici-promo.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    Codici Promo
+                </a>
+                <a href="report.html" class="nav-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    Report
+                </a>
+            </div>
+        </div>
+
+        <!-- MAIN AREA -->
+        <div class="main-area">
+            <header class="header">
+                <h2>Destinazioni</h2>
+                <div class="header-actions">
+                    <button class="btn">+ Richiedi Nuova Destinazione</button>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Hawaii — Tropical Vibes</h4>
+                        <p class="desc">Spiaggia, sole, cocktail. Un'esperienza immersiva al caldo delle isole hawaiane.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">127 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Tokyo — Neon Nights</h4>
+                        <p class="desc">Cyberpunk, neon, pioggia. Atmosfera futuristica per partite ad alta tensione.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">94 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Islanda — Northern Lights</h4>
+                        <p class="desc">Ghiaccio e aurore boreali. Partite in un'atmosfera magica e glaciale.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">65 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Sahara — Desert Heat</h4>
+                        <p class="desc">Dune di sabbia e calore estremo. Un'esperienza per i giocatori più tenaci.</p>
+                        <div><span class="badge badge-light">DISATTIVATA</span></div>
+                        <p class="stat">32 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Attiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Amazzonia — Wild Jungle</h4>
+                        <p class="desc">Foresta pluviale, suoni della natura e vegetazione rigogliosa ovunque.</p>
+                        <div><span class="badge badge-dark">ATTIVA</span></div>
+                        <p class="stat">108 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Disattiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="placeholder-media"><span class="placeholder-x">X</span></div>
+                        <h4>Santorini — Blue & White</h4>
+                        <p class="desc">Atmosfera mediterranea, tramonti mozzafiato e architettura cicladica.</p>
+                        <div><span class="badge badge-light">DISATTIVATA</span></div>
+                        <p class="stat">41 partite giocate</p>
+                        <div class="card-actions">
+                            <button class="btn-secondary">Attiva</button>
+                            <button class="btn-secondary">Modifica</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <h3>Richiedi Nuova Destinazione</h3>
+            
+            <div class="form-group" style="margin-top: 1.5rem;">
+                <label>Nome proposto</label>
+                <input type="text" placeholder="Es. Marte - Red Planet" />
+            </div>
+            
+            <div class="form-group">
+                <label>Descrizione esperienza</label>
+                <textarea style="height: 100px;" placeholder="Descrivi l'atmosfera e gli elementi visivi..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Motivazione</label>
+                <textarea style="height: 80px;" placeholder="Perché questa destinazione funzionerebbe?"></textarea>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn">Invia Richiesta</button>
+                <button class="btn-secondary">Annulla</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

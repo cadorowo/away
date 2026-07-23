@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Destinazione - Away</title>
+    
+    <style>
+
+        /* Canvas & Pure Charcoal Tokens */
+        :root {
+            --bg-color: #161616;
+            --color-primary: #161616;
+            --color-surface-card: #222222;
+            --color-surface-hover: #2A2A2A;
+
+            --color-secondary: #B3E5FF;
+            --color-accent: #EE3810;
+
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            color: #FFFFFF;
+            text-shadow: none;
+        }
+
+        h1 { font-size: 4.5rem; line-height: 1.05; }
+        h2 { font-size: 2.75rem; line-height: 1.1; }
+        h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        /* Reference Glassmorphic Header */
+        header.glass-header {
+            position: sticky;
+            top: 1.5rem;
+            z-index: 1000;
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        .header-logo .logo {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            color: #FFFFFF;
+            text-decoration: none;
+        }
+
+        /* Central Glass Pill Nav */
+        .glass-pill-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            border-radius: 999px;
+            padding: 0.65rem 2.25rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .glass-pill-nav a {
+            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .glass-pill-nav a:hover {
+            color: #B3E5FF;
+        }
+
+        .nav-divider {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 300;
+            font-size: 0.85rem;
+            user-select: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-item:hover .submenu-cards {
+            display: none;
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: none;
+            border-radius: 24px;
+            padding: 1.5rem;
+            gap: 1rem;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            color: #FFFFFF;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 150px;
+            text-decoration: none;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            background-color: #2A2A2A;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .menu-card .card-title {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        /* Right Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .cart-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cta-pill-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.65rem 1.4rem;
+            background-color: #FFFFFF;
+            color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-pill-white:hover {
+            background-color: #F0F0F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .cta-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #161616;
+            background: linear-gradient(180deg, rgba(22,22,22,0.55) 0%, rgba(22,22,22,0.85) 60%, rgba(22,22,22,1) 100%), url("https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1920&q=85") center/cover no-repeat;
+            color: #FFFFFF;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Pure Charcoal Hero without image background or glows */
+        
+        /* Hero Section & Radial Mask Overlay */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 10.5rem 2rem 5rem 2rem;
+            margin-top: -6rem;
+            background-color: #161616;
+            border-bottom: none;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        
+
+
+        #trail-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .trail-img {
+            position: absolute;
+            width: 220px;
+            height: 270px;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 980px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            text-shadow: none;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--color-accent);
+            cursor: pointer;
+            text-align: center;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #D62D07;
+            border-color: #D62D07;
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            border-color: var(--color-secondary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background-color: #92D8FF;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 6rem 2rem;
+            
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Carousel Section */
+        #destinazioni-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        #destinazioni-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-card {
+            width: 320px;
+            height: 520px;
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .carousel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            background-color: var(--color-surface-hover);
+        }
+
+        .carousel-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .carousel-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-card:hover .carousel-img-wrap img {
+            transform: scale(1.06);
+        }
+
+        .carousel-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.4rem 1rem;
+            background-color: var(--color-secondary);
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+        }
+
+        .carousel-content {
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .carousel-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #FFFFFF;
+        }
+
+        .carousel-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--color-secondary);
+            margin-top: auto;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Grid Section for PalaVillage & Services */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .feature-card {
+            background-color: var(--color-surface-card);
+            color: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card h2 {
+            color: #FFFFFF;
+            font-size: 2.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+            
+        }
+
+        .footer-grid h3 {
+            font-size: 2.25rem;
+            color: #FFFFFF;
+        }
+
+        .footer-grid h4 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-grid a {
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover {
+            color: var(--color-secondary);
+        }
+
+        .newsletter-form input {
+            padding: 0.9rem 1.25rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.08);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: var(--font-display);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.88rem;
+        }
+
+    
+        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
+        h1, h2, h3, h4 {
+            text-wrap: balance;
+        }
+
+        p, .hero p, .accordion-desc {
+            text-wrap: pretty;
+        }
+
+        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+    
+        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
+        .hero-bg-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .hero-bg-mask::after {
+            display: none !important;
+        }
+
+        .hero-bg-mask {
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            width: calc(100% - 4rem);
+            max-width: 1320px;
+            height: calc(100% - 4rem);
+            top: 2rem;
+        }
+
+        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        }
+
+    
+        
+        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 2.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 3rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 1.5rem) !important;
+            margin-right: calc(-50vw + 1.5rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 32px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            transform: none !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+        }
+
+    
+        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0 !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+            filter: brightness(0.95);
+        }
+
+    
+        
+        
+        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
+        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+            background-color: #161616 !important;
+            background: #161616 !important;
+        }
+
+        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .hero-bg-mask {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: calc(100% - 2rem) !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.88);
+            border-radius: 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: calc(100vw - 4rem) !important;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: calc(-50vw + 2rem) !important;
+            margin-right: calc(-50vw + 2rem) !important;
+            height: 65vh;
+            min-height: 480px;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 36px !important;
+            filter: brightness(0.95);
+        }
+
+        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
+            width: 100% !important;
+            height: 380px !important;
+            object-fit: cover !important;
+            border-radius: 28px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+        <!-- Floating Glass Pill Navbar -->
+        <!-- Reference Glassmorphic Navbar -->
+    <header class="glass-header">
+        <div class="header-logo">
+            <a href="index.html" class="logo">AWAY</a>
+        </div>
+
+        <nav class="glass-pill-nav">
+            <a href="servizio.html">Servizio</a>
+            <span class="nav-divider">|</span>
+            <div class="nav-item">
+                <a href="destinazioni.html">Destinazioni</a>
+                <div class="submenu-cards">
+                    <a href="dettaglio-destinazione.html#hawaii" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii">
+                        <span class="card-title">Hawaii</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#islanda" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=400&q=80" alt="Islanda">
+                        <span class="card-title">Islanda</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#marocco" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=400&q=80" alt="Marocco">
+                        <span class="card-title">Marocco</span>
+                    </a>
+                    <a href="dettaglio-destinazione.html#peru" class="menu-card">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=400&q=80" alt="Perù">
+                        <span class="card-title">Perù</span>
+                    </a>
+                </div>
+            </div>
+            <span class="nav-divider">|</span>
+            <a href="app.html">App</a>
+            <span class="nav-divider">|</span>
+            <a href="partner.html">Partner</a>
+            <span class="nav-divider">|</span>
+            <a href="palavillage.html">PalaVillage</a>
+            <span class="nav-divider">|</span>
+            <a href="aiuto.html">Aiuto</a>
+        </nav>
+
+        <div class="header-actions">
+            <a href="cart.html" class="cart-btn" title="Carrello">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            </a>
+            <a href="app.html" class="cta-pill-white">
+                <span>Scarica App</span>
+                <span class="cta-arrow">↗</span>
+            </a>
+        </div>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 6rem 2rem;">
+        
+        <!-- Back navigation link -->
+        <div style="margin-bottom: 2rem;">
+            <a href="upsell.html" style="font-family: var(--font-display); font-weight: bold; text-decoration: none; font-size: 1rem;">← Torna all'offerta Kit</a>
+        </div>
+
+        <div class="details-grid">
+            <!-- Left Column: Specs & Gallery -->
+            <div>
+                <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Configura il tuo Kit</h1>
+                <p style="font-size: 1.3rem; font-weight: bold; margin-bottom: 3rem;">Scegli la fragranza, il colore dello speaker e la stampa del laccetto per un'esperienza su misura.</p>
+
+                <!-- Fragranza -->
+                <h3 style="margin-bottom: 1.5rem;">1. Scegli la Fragranza</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 3rem;">
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Brezza Oceanica</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Pino Nordico</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Spezie Calde</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">S. Sandalo</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colore Speaker -->
+                <h3 style="margin-bottom: 1.5rem;">2. Colore Speaker</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem;">
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Ocean Blue</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Desert Sand</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Volcanic Ash</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stampa Laccetto -->
+                <h3 style="margin-bottom: 1.5rem;">3. Stampa Laccetto</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Pattern AWAY</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">AWAY X PALAVILLAGE</h4>
+                        </div>
+                    </div>
+                    
+                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
+                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
+                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">"Play the World"</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Side Booking Card -->
+            <div>
+                <div style="border: 2px solid var(--border-color); padding: 2.5rem; background-color: var(--bg-color); position: sticky; top: 2rem;">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">Riepilogo Kit</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <p style="font-size: 0.9rem; text-transform: uppercase; font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem;">Totale Aggiuntivo</p>
+                        <p style="font-size: 2.5rem; font-weight: 900; font-family: var(--font-display);">+ € 30,00</p>
+                    </div>
+
+                    <ul style="list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Fragranza:</strong> Pino Nordico</li>
+                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Colore:</strong> Ocean Blue</li>
+                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Laccetto:</strong> AWAY X PALAVILLAGE</li>
+                    </ul>
+
+                    <a href="checkout-entrambi.html" class="btn" style="width: 100%; font-size: 1.1rem; padding: 1.2rem;">Conferma e Vai al Pagamento</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+                <footer style="padding: 4rem 2rem;  margin-top: 2rem;">
+        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; text-align: left; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+            <div>
+                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">AWAY</h3>
+                <p style="margin-bottom: 2rem; line-height: 1.6;">[Breve descrizione del brand e della mission].</p>
+                <div style="display: flex; gap: 1rem;">
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Navigazione</h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="servizio.html" style="text-decoration: none;">Servizio</a>
+                    <a href="destinazioni.html" style="text-decoration: none;">Destinazioni</a>
+                    <a href="app.html" style="text-decoration: none;">App</a>
+                    <a href="partner.html" style="text-decoration: none;">Partner</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Supporto</h4>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <a href="palavillage.html" style="text-decoration: none;">PalaVillage</a>
+                    <a href="aiuto.html" style="text-decoration: none;">Aiuto & FAQ</a>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Newsletter</h4>
+                <p style="margin-bottom: 1.5rem;">[Testo invito newsletter]</p>
+                <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
+                    <input type="email" placeholder="La tua email" style="padding: 1rem; border: 2px solid var(--border-color); width: 100%; font-family: var(--font-main);">
+                    <button type="submit" class="btn" style="padding: 1rem 2rem;">Iscriviti</button>
+                </form>
+            </div>
+        </div>
+        <div style="max-width: 1200px; margin: 0 auto; margin-top: 2rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <p>&copy; [Anno] AWAY. Tutti i diritti riservati.</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Termini di Servizio</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
