@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrello - Away</title>
-    <!-- CSS INLINE per Figma -->
+    <title>Il Tuo Carrello | AWAY</title>
     
     <style>
-
         /* Canvas & Pure Charcoal Tokens */
         :root {
             --bg-color: #161616;
@@ -50,6 +48,8 @@
             color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             padding-top: 0;
             overflow-x: hidden;
         }
@@ -61,12 +61,16 @@
             letter-spacing: -0.03em;
             margin-bottom: 1rem;
             color: #FFFFFF;
-            text-shadow: none;
+            text-wrap: balance;
         }
 
         h1 { font-size: 4.5rem; line-height: 1.05; }
         h2 { font-size: 2.75rem; line-height: 1.1; }
         h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        p {
+            text-wrap: pretty;
+        }
 
         a {
             color: var(--text-color);
@@ -92,7 +96,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: transparent;
         }
 
         .header-logo .logo {
@@ -109,13 +112,13 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.09) !important;
             backdrop-filter: blur(24px) saturate(200%);
             -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: none;
+            border: none !important;
             border-radius: 999px;
             padding: 0.65rem 2.25rem;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
         }
 
         .glass-pill-nav a {
@@ -139,6 +142,7 @@
             user-select: none;
         }
 
+        /* Submenu Dropdowns */
         .nav-item {
             position: relative;
         }
@@ -149,58 +153,44 @@
             top: calc(100% + 1rem);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.85);
+            background: rgba(22, 22, 22, 0.92);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 24px;
             padding: 1.5rem;
             gap: 1rem;
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            z-index: 1001;
         }
 
         .nav-item:hover .submenu-cards {
-            display: none;
-            position: absolute;
-            top: calc(100% + 1rem);
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.85);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: none;
-            border-radius: 24px;
-            padding: 1.5rem;
-            gap: 1rem;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            display: flex;
         }
 
         .menu-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #222222;
+            width: 180px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 1rem;
-            color: #FFFFFF;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 150px;
             text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
         }
 
         .menu-card:hover {
-            transform: translateY(-4px);
-            background-color: #2A2A2A;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
         }
 
         .menu-card img {
-            width: 120px;
-            height: 100px;
+            width: 100%;
+            height: 90px;
             object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 0.75rem;
         }
 
         .menu-card .card-title {
@@ -256,379 +246,26 @@
         }
 
         .cta-pill-white:hover {
-            background-color: #F0F0F0;
+            background-color: var(--color-secondary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .cta-arrow {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: #161616;
-            background: linear-gradient(180deg, rgba(22,22,22,0.55) 0%, rgba(22,22,22,0.85) 60%, rgba(22,22,22,1) 100%), url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85") center/cover no-repeat;
-            color: #FFFFFF;
-            border-radius: 50%;
-            font-size: 0.8rem;
             font-weight: bold;
         }
 
-        /* Pure Charcoal Hero without image background or glows */
+        /* Hero Section */
         .hero {
             position: relative;
+            padding: 10.5rem 2rem 5rem 2rem;
             text-align: center;
-            padding: 11rem 2rem 6rem 2rem;
-            margin-top: 0;
-            padding-top: 10.5rem;
-}
-
-        #trail-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .trail-img {
-            position: absolute;
-            width: 220px;
-            height: 270px;
-            object-fit: cover;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 980px;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            color: #FFFFFF;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            text-shadow: none;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem 2.25rem;
-            background-color: var(--color-accent);
-            color: #FFFFFF;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--color-accent);
-            cursor: pointer;
-            text-align: center;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            background-color: #D62D07;
-            border-color: #D62D07;
-        }
-
-        .btn-secondary {
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            border-color: var(--color-secondary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background-color: #92D8FF;
-            transform: translateY(-2px);
-        }
-
-        section {
-            padding: 6rem 2rem;
-            
-        }
-
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3.5rem auto;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Carousel Section */
-        #destinazioni-carousel {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding-bottom: 2rem;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-        }
-
-        #destinazioni-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .carousel-card {
-            width: 320px;
-            height: 520px;
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .carousel-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            background-color: var(--color-surface-hover);
-        }
-
-        .carousel-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .carousel-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-card:hover .carousel-img-wrap img {
-            transform: scale(1.06);
-        }
-
-        .carousel-tag {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.4rem 1rem;
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            text-transform: uppercase;
-        }
-
-        .carousel-content {
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .carousel-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #FFFFFF;
-        }
-
-        .carousel-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .carousel-price {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--color-secondary);
-            margin-top: auto;
-            margin-bottom: 1.25rem;
-        }
-
-        /* Grid Section for PalaVillage & Services */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .feature-card {
-            background-color: var(--color-surface-card);
-            color: #FFFFFF;
-            border-radius: var(--radius-lg);
-            padding: 4rem 3rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-card h2 {
-            color: #FFFFFF;
-            font-size: 2.75rem;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #161616;
-            color: #FFFFFF;
-            padding: 5rem 2rem 2.5rem 2rem;
-            
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 3.5rem;
-            max-width: 1240px;
-            margin: 0 auto;
-            padding-bottom: 3rem;
-            
-        }
-
-        .footer-grid h3 {
-            font-size: 2.25rem;
-            color: #FFFFFF;
-        }
-
-        .footer-grid h4 {
-            font-size: 1.1rem;
-            color: var(--color-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        .footer-grid a {
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .footer-grid a:hover {
-            color: var(--color-secondary);
-        }
-
-        .newsletter-form input {
-            padding: 0.9rem 1.25rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.08);
-            color: #FFFFFF;
-            width: 100%;
-            margin-bottom: 0.75rem;
-            font-family: var(--font-display);
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .footer-bottom {
-            max-width: 1240px;
-            margin: 2rem auto 0 auto;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.88rem;
-        }
-
-    
-        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
-        h1, h2, h3, h4 {
-            text-wrap: balance;
-        }
-
-        p, .hero p, .accordion-desc {
-            text-wrap: pretty;
-        }
-
-        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
-            font-variant-numeric: tabular-nums;
-            font-feature-settings: "tnum";
-        }
-
-        body {
-            -webkit-font-smoothing: antialiased;
-            padding-top: 0;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-    
-        
-        /* PURE CHARCOAL CANVAS, TRANSPARENT HEADERS & ZERO PHOTO BORDERS */
-        html, body, main, section, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
             background-color: #161616 !important;
-            background: #161616 !important;
-        }
-
-        header.glass-header {
-            background: transparent !important;
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        .glass-pill-nav {
-            background: rgba(255, 255, 255, 0.09) !important;
-            border: none !important;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
-        }
-
-        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
         }
 
         .hero-bg-mask {
@@ -643,46 +280,31 @@
             overflow: hidden !important;
             pointer-events: none;
             border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            box-shadow: none !important;
         }
 
         .hero-bg-mask img {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
-            filter: brightness(0.88);
+            filter: brightness(0.82);
             border-radius: 0 0 36px 36px !important;
             mask-image: none !important;
             -webkit-mask-image: none !important;
         }
 
-        .fullscreen-edge-banner {
-            width: calc(100vw - 4rem) !important;
+        .hero-content {
             position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: calc(-50vw + 2rem) !important;
-            margin-right: calc(-50vw + 2rem) !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-radius: 36px !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 36px !important;
-            filter: brightness(0.95);
-        }
-
-        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            width: 100% !important;
-            height: 380px !important;
-            object-fit: cover !important;
-            border-radius: 28px !important;
+        .hero-content h1 {
+            font-size: 4.5rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
         }
 
         .hero-content p {
@@ -697,16 +319,343 @@
             margin: 1.5rem auto !important;
             color: rgba(255, 255, 255, 0.92) !important;
             line-height: 1.65 !important;
-            text-wrap: pretty !important;
+            font-size: 1.15rem;
         }
 
+        /* Container Layouts */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* TYPOGRAPHY STATEMENT SECTION */
+        .typography-statement-section {
+            padding: 7.5rem 2rem;
+            background-color: #161616 !important;
+        }
+
+        .statement-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .statement-index {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .statement-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 2.25rem;
+            max-width: 400px;
+        }
+
+        .statement-heading {
+            font-size: 2.85rem;
+            line-height: 1.25;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: -0.02em;
+        }
+
+        .statement-heading strong {
+            color: #FFFFFF;
+            font-weight: 900;
+        }
+
+        .btn-statement {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.6rem;
+            background-color: #222222;
+            color: #FFFFFF;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-statement:hover {
+            background-color: #2A2A2A;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .circle-arrow {
+            width: 32px;
+            height: 32px;
+            background-color: #FFFFFF;
+            color: #161616;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* CART SPLIT LAYOUT */
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.86fr;
+            gap: 3.5rem;
+            align-items: flex-start;
+        }
+
+        .cart-items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .cart-item-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 140px 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item-card:hover {
+            background-color: var(--color-surface-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cart-item-img {
+            width: 140px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+        }
+
+        .cart-item-info h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .cart-item-tags {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .item-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-secondary);
+            background: rgba(179, 229, 255, 0.1);
+            padding: 0.2rem 0.65rem;
+            border-radius: var(--radius-pill);
+            text-transform: uppercase;
+        }
+
+        .cart-item-desc {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        .cart-item-price {
+            text-align: right;
+        }
+
+        .price-val {
+            font-family: var(--font-mono);
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            font-variant-numeric: tabular-nums;
+            display: block;
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .remove-btn:hover {
+            color: var(--color-accent);
+        }
+
+        /* ORDER SUMMARY CARD */
+        .order-summary-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 6rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.1rem;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
+        .summary-row span:last-child {
+            color: #FFFFFF;
+            font-family: var(--font-mono);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .summary-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .total-row h4 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .total-val {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .btn-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1.15rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(238, 56, 16, 0.4);
+            margin-bottom: 0.85rem;
+        }
+
+        .btn-checkout:hover {
+            background-color: #D62D07;
+            transform: translateY(-2px);
+        }
+
+        .btn-upsell-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 1.1rem;
+            background-color: transparent;
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-upsell-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616 !important;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .footer-grid h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-grid h4 { font-size: 1rem; color: var(--color-secondary); margin-bottom: 1.25rem; }
+
+        .footer-grid a {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover { color: #FFFFFF; }
+
+        .newsletter-form input {
+            padding: 0.85rem 1.2rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: inherit;
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
     </style>
 </head>
 <body>
 
-        <!-- Floating Glass Pill Navbar -->
-        <!-- Reference Glassmorphic Navbar -->
-        <!-- Reference Glassmorphic Header -->
+    <!-- Reference Glassmorphic Header -->
     <header class="glass-header">
         <div class="header-logo">
             <a href="index.html" class="logo">AWAY</a>
@@ -747,7 +696,7 @@
         </nav>
 
         <div class="header-actions">
-            <a href="cart.html" class="cart-btn" title="Carrello">
+            <a href="cart.html" class="cart-btn" title="Carrello" style="background: rgba(255, 255, 255, 0.25);">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
             </a>
             <a href="app.html" class="cta-pill-white">
@@ -756,128 +705,157 @@
             </a>
         </div>
     </header>
-        <main>
-        <div style="max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 0 2rem;">
-            <a href="destinazioni.html" style="font-family: var(--font-display); font-weight: bold; text-decoration: none; font-size: 1rem;">← Torna alle destinazioni</a>
-        </div>
-        <section style="text-align: center; padding: 2rem 1rem 2rem 1rem; margin-bottom: 2rem; background-color: transparent; border-bottom: none;">
-            <h1>Il Tuo Carrello</h1>
-            <p>Rivedi le tue selezioni prima di procedere al pagamento.</p>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-mask">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=85" alt="Cart Hero Away">
+            </div>
+            <div class="hero-content">
+                <h1>IL TUO CARRELLO AWAY</h1>
+                <p>
+                    Riepilogo della tua selezione: pacchetto viaggio immersivo, kit da padel personalizzato ed esperienze sensoriali.
+                </p>
+            </div>
         </section>
 
-        <section style="padding-top: 0; border-bottom: none;">
-            <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start;">
-                
-                <!-- Lista Prodotti -->
+        <!-- TYPOGRAPHY STATEMENT SECTION -->
+        <section class="typography-statement-section">
+            <div class="statement-grid">
                 <div>
-                    <!-- Prodotto 1: Slot -->
-                    <div style="display: flex; gap: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 2rem; margin-bottom: 2rem; align-items: center;">
-                        <div style="width: 150px; height: 150px; border: 2px solid var(--border-color); background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 2rem;">⏱️</div>
-                        <div style="flex-grow: 1;">
-                            <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Esperienza Immersiva - 90 min</h3>
-                            <p style="margin-bottom: 0.5rem; font-weight: bold;">Viaggio Scelto: Hawaii (Tropical Vibes)</p>
-                            <p style="margin-bottom: 1rem;">Data: 24 Nov 2024 - 18:00</p>
-                        </div>
-                        <div style="text-align: right;">
-                            <h3 style="margin-bottom: 1rem;">€ 140,00</h3>
-                            <a href="#" style="font-size: 0.9rem;">Rimuovi</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Prodotto 2: Upsell -->
-                    <div style="display: flex; gap: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 2rem; align-items: center;">
-                        <div style="width: 150px; height: 150px; border: 2px solid var(--border-color); background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center; font-size: 2rem;"></div>
-                        <div style="flex-grow: 1;">
-                            <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">Kit Sensoriale</h3>
-                            <p style="margin-bottom: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique tristique sodales.</p>
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <button class="btn btn-outline" style="padding: 0.5rem 1rem;">-</button>
-                                <span>1</span>
-                                <button class="btn btn-outline" style="padding: 0.5rem 1rem;">+</button>
-                            </div>
-                        </div>
-                        <div style="text-align: right;">
-                            <h3 style="margin-bottom: 1rem;">€ 30,00</h3>
-                            <a href="#" style="font-size: 0.9rem;">Rimuovi</a>
-                        </div>
-                    </div>
+                    <span class="statement-index">(05) Trasparenza & Selezione Luxury</span>
+                    <p class="statement-desc">
+                        Ogni dettaglio del tuo viaggio è verificato. Nessun costo nascosto, garanzia clima inclusa ed assistenza concierge dedicata.
+                    </p>
+                    <a href="upsell.html" class="btn-statement">
+                        <span>Personalizza Extra</span>
+                        <div class="circle-arrow">↗</div>
+                    </a>
                 </div>
-                
-                <!-- Riepilogo Ordine -->
-                <div style="border: 4px solid var(--border-color); padding: 2.5rem; position: sticky; top: 120px;">
-                    <h3 style="margin-bottom: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">Riepilogo Ordine</h3>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                        <span>Subtotale</span>
-                        <span>€ 170,00</span>
+                <div>
+                    <h2 class="statement-heading">
+                        <strong>Pronto a partire per l'imprevisto</strong>: conferma la tua prenotazione o aggiungi esperienze esclusive prima del checkout.
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- CART CONTENT SPLIT SECTION -->
+        <section class="container">
+            <div class="cart-grid">
+                <!-- Left Column: Items List -->
+                <div class="cart-items-list">
+                    <!-- Item 1 -->
+                    <div class="cart-item-card">
+                        <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii Travel Package" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-tags">
+                                <span class="item-tag">7 Notti / 8 Giorni</span>
+                                <span class="item-tag">2 Persone</span>
+                            </div>
+                            <h3>Hawaii Padel Experience</h3>
+                            <p class="cart-item-desc">Resort 5★ Pacific Beach, 90 min match quotidiano con audio Spotify e diffusori Olfattorio.</p>
+                        </div>
+                        <div class="cart-item-price">
+                            <span class="price-val">€ 1.850,00</span>
+                            <button class="remove-btn" onclick="alert('Rimuovere il pacchetto viaggio dal carrello?')">Rimuovi</button>
+                        </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem;">
-                        <span>Tasse</span>
-                        <span>Incluse</span>
-                    </div>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; font-weight: bold; font-size: 1.5rem; border-top: 2px solid var(--border-color); padding-top: 1.5rem;">
-                        <span>Totale</span>
-                        <span>€ 170,00</span>
-                    </div>
-                    
-                    <a href="checkout-entrambi.html" class="btn" style="width: 100%; font-size: 1.2rem; padding: 1.5rem;">Procedi al Checkout</a>
-                    
-                    <div style="margin-top: 2rem; text-align: center; display: flex; gap: 1rem; justify-content: center;">
-                        <span style="border: 2px solid var(--border-color); width: 40px; height: 30px; display: inline-block; line-height: 26px;">VISA</span>
-                        <span style="border: 2px solid var(--border-color); width: 40px; height: 30px; display: inline-block; line-height: 26px;">MC</span>
-                        <span style="border: 2px solid var(--border-color); width: 40px; height: 30px; display: inline-block; line-height: 26px;">PP</span>
+
+                    <!-- Item 2 -->
+                    <div class="cart-item-card">
+                        <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=400&q=80" alt="Away Gear Kit Custom" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-tags">
+                                <span class="item-tag">Custom Pro Kit</span>
+                                <span class="item-tag">NFC Tagged</span>
+                            </div>
+                            <h3>Away Gear Kit Custom</h3>
+                            <p class="cart-item-desc">Racchetta Pro Carbon 12K, Borsa Termica, 2 Maglie Tecniche con stampa nome personalizzata.</p>
+                        </div>
+                        <div class="cart-item-price">
+                            <span class="price-val">€ 30,00</span>
+                            <button class="remove-btn" onclick="alert('Rimuovere il kit personalizzato?')">Rimuovi</button>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Right Column: Order Summary -->
+                <div class="order-summary-card">
+                    <h3>Riepilogo Ordine</h3>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <div class="summary-row">
+                            <span>Subtotale Selezionato</span>
+                            <span>€ 1.880,00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Garanzia Campo Coperto</span>
+                            <span style="color: var(--color-secondary);">Incluso</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Consegna Smart Locker / Casa</span>
+                            <span style="color: var(--color-secondary);">Gratuita</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="total-row">
+                            <h4>Totale Preventivo</h4>
+                            <span class="total-val">€ 1.880,00</span>
+                        </div>
+
+                        <!-- CTA BUTTONS -->
+                        <a href="upsell.html" class="btn-checkout">
+                            <span>Aggiungi Esperienze Extra ↗</span>
+                        </a>
+                        <a href="checkout-entrambi.html" class="btn-upsell-link">
+                            <span>Vai Al Checkout Diretto</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-                    <footer style="padding: 4rem 2rem;  margin-top: 2rem;">
-        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; text-align: left; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
             <div>
-                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">AWAY</h3>
-                <p style="margin-bottom: 2rem; line-height: 1.6;">[Breve descrizione del brand e della mission].</p>
-                <div style="display: flex; gap: 1rem;">
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                </div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Navigazione</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="servizio.html" style="text-decoration: none;">Servizio</a>
-                    <a href="destinazioni.html" style="text-decoration: none;">Destinazioni</a>
-                    <a href="app.html" style="text-decoration: none;">App</a>
-                    <a href="partner.html" style="text-decoration: none;">Partner</a>
-                </div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Supporto</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="palavillage.html" style="text-decoration: none;">PalaVillage</a>
-                    <a href="aiuto.html" style="text-decoration: none;">Aiuto & FAQ</a>
-                </div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Newsletter</h4>
-                <p style="margin-bottom: 1.5rem;">[Testo invito newsletter]</p>
-                <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
-                    <input type="email" placeholder="La tua email" style="padding: 1rem; border: 2px solid var(--border-color); width: 100%; font-family: var(--font-main);">
-                    <button type="submit" class="btn" style="padding: 1rem 2rem;">Iscriviti</button>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
                 </form>
             </div>
         </div>
-        <div style="max-width: 1200px; margin: 0 auto; margin-top: 2rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-            <p>&copy; [Anno] AWAY. Tutti i diritti riservati.</p>
-            <div style="display: flex; gap: 1.5rem;">
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Termini di Servizio</a>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
             </div>
         </div>
     </footer>
-    <!-- L'update_footer.py riempirà questo -->
 </body>
 </html>

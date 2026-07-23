@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titolo Pagina E-commerce - Away</title>
-    <!-- CSS INLINE per Figma -->
+    <title>Esperienze Extra & Upsell | AWAY</title>
     
     <style>
-
         /* Canvas & Pure Charcoal Tokens */
         :root {
             --bg-color: #161616;
@@ -50,6 +48,8 @@
             color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             padding-top: 0;
             overflow-x: hidden;
         }
@@ -61,12 +61,16 @@
             letter-spacing: -0.03em;
             margin-bottom: 1rem;
             color: #FFFFFF;
-            text-shadow: none;
+            text-wrap: balance;
         }
 
         h1 { font-size: 4.5rem; line-height: 1.05; }
         h2 { font-size: 2.75rem; line-height: 1.1; }
         h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        p {
+            text-wrap: pretty;
+        }
 
         a {
             color: var(--text-color);
@@ -92,7 +96,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: transparent;
         }
 
         .header-logo .logo {
@@ -109,13 +112,13 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.09) !important;
             backdrop-filter: blur(24px) saturate(200%);
             -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: none;
+            border: none !important;
             border-radius: 999px;
             padding: 0.65rem 2.25rem;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
         }
 
         .glass-pill-nav a {
@@ -139,6 +142,7 @@
             user-select: none;
         }
 
+        /* Submenu Dropdowns */
         .nav-item {
             position: relative;
         }
@@ -149,58 +153,44 @@
             top: calc(100% + 1rem);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.85);
+            background: rgba(22, 22, 22, 0.92);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 24px;
             padding: 1.5rem;
             gap: 1rem;
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            z-index: 1001;
         }
 
         .nav-item:hover .submenu-cards {
-            display: none;
-            position: absolute;
-            top: calc(100% + 1rem);
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.85);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: none;
-            border-radius: 24px;
-            padding: 1.5rem;
-            gap: 1rem;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            display: flex;
         }
 
         .menu-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #222222;
+            width: 180px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 1rem;
-            color: #FFFFFF;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 150px;
             text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
         }
 
         .menu-card:hover {
-            transform: translateY(-4px);
-            background-color: #2A2A2A;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
         }
 
         .menu-card img {
-            width: 120px;
-            height: 100px;
+            width: 100%;
+            height: 90px;
             object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 0.75rem;
         }
 
         .menu-card .card-title {
@@ -256,378 +246,26 @@
         }
 
         .cta-pill-white:hover {
-            background-color: #F0F0F0;
+            background-color: var(--color-secondary);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .cta-arrow {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: #161616;
-            color: #FFFFFF;
-            border-radius: 50%;
-            font-size: 0.8rem;
             font-weight: bold;
         }
 
-        /* Pure Charcoal Hero without image background or glows */
+        /* Hero Section */
         .hero {
             position: relative;
+            padding: 10.5rem 2rem 5rem 2rem;
             text-align: center;
-            padding: 11rem 2rem 6rem 2rem;
-            margin-top: 0;
-            padding-top: 10.5rem;
-}
-
-        #trail-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .trail-img {
-            position: absolute;
-            width: 220px;
-            height: 270px;
-            object-fit: cover;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 980px;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            color: #FFFFFF;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-            text-shadow: none;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem 2.25rem;
-            background-color: var(--color-accent);
-            color: #FFFFFF;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--color-accent);
-            cursor: pointer;
-            text-align: center;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            background-color: #D62D07;
-            border-color: #D62D07;
-        }
-
-        .btn-secondary {
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            border-color: var(--color-secondary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background-color: #92D8FF;
-            transform: translateY(-2px);
-        }
-
-        section {
-            padding: 6rem 2rem;
-            
-        }
-
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3.5rem auto;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Carousel Section */
-        #destinazioni-carousel {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            padding-bottom: 2rem;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-        }
-
-        #destinazioni-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
-        .carousel-card {
-            width: 320px;
-            height: 520px;
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .carousel-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            background-color: var(--color-surface-hover);
-        }
-
-        .carousel-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 240px;
-            overflow: hidden;
-        }
-
-        .carousel-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-card:hover .carousel-img-wrap img {
-            transform: scale(1.06);
-        }
-
-        .carousel-tag {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            padding: 0.4rem 1rem;
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            font-size: 0.75rem;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            text-transform: uppercase;
-        }
-
-        .carousel-content {
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .carousel-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #FFFFFF;
-        }
-
-        .carousel-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .carousel-price {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--color-secondary);
-            margin-top: auto;
-            margin-bottom: 1.25rem;
-        }
-
-        /* Grid Section for PalaVillage & Services */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .feature-card {
-            background-color: var(--color-surface-card);
-            color: #FFFFFF;
-            border-radius: var(--radius-lg);
-            padding: 4rem 3rem;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-card h2 {
-            color: #FFFFFF;
-            font-size: 2.75rem;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #161616;
-            color: #FFFFFF;
-            padding: 5rem 2rem 2.5rem 2rem;
-            
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 3.5rem;
-            max-width: 1240px;
-            margin: 0 auto;
-            padding-bottom: 3rem;
-            
-        }
-
-        .footer-grid h3 {
-            font-size: 2.25rem;
-            color: #FFFFFF;
-        }
-
-        .footer-grid h4 {
-            font-size: 1.1rem;
-            color: var(--color-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        .footer-grid a {
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .footer-grid a:hover {
-            color: var(--color-secondary);
-        }
-
-        .newsletter-form input {
-            padding: 0.9rem 1.25rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.08);
-            color: #FFFFFF;
-            width: 100%;
-            margin-bottom: 0.75rem;
-            font-family: var(--font-display);
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .footer-bottom {
-            max-width: 1240px;
-            margin: 2rem auto 0 auto;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.88rem;
-        }
-
-    
-        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
-        h1, h2, h3, h4 {
-            text-wrap: balance;
-        }
-
-        p, .hero p, .accordion-desc {
-            text-wrap: pretty;
-        }
-
-        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
-            font-variant-numeric: tabular-nums;
-            font-feature-settings: "tnum";
-        }
-
-        body {
-            -webkit-font-smoothing: antialiased;
-            padding-top: 0;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-    
-        
-        /* PURE CHARCOAL CANVAS, TRANSPARENT HEADERS & ZERO PHOTO BORDERS */
-        html, body, main, section, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
             background-color: #161616 !important;
-            background: #161616 !important;
-        }
-
-        header.glass-header {
-            background: transparent !important;
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        .glass-pill-nav {
-            background: rgba(255, 255, 255, 0.09) !important;
-            border: none !important;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
-        }
-
-        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
         }
 
         .hero-bg-mask {
@@ -642,46 +280,31 @@
             overflow: hidden !important;
             pointer-events: none;
             border-radius: 0 0 36px 36px !important;
+            border: none !important;
+            box-shadow: none !important;
         }
 
         .hero-bg-mask img {
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
-            filter: brightness(0.88);
+            filter: brightness(0.82);
             border-radius: 0 0 36px 36px !important;
             mask-image: none !important;
             -webkit-mask-image: none !important;
         }
 
-        .fullscreen-edge-banner {
-            width: calc(100vw - 4rem) !important;
+        .hero-content {
             position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: calc(-50vw + 2rem) !important;
-            margin-right: calc(-50vw + 2rem) !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-radius: 36px !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 36px !important;
-            filter: brightness(0.95);
-        }
-
-        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            width: 100% !important;
-            height: 380px !important;
-            object-fit: cover !important;
-            border-radius: 28px !important;
+        .hero-content h1 {
+            font-size: 4.5rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 1rem;
         }
 
         .hero-content p {
@@ -696,16 +319,330 @@
             margin: 1.5rem auto !important;
             color: rgba(255, 255, 255, 0.92) !important;
             line-height: 1.65 !important;
-            text-wrap: pretty !important;
+            font-size: 1.15rem;
         }
 
+        /* Container Layouts */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        /* TYPOGRAPHY STATEMENT SECTION */
+        .typography-statement-section {
+            padding: 7.5rem 2rem;
+            background-color: #161616 !important;
+        }
+
+        .statement-grid {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .statement-index {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .statement-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 2.25rem;
+            max-width: 400px;
+        }
+
+        .statement-heading {
+            font-size: 2.85rem;
+            line-height: 1.25;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: -0.02em;
+        }
+
+        .statement-heading strong {
+            color: #FFFFFF;
+            font-weight: 900;
+        }
+
+        .btn-statement {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.6rem;
+            background-color: #222222;
+            color: #FFFFFF;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn-statement:hover {
+            background-color: #2A2A2A;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .circle-arrow {
+            width: 32px;
+            height: 32px;
+            background-color: #FFFFFF;
+            color: #161616;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* UPSELL BENTO GRID */
+        .upsell-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.75rem;
+            margin-top: 3.5rem;
+        }
+
+        .upsell-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .upsell-card:hover {
+            background-color: var(--color-surface-hover);
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .upsell-card.col-8 { grid-column: span 8; }
+        .upsell-card.col-4 { grid-column: span 4; }
+        .upsell-card.col-6 { grid-column: span 6; }
+
+        .upsell-card img {
+            width: 100% !important;
+            height: 320px !important;
+            object-fit: cover !important;
+            border-radius: 24px !important;
+            margin-bottom: 1.75rem;
+            border: none !important;
+        }
+
+        .upsell-tag {
+            align-self: flex-start;
+            padding: 0.4rem 1.1rem;
+            background: rgba(179, 229, 255, 0.1);
+            border-radius: var(--radius-pill);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .upsell-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upsell-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .upsell-price-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .upsell-price {
+            font-family: var(--font-mono);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .btn-add-extra {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-extra:hover, .btn-add-extra.added {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        /* BOTTOM ACTION FLOATING BAR */
+        .bottom-action-bar {
+            position: sticky;
+            bottom: 2rem;
+            z-index: 999;
+            max-width: 1000px;
+            margin: 4rem auto 0 auto;
+            background: rgba(22, 22, 22, 0.92);
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 999px;
+            padding: 1.1rem 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .bar-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .bar-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .bar-price {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-checkout-bar {
+            padding: 0.9rem 2rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(238, 56, 16, 0.4);
+            text-decoration: none;
+        }
+
+        .btn-checkout-bar:hover {
+            background-color: #D62D07;
+            transform: translateY(-2px);
+        }
+
+        .btn-skip {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            text-decoration: underline;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-skip:hover {
+            color: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616 !important;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .footer-grid h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-grid h4 { font-size: 1rem; color: var(--color-secondary); margin-bottom: 1.25rem; }
+
+        .footer-grid a {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover { color: #FFFFFF; }
+
+        .newsletter-form input {
+            padding: 0.85rem 1.2rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: inherit;
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
     </style>
 </head>
 <body>
 
-        <!-- Floating Glass Pill Navbar -->
-        <!-- Reference Glassmorphic Navbar -->
-        <!-- Reference Glassmorphic Header -->
+    <!-- Reference Glassmorphic Header -->
     <header class="glass-header">
         <div class="header-logo">
             <a href="index.html" class="logo">AWAY</a>
@@ -756,92 +693,176 @@
         </div>
     </header>
 
-    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 4rem 2rem;">
-        <div style="margin-bottom: 2rem;">
-            <a href="cart-destinazione.html" style="font-family: var(--font-display); font-weight: bold; text-decoration: none; font-size: 1rem;">← Torna al carrello</a>
-        </div>
-        <div style="text-align: center; margin-bottom: 4rem;">
-            <h1>Ottima scelta!</h1>
-            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Prima di procedere al pagamento, vuoi arricchire il tuo viaggio con un Kit Sensoriale dedicato per migliorare l'esperienza in campo?</p>
-        </div>
-        
-        <div style="display: flex; gap: 4rem; justify-content: center; flex-wrap: wrap;">
-            <div class="card" style="padding: 3rem; flex: 1; max-width: 900px; width: 100%; border: 4px solid var(--border-color); display: flex; gap: 3rem; align-items: center; text-align: left;">
-                
-                <!-- Immagine Sinistra -->
-                <div style="width: 300px; height: 300px; flex-shrink: 0; border: 2px solid var(--border-color); background-color: var(--secondary-color); display: flex; align-items: center; justify-content: center;">
-                    <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.5;">X</span>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg-mask">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=85" alt="Upsell Hero Away">
+            </div>
+            <div class="hero-content">
+                <h1>ARRICCHISCI IL TUO VIAGGIO</h1>
+                <p>
+                    Personalizza la tua esperienza AWAY prima della partenza: Masterclass con Pro Player, 
+                    trattamenti SPA Olfattorio e Driver Executive dedicati.
+                </p>
+            </div>
+        </section>
+
+        <!-- TYPOGRAPHY STATEMENT SECTION -->
+        <section class="typography-statement-section">
+            <div class="statement-grid">
+                <div>
+                    <span class="statement-index">(06) Personalizzazione Su Misura</span>
+                    <p class="statement-desc">
+                        Eleviamo il tuo soggiorno prima ancora della partenza. Scegli le esperienze da aggiungere al tuo itinerario in un unico click.
+                    </p>
+                    <a href="checkout-entrambi.html" class="btn-statement">
+                        <span>Vai Al Checkout</span>
+                        <div class="circle-arrow">↗</div>
+                    </a>
                 </div>
-                
-                <!-- Contenuto Destra -->
-                <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                    <h2 style="font-size: 3rem; margin-bottom: 1rem;">Kit Sensoriale</h2>
-                    <p style="font-size: 1.3rem; margin-bottom: 2rem;">Personalizza il tuo Kit Sensoriale per un'esperienza su misura.</p>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-top: 2px solid var(--border-color); padding-top: 2rem;">
-                        <span style="font-size: 2.5rem; font-weight: bold;">+ € 30,00</span>
-                    </div>
-                    <a href="configuratore-kit.html" class="btn" style="width: 100%; font-size: 1.2rem; padding: 1.5rem;">Personalizza e Aggiungi</a>
+                <div>
+                    <h2 class="statement-heading">
+                        <strong>Nessun limite alla tua esperienza</strong>: scopri le attività ed i servizi riservati in esclusiva alla community AWAY.
+                    </h2>
                 </div>
             </div>
-            
-        </div>
-        
-        <div style="text-align: center; margin-top: 4rem;">
-            <a href="checkout-destinazione.html" style="font-size: 1.2rem; text-decoration: underline; color: var(--text-color);">No grazie, procedi direttamente al pagamento</a>
-        </div>
+        </section>
 
+        <!-- UPSELL BENTO GRID SECTION -->
+        <section class="container">
+            <div style="text-align: center; max-width: 750px; margin: 0 auto 3.5rem auto;">
+                <span class="upsell-tag">Esperienze Esclusive</span>
+                <h2>Scegli I Tuoi Extra</h2>
+                <p style="color: var(--text-muted); font-size: 1.15rem;">
+                    Seleziona le attività da aggiungere al pacchetto viaggio. Il totale si aggiornerà in tempo reale.
+                </p>
+            </div>
+
+            <div class="upsell-bento">
+                <!-- Extra 1: Masterclass Pro Player -->
+                <div class="upsell-card col-8">
+                    <span class="upsell-tag">Coaching VIP</span>
+                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=85" alt="Pro Player Masterclass">
+                    <div>
+                        <h3>Masterclass Privata con Pro Player WPT</h3>
+                        <p>
+                            Sessione individuale di 2 ore in campo con un maestro professionista del circuito internazionale, corredata da analisi video dinamica della tecnica di gioco.
+                        </p>
+                        <div class="upsell-price-bar">
+                            <span class="upsell-price">+ € 180,00</span>
+                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
+                                + Aggiungi Extra
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra 2: SPA Olfattorio -->
+                <div class="upsell-card col-4">
+                    <span class="upsell-tag">Sensory Recovery</span>
+                    <h3>Percorso SPA Olfattorio</h3>
+                    <p>
+                        Massaggio muscolare decontratturante post-match abbinato ad un percorso di aromaterapia personalizzato con le essenze della tua destinazione.
+                    </p>
+                    <div class="upsell-price-bar">
+                        <span class="upsell-price">+ € 120,00</span>
+                        <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
+                            + Aggiungi Extra
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Extra 3: Luxury Racket Test -->
+                <div class="upsell-card col-6">
+                    <span class="upsell-tag">Gear Test</span>
+                    <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="Test Rachetta Luxury">
+                    <div>
+                        <h3>Test Racchetta Luxury & Hard-Case</h3>
+                        <p>
+                            Prova durante il viaggio una seconda racchetta in carbonio 18K ad alta rigidità con custodia rigida da viaggio personalizzata con le tue cifre.
+                        </p>
+                        <div class="upsell-price-bar">
+                            <span class="upsell-price">+ € 95,00</span>
+                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
+                                + Aggiungi Extra
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra 4: Executive Driver -->
+                <div class="upsell-card col-6">
+                    <span class="upsell-tag">VIP Transfer</span>
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" alt="Executive Driver Transfer">
+                    <div>
+                        <h3>Executive Chauffeur & VIP Transfer</h3>
+                        <p>
+                            Servizio di autista privato in berlina executive per tutti i trasferimenti dall'aeroporto al resort e per i tuoi spostamenti verso l'arena di gioco.
+                        </p>
+                        <div class="upsell-price-bar">
+                            <span class="upsell-price">+ € 140,00</span>
+                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
+                                + Aggiungi Extra
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTTOM FLOATING ACTION BAR -->
+            <div class="bottom-action-bar">
+                <div class="bar-info">
+                    <span class="bar-label">Totale Con Extra:</span>
+                    <span class="bar-price">€ 1.880,00</span>
+                </div>
+                <div class="bar-actions">
+                    <a href="checkout-entrambi.html" class="btn-skip">Salta Extra</a>
+                    <a href="checkout-entrambi.html" class="btn-checkout-bar">
+                        <span>Conferma & Vai Al Checkout ↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
-            <footer style="padding: 4rem 2rem;  margin-top: 2rem;">
-        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; text-align: left; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
             <div>
-                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">AWAY</h3>
-                <p style="margin-bottom: 2rem; line-height: 1.6;">[Breve descrizione del brand e della mission].</p>
-                <div style="display: flex; gap: 1rem;">
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                </div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                </p>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Navigazione</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="servizio.html" style="text-decoration: none;">Servizio</a>
-                    <a href="destinazioni.html" style="text-decoration: none;">Destinazioni</a>
-                    <a href="app.html" style="text-decoration: none;">App</a>
-                    <a href="partner.html" style="text-decoration: none;">Partner</a>
-                </div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Supporto</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="palavillage.html" style="text-decoration: none;">PalaVillage</a>
-                    <a href="aiuto.html" style="text-decoration: none;">Aiuto & FAQ</a>
-                </div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Newsletter</h4>
-                <p style="margin-bottom: 1.5rem;">[Testo invito newsletter]</p>
-                <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
-                    <input type="email" placeholder="La tua email" style="padding: 1rem; border: 2px solid var(--border-color); width: 100%; font-family: var(--font-main);">
-                    <button type="submit" class="btn" style="padding: 1rem 2rem;">Iscriviti</button>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn" style="width: 100%;">Iscriviti Ora</button>
                 </form>
             </div>
         </div>
-        <div style="max-width: 1200px; margin: 0 auto; margin-top: 2rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-            <p>&copy; [Anno] AWAY. Tutti i diritti riservati.</p>
-            <div style="display: flex; gap: 1.5rem;">
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Termini di Servizio</a>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
             </div>
         </div>
     </footer>
-
-    <!-- JS INLINE -->
-    <script>
-        // Pagina statica per wireframe
-    </script>
-
 </body>
 </html>
