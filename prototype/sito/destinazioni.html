@@ -923,16 +923,17 @@
         }
 
         .fullscreen-edge-banner {
-            width: calc(100vw - 4rem) !important;
+            width: calc(100vw - 2rem) !important;
             position: relative;
             left: 50%;
-            right: 50%;
             margin-left: calc(-50vw + 2rem) !important;
-            margin-right: calc(-50vw + 2rem) !important;
+            margin-right: -50vw !important;
             height: 65vh;
             min-height: 480px;
             overflow: hidden !important;
             border-radius: 36px 0 0 36px !important;
+            border: none !important;
+            box-shadow: none !important;
             margin-top: 4rem;
             margin-bottom: 4rem;
         }
@@ -942,6 +943,7 @@
             height: 100% !important;
             object-fit: cover !important;
             border-radius: 36px 0 0 36px !important;
+            border: none !important;
             filter: brightness(0.95);
         }
 
