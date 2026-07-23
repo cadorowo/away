@@ -48,7 +48,6 @@
             color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            padding-top: 0;
             overflow-x: hidden;
         }
 
@@ -74,10 +73,12 @@
 
         /* Reference Glassmorphic Header */
         header.glass-header {
-            position: fixed;
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            position: sticky;
             top: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
             z-index: 1000;
             margin: 0 auto;
             width: calc(100% - 4rem);
@@ -272,18 +273,10 @@
         .hero {
             position: relative;
             text-align: center;
-            padding: 10.5rem 2rem 5rem 2rem;
-            margin-top: 0;
-            background-color: #161616;
-            border-bottom: none;
-            min-height: 88vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            user-select: none;
-        }
+            padding: 10rem 2rem 5rem 2rem;
+            margin-top: -6rem;
+            padding-top: 10.5rem;
+}
 
         .hero-3d-deck-wrapper {
             position: relative;
@@ -825,206 +818,29 @@
 
         body {
             -webkit-font-smoothing: antialiased;
-            padding-top: 0;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
 
     
-        /* CRISP ROUNDED IMAGE FRAMES (NO GRADIENT OVERLAYS) */
-        .hero-bg-mask img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.95);
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-        .hero-bg-mask::after {
-            display: none !important;
-        }
-
-        .hero-bg-mask {
-            border-radius: 32px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            margin: 0 auto;
-            width: calc(100% - 4rem);
-            max-width: 1320px;
-            height: calc(100% - 4rem);
-            top: 2rem;
-        }
-
-        .rounded-image-frame, .bento-card img, .matrix-card img, .partner-img-wrap {
-            border-radius: 28px !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
-            overflow: hidden !important;
-        }
-
-    
         
-        /* FULL-SIZE HORIZONTAL IMAGES WITH ROUNDED CORNERS (BORDI STONDEGGIANTI) */
-        .hero-bg-mask {
-            position: absolute;
-            top: 1rem;
-            left: 50%;
-            transform: translateX(-50%) !important;
-            width: calc(100% - 2.5rem) !important;
-            max-width: 1360px !important;
-            height: calc(100% - 2rem) !important;
-            z-index: 1;
-            overflow: hidden !important;
-            pointer-events: none;
-            border-radius: 32px !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.88);
-            border-radius: 32px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-        .fullscreen-edge-banner {
-            width: calc(100vw - 3rem) !important;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: calc(-50vw + 1.5rem) !important;
-            margin-right: calc(-50vw + 1.5rem) !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-radius: 32px !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 32px !important;
-            filter: brightness(0.95);
-        }
-
-        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            width: 100% !important;
-            height: 380px !important;
-            object-fit: cover !important;
-            border-radius: 28px !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
-        }
-
-    
-        /* 100% EDGE-TO-EDGE HORIZONTAL WITH ROUNDED TOP/BOTTOM CONTOURS (NO SIDE MARGINS) */
-        .hero-bg-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100% !important;
-            max-width: 100% !important;
-            height: 100% !important;
-            z-index: 1;
-            overflow: hidden !important;
-            pointer-events: none;
-            border-radius: 0 0 36px 36px !important;
-            border: none !important;
-            transform: none !important;
-        }
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.88);
-            border-radius: 0 0 36px 36px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-        .fullscreen-edge-banner {
-            width: 100vw !important;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw !important;
-            margin-right: -50vw !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-radius: 36px !important;
-            border: none !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 36px !important;
-            filter: brightness(0.95);
-        }
-
-        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            width: 100% !important;
-            height: 380px !important;
-            object-fit: cover !important;
-            border-radius: 28px !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
-        }
-
-    
-        /* 100% EDGE-TO-EDGE HORIZONTAL WITH SUBTLE HORIZONTAL BORDERS */
-        .fullscreen-edge-banner {
-            width: 100vw !important;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw !important;
-            margin-right: -50vw !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-top: 1px solid rgba(255, 255, 255, 0.18) !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important;
-            border-left: none !important;
-            border-right: none !important;
-            border-radius: 0 !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 0 !important;
-            filter: brightness(0.95);
-        }
-
-    
-        
-        
-        /* PURE CHARCOAL CANVAS & ZERO PHOTO BORDERS */
-        html, body, main, section, header, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
+        /* PURE CHARCOAL CANVAS, TRANSPARENT HEADERS & ZERO PHOTO BORDERS */
+        html, body, main, section, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
             background-color: #161616 !important;
             background: #161616 !important;
+        }
+
+        header.glass-header {
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .glass-pill-nav {
+            background: rgba(255, 255, 255, 0.09) !important;
+            border: none !important;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
         }
 
         .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
