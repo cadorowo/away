@@ -415,8 +415,8 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background-color: rgba(238, 56, 16, 0.2);
-            color: var(--color-accent);
+            background-color: rgba(179, 229, 255, 0.18) !important;
+            color: #B3E5FF !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -431,7 +431,7 @@
             justify-content: center;
             gap: 0.5rem;
             padding: 1.1rem 2.25rem;
-            background-color: var(--color-accent);
+            background-color: #B3E5FF !important;
             color: #FFFFFF;
             font-weight: 700;
             border-radius: var(--radius-pill);
@@ -1245,6 +1245,25 @@
             object-fit: cover !important;
             filter: brightness(0.75) !important;
             border-radius: 0 0 36px 36px !important;
+        }
+
+    
+        /* BRAND NON-BUTTON HIGHLIGHTS: BLUE (#B3E5FF) INSTEAD OF ORANGE */
+        .feature-icon-pill {
+            background-color: rgba(179, 229, 255, 0.18) !important;
+            color: #B3E5FF !important;
+            border: 1px solid rgba(179, 229, 255, 0.3) !important;
+        }
+
+        .gear-icon {
+            color: #B3E5FF !important;
+        }
+
+        .bento-tag:not(.btn),
+        .matrix-badge {
+            background-color: rgba(179, 229, 255, 0.15) !important;
+            color: #B3E5FF !important;
+            border: 1px solid rgba(179, 229, 255, 0.3) !important;
         }
 
     </style>
