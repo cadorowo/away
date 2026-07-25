@@ -284,7 +284,8 @@
             max-width: 1320px;
             height: 440px;
             margin-bottom: 3rem;
-            perspective: 1600px;
+            perspective: 1400px;
+            perspective-origin: 50% 50%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -298,7 +299,7 @@
             justify-content: center;
             align-items: center;
             transform-style: preserve-3d;
-            transition: transform 0.5s ease-out;
+            will-change: transform;
         }
 
         .deck-card {
@@ -307,11 +308,13 @@
             height: 380px;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
             cursor: pointer;
             will-change: transform;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
             text-decoration: none;
         }
 
@@ -375,10 +378,10 @@
         }
 
         .deck-card:hover {
-            transform: scale(1.15) rotateZ(0deg) rotateY(0deg) translateY(-30px) translateZ(160px) !important;
-            z-index: 30 !important;
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95);
+            transform: scale(1.12) translateY(-25px) translateZ(140px) !important;
+            z-index: 50 !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95) !important;
         }
 
         .hero-content {
@@ -1866,30 +1869,47 @@
     <!-- Interactive Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 3D Deck Parallax Effect in Hero
+            // Smooth Non-Flickering 3D Deck Parallax Effect in Hero
             const heroSection = document.getElementById('hero-section');
+            const deckWrapper = document.querySelector('.hero-3d-deck-wrapper');
             const deck = document.getElementById('3d-deck');
+            const deckCards = document.querySelectorAll('.deck-card');
+            let isHoveringCard = false;
 
-            if (heroSection && deck) {
-                heroSection.addEventListener('mousemove', (e) => {
-                    const rect = heroSection.getBoundingClientRect();
+            if (deckWrapper && deck) {
+                deckCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        isHoveringCard = true;
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        isHoveringCard = false;
+                    });
+                });
+
+                deckWrapper.addEventListener('mousemove', (e) => {
+                    if (isHoveringCard) return; // Freeze deck rotation while hovering card to prevent 3D flicker loop
+
+                    const rect = deckWrapper.getBoundingClientRect();
                     const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
                     const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
 
                     gsap.to(deck, {
-                        rotationY: mouseX * 32,
-                        rotationX: -mouseY * 24,
-                        duration: 0.7,
-                        ease: 'power2.out'
+                        rotationY: mouseX * 22,
+                        rotationX: -mouseY * 14,
+                        duration: 0.8,
+                        ease: 'power1.out',
+                        overwrite: 'auto'
                     });
                 });
 
-                heroSection.addEventListener('mouseleave', () => {
+                deckWrapper.addEventListener('mouseleave', () => {
+                    isHoveringCard = false;
                     gsap.to(deck, {
                         rotationY: 0,
                         rotationX: 0,
-                        duration: 1.2,
-                        ease: 'power2.out'
+                        duration: 1.0,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
                     });
                 });
             }
