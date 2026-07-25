@@ -377,7 +377,7 @@
         .deck-card:hover {
             transform: scale(1.15) rotateZ(0deg) rotateY(0deg) translateY(-30px) translateZ(160px) !important;
             z-index: 30 !important;
-            border-color: var(--color-secondary);
+            border-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95);
         }
 
@@ -449,7 +449,7 @@
         }
 
         section {
-            padding: 6rem 2rem;
+            padding: 7.5rem 2rem !important;
             
         }
 
@@ -654,10 +654,14 @@
 
         /* TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) */
         .typography-statement-section {
-            padding: 7.5rem 2rem;
-            background-color: #161616;
-            border-top: none;
-            border-bottom: none;
+            padding: 7.5rem 2rem !important;
+            background-color: #161616 !important;
+            background-image: none !important;
+            background: #161616 !important;
+            border-top: none !important;
+            border-bottom: none !important;
+            position: relative;
+            z-index: 10;
         }
 
         .statement-grid {
@@ -918,6 +922,644 @@
             text-wrap: pretty !important;
         }
 
+    
+        /* GRAPHIC FULL-SIZE BACKGROUND IMAGES FOR TEXT COMPONENTS */
+        .typography-statement-section {
+            position: relative;
+            padding: 8.5rem 2rem;
+            margin: 4rem auto;
+            max-width: 1360px;
+            border-radius: 36px !important;
+            overflow: hidden !important;
+            background-color: #161616 !important;
+            background-image: none !important;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+        .statement-grid {
+            position: relative;
+            z-index: 5;
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+
+        .live-booking-card, .contact-support-card {
+            position: relative;
+            overflow: hidden !important;
+            border-radius: 36px !important;
+            background-image: linear-gradient(135deg, rgba(22, 22, 22, 0.85) 0%, rgba(22, 22, 22, 0.94) 100%), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=85') !important;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+    
+        /* GRAPHIC FULL-BLEED BACKGROUND CARDS */
+        .feature-card, .agency-bento, .graphic-full-card {
+            position: relative;
+            background-color: var(--color-surface-card);
+            border-radius: 32px !important;
+            min-height: 460px;
+            overflow: hidden !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+            display: flex !important;
+            align-items: center !important;
+            padding: 0 !important;
+        }
+
+        .feature-card .feature-bg-img, .agency-bento .feature-bg-img, .graphic-full-card .feature-bg-img {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            z-index: 1 !important;
+            filter: brightness(0.85) !important;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            border-radius: 32px !important;
+            border: none !important;
+        }
+
+        .feature-card:hover .feature-bg-img, .agency-bento:hover .feature-bg-img, .graphic-full-card:hover .feature-bg-img {
+            transform: scale(1.04) !important;
+        }
+
+        .feature-card::before, .agency-bento::before, .graphic-full-card::before {
+            content: "" !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 2 !important;
+            background: linear-gradient(90deg, rgba(16, 16, 16, 0.95) 0%, rgba(16, 16, 16, 0.7) 55%, rgba(16, 16, 16, 0.15) 100%) !important;
+            pointer-events: none !important;
+        }
+
+        .feature-card-content, .agency-bento-content, .graphic-full-content {
+            position: relative !important;
+            z-index: 10 !important;
+            max-width: 650px !important;
+            padding: 4.5rem 4rem !important;
+        }
+
+        .feature-card-content h2, .agency-bento-content h2, .graphic-full-content h2 {
+            font-size: 3.25rem !important;
+            line-height: 1.08 !important;
+            margin-bottom: 1.25rem !important;
+            color: #FFFFFF !important;
+            letter-spacing: -0.04em !important;
+        }
+
+        .feature-card-content p, .agency-bento-content p, .graphic-full-content p {
+            color: rgba(255, 255, 255, 0.88) !important;
+            font-size: 1.15rem !important;
+            line-height: 1.7 !important;
+            margin-bottom: 2.25rem !important;
+            text-wrap: pretty !important;
+        }
+
+    
+        /* PERFECT HERO TEXT CENTERING */
+        .hero, .hero-content {
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .hero h1, .hero-content h1,
+        .hero h2, .hero-content h2,
+        .hero p, .hero-content p,
+        .hero span, .hero-content span,
+        .hero-cta-group, .hero-actions {
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            align-self: center !important;
+        }
+
+    
+        
+
+        .btn:not(.btn-outline):hover,
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
+        .btn-statement:hover,
+        .btn-checkout:hover,
+        .btn-add-kit:hover,
+        .accordion-cta-pill:hover,
+        .hero-content .btn:not(.btn-outline):hover {
+            background-color: #D62D07 !important;
+            border-color: #D62D07 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: none !important;
+        }
+
+        /* Keep internal circle arrow contrast white icon on orange button */
+        .btn-statement .circle-arrow,
+        .accordion-cta-pill .cta-icon-circle,
+        .cta-pill-white .cta-arrow {
+            background-color: #FFFFFF !important;
+            color: #EE3810 !important;
+        }
+
+    
+        /* FIX ACCORDION CTA PILL OVERFLOW & TEXT SQUISHING */
+        .accordion-cta-pill {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.75rem !important;
+            padding: 0.75rem 1.25rem !important;
+            background-color: #EE3810 !important;
+            color: #FFFFFF !important;
+            border-radius: 999px !important;
+            font-weight: 800 !important;
+            font-size: 0.82rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.04em !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            width: auto !important;
+        }
+
+        .accordion-cta-pill span {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            display: inline-block !important;
+        }
+
+        .accordion-cta-pill .cta-icon-circle,
+        .accordion-cta-pill .circle-arrow {
+            flex-shrink: 0 !important;
+            width: 28px !important;
+            height: 28px !important;
+            min-width: 28px !important;
+            min-height: 28px !important;
+            border-radius: 50% !important;
+            background-color: #FFFFFF !important;
+            color: #EE3810 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-weight: 900 !important;
+            font-size: 0.85rem !important;
+        }
+
+    
+        /* COMPRESSED ACCORDION CTA BUTTON: ICON ONLY WHEN COLLAPSED */
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
+            padding: 0.6rem !important;
+            width: 44px !important;
+            height: 44px !important;
+            min-width: 44px !important;
+            min-height: 44px !important;
+            border-radius: 50% !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 0 !important;
+            background-color: #EE3810 !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
+            display: none !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
+            width: 28px !important;
+            height: 28px !important;
+            margin: 0 !important;
+            background-color: #FFFFFF !important;
+            color: #EE3810 !important;
+        }
+
+        /* ACTIVE / HOVERED ACCORDION CARD BUTTON: FULL EXPANDED PILL */
+        .accordion-card.active .accordion-cta-pill,
+        .accordion-card:hover .accordion-cta-pill {
+            padding: 0.75rem 1.4rem !important;
+            width: auto !important;
+            height: auto !important;
+            border-radius: 999px !important;
+            justify-content: space-between !important;
+            gap: 1rem !important;
+        }
+
+        .accordion-card.active .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow),
+        .accordion-card:hover .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
+            display: inline-block !important;
+            white-space: nowrap !important;
+            font-size: 0.85rem !important;
+            font-weight: 800 !important;
+        }
+
+    
+        /* REMOVE HOVER GLOW FROM ALL BUTTONS */
+        .btn:hover,
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
+        .btn-statement:hover,
+        .btn-checkout:hover,
+        .btn-add-kit:hover,
+        .accordion-cta-pill:hover,
+        .hero-content .btn:hover {
+            box-shadow: none !important;
+            filter: none !important;
+        }
+
+    
+        /* ENFORCE PURE WHITE CARD PILLS FOR HAWAII, ISLANDA, MAROCCO, PERU */
+        .card-pill {
+            display: inline-block !important;
+            padding: 0.4rem 1.1rem !important;
+            background: #FFFFFF !important;
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+            font-size: 0.75rem !important;
+            font-weight: 900 !important;
+            border-radius: 999px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.05em !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+
+    
+        
+
+        .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
+            color: #161616 !important;
+        }
+
+        .accordion-cta-pill .cta-icon-circle,
+        .accordion-cta-pill .circle-arrow {
+            background-color: #161616 !important;
+            color: #FFFFFF !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
+            background-color: #161616 !important;
+            color: #FFFFFF !important;
+        }
+
+        /* SECONDARY STATEMENT BUTTON (.btn-statement) */
+        .btn-statement {
+            background-color: #222222 !important;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-statement:hover {
+            background-color: #2A2A2A !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .btn-statement .circle-arrow {
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+        }
+
+        /* SECONDARY GENERIC BUTTONS (.btn-secondary) */
+        .btn-secondary {
+            background-color: #222222 !important;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-secondary:hover {
+            background-color: #2A2A2A !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+
+    
+        /* REMOVE BLUE BORDER ON CARD HOVER */
+        .deck-card:hover,
+        .accordion-card:hover,
+        .bento-card:hover,
+        .menu-card:hover,
+        .upsell-card:hover,
+        .feature-card:hover {
+            border-color: rgba(255, 255, 255, 0.25) !important;
+        }
+
+    
+        /* =========================================================
+           AWAY 3-TIER BUTTON SYSTEM ARCHITECTURE
+           ========================================================= */
+
+        /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
+        .btn-primary,
+        .cta-pill-white,
+        .header-actions .cta-pill-white,
+        .btn-checkout,
+        .btn-add-kit,
+        .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
+            background-color: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: none !important;
+        }
+
+        .btn-primary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
+        .btn-checkout:hover,
+        .btn-add-kit:hover,
+        .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
+            background-color: #D62D07 !important;
+            border-color: #D62D07 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: none !important;
+        }
+
+        .cta-pill-white .cta-arrow,
+        .btn-checkout .cta-arrow,
+        .btn-add-kit .cta-arrow {
+            background-color: #FFFFFF !important;
+            color: #EE3810 !important;
+        }
+
+        /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
+        .btn-secondary,
+        .accordion-cta-pill {
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+            border: 1px solid #FFFFFF !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+
+        .btn-secondary:hover,
+        .accordion-cta-pill:hover,
+        .accordion-card.active .accordion-cta-pill {
+            background-color: #F2F2F2 !important;
+            border-color: #F2F2F2 !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
+            color: #161616 !important;
+        }
+
+        .accordion-cta-pill .cta-icon-circle,
+        .accordion-cta-pill .circle-arrow,
+        .btn-secondary .circle-arrow {
+            background-color: #161616 !important;
+            color: #FFFFFF !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+        }
+
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
+        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
+            background-color: #161616 !important;
+            color: #FFFFFF !important;
+        }
+
+        /* 3. BOTTONI TERZIARI (Dark Glass / Outline #222222) */
+        .btn-tertiary,
+        .btn-statement,
+        .btn-outline,
+        .btn-skip,
+        .btn-skip-kit {
+            background-color: #222222 !important;
+            color: #FFFFFF !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-tertiary:hover,
+        .btn-statement:hover,
+        .btn-outline:hover,
+        .btn-skip:hover,
+        .btn-skip-kit:hover {
+            background-color: #2A2A2A !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-statement .circle-arrow,
+        .btn-tertiary .circle-arrow,
+        .btn-outline .circle-arrow {
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+        }
+
+    
+        /* REMOVE CIRCLE ARROWS FROM ALL BUTTONS */
+        .circle-arrow,
+        .cta-arrow,
+        .cta-icon-circle {
+            display: none !important;
+        }
+
+    
+        /* HEADER LOGO IMAGE STYLING */
+        .header-logo .logo {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-decoration: none !important;
+        }
+
+        .header-logo .brand-logo-img {
+            height: 28px !important;
+            width: auto !important;
+            max-height: 32px !important;
+            object-fit: contain !important;
+            display: block !important;
+        }
+
+    
+        /* COMPACT VERTICAL PADDING FOR TYPOGRAPHY STATEMENT SECTION */
+        .typography-statement-section {
+            padding: 7.5rem 2rem !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+    
+        /* HERO RACKET BACKGROUND MASK */
+        .hero-bg-mask {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: 100% !important;
+            z-index: 1;
+            overflow: hidden !important;
+            pointer-events: none;
+            border-radius: 0 0 36px 36px !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.75) !important;
+            border-radius: 0 0 36px 36px !important;
+        }
+
+        .hero-3d-deck-wrapper,
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+    
+        
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.8) !important;
+            border-radius: 32px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+    
+        
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.75) !important;
+            border-radius: 0 0 36px 36px !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+    
+        /* 100% FULL-WIDTH HORIZONTAL IMAGES (NO LATERAL SPACES/MARGINS) */
+        .hero-bg-mask {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 100% !important;
+            z-index: 1 !important;
+            overflow: hidden !important;
+            pointer-events: none !important;
+            border-radius: 0 0 36px 36px !important;
+            transform: none !important;
+            margin: 0 !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.75) !important;
+            border-radius: 0 0 36px 36px !important;
+        }
+
+        .fullscreen-edge-banner {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            position: relative !important;
+            left: 50% !important;
+            right: 50% !important;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            height: 65vh !important;
+            min-height: 480px !important;
+            overflow: hidden !important;
+            border-radius: 0 !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .fullscreen-edge-banner .banner-img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 0 !important;
+        }
+
+    
+        /* BALANCED ELEGANT SECTION SPACING */
+        section {
+            padding: 7.5rem 2rem !important;
+        }
+
+        .hero {
+            padding-top: 10.5rem !important;
+            padding-bottom: 5.5rem !important;
+        }
+
+        .typography-statement-section {
+            padding: 8rem 2rem !important;
+        }
+
+        .section-header {
+            margin-bottom: 4rem !important;
+        }
+
+    
+        /* STRICTLY REMOVE ALL CIRCLE BADGES FROM ACCORDION BUTTONS */
+        .cta-icon-circle,
+        .accordion-cta-circle,
+        .circle-arrow,
+        .cta-arrow {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        .accordion-cta-pill {
+            padding: 0.85rem 1.85rem !important;
+            border-radius: 999px !important;
+            background-color: #FFFFFF !important;
+            color: #161616 !important;
+            font-weight: 800 !important;
+        }
+
+        .accordion-card:not(.active) .accordion-cta-pill {
+            padding: 0.65rem 1.25rem !important;
+        }
+
+        .accordion-card:not(.active) .accordion-cta-pill span {
+            display: inline-block !important;
+            font-size: 0.8rem !important;
+        }
+
     </style>
 
     <!-- GSAP Library -->
@@ -928,7 +1570,7 @@
         <!-- Reference Glassmorphic Header -->
     <header class="glass-header">
         <div class="header-logo">
-            <a href="index.html" class="logo">AWAY</a>
+            <a href="index.html" class="logo"><img src="assets/AWAY.png" alt="AWAY Logo" class="brand-logo-img"></a>
         </div>
 
         <nav class="glass-pill-nav">
@@ -971,7 +1613,7 @@
             </a>
             <a href="app.html" class="cta-pill-white">
                 <span>Scarica App</span>
-                <span class="cta-arrow">↗</span>
+                
             </a>
         </div>
     </header>
@@ -979,6 +1621,9 @@
     <main>
         <!-- Interactive 3D Rotating Destination Deck Hero Section -->
         <section class="hero" id="hero-section">
+            <div class="hero-bg-mask">
+                <img src="assets/change_bg_to_161616_2K_202607251514.jpeg" alt="Hero Racket Background">
+            </div>
             
             <div class="hero-3d-deck-wrapper">
                 <div class="hero-3d-deck" id="3d-deck">
@@ -995,7 +1640,7 @@
                     <a href="dettaglio-destinazione.html#islanda" class="deck-card card-islanda">
                         <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=600&q=80" alt="Islanda">
                         <div class="card-overlay">
-                            <span class="card-pill" style="background: var(--color-secondary); color: #161616;">ISLANDA</span>
+                            <span class="card-pill">ISLANDA</span>
                             <h4>Ghiaccio e Aurora</h4>
                         </div>
                     </a>
@@ -1004,7 +1649,7 @@
                     <a href="dettaglio-destinazione.html#marocco" class="deck-card card-marocco">
                         <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=600&q=80" alt="Marocco">
                         <div class="card-overlay">
-                            <span class="card-pill" style="background: var(--color-accent); color: #FFFFFF;">MAROCCO</span>
+                            <span class="card-pill">MAROCCO</span>
                             <h4>Deserto e Magia</h4>
                         </div>
                     </a>
@@ -1034,18 +1679,17 @@
         <section class="typography-statement-section">
             <div class="statement-grid">
                 <div>
-                    <span class="statement-index">(01) Visione & Format</span>
+                    <span class="statement-index">(01) Il Format Immersivo</span>
                     <p class="statement-desc">
-                        AWAY trasforma il padel da semplice disciplina sportiva ad avventura immersiva, dove la competizione sul campo incontra l'esplorazione del mondo.
+                        Nel nostro hub immersivo al PalaVillage, ogni partita diventa un viaggio a sé stante. Vivi un'esperienza dove sport ed esplorazione sensoriale si fondono direttamente in campo.
                     </p>
                     <a href="servizio.html" class="btn-statement">
                         <span>Scopri Il Format</span>
-                        <span class="circle-arrow">↗</span>
                     </a>
                 </div>
                 <div>
                     <h2 class="statement-heading">
-                        <strong>AWAY</strong> unisce la passione per il <strong>padel agonistico</strong> con la scoperta di <strong>destinazioni straordinarie</strong>, trasformando ogni match in un'<strong>esperienza sensoriale totale</strong>.
+                        <strong>AWAY</strong> unisce il <strong>padel agonistico</strong> ad un <strong>viaggio sensoriale in campo</strong>: proiezioni a 360°, suoni direzionali ed essenze ti trasportano nelle mete più affascinanti del pianeta.
                     </h2>
                 </div>
             </div>
@@ -1055,8 +1699,8 @@
         <section id="destinazioni">
             <div class="container">
                 <div class="section-header">
-                    <h2>Destinazioni Esclusive</h2>
-                    <p>Scegli la tua prossima tappa di gioco ed esplorazione in giro per il pianeta</p>
+                    <h2>Ambienti & Destinazioni Immersive</h2>
+                    <p>Scegli l'atmosfera sensoriale in cui desideri essere trasportato durante i tuoi 90 minuti di gioco al PalaVillage</p>
                 </div>
 
                 <div class="accordion-container" id="home-destinations-accordion">
@@ -1066,19 +1710,20 @@
                         <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=1200&q=85" alt="Hawaii Padel" class="accordion-bg">
                         <div class="accordion-overlay">
                             <div class="accordion-top-badges">
-                                <span class="glass-pill-tag">Pacific Experience</span>
-                                <span class="glass-pill-tag">Tropical Vibes</span>
-                                <span class="glass-pill-tag">da € 1.890</span>
+                                <span class="glass-pill-tag">Brezza Marina Olfattiva</span>
+                                <span class="glass-pill-tag">Clima Tropicale 28°C</span>
+                                <span class="glass-pill-tag">Audio 3D Oceano</span>
+                                <span class="glass-pill-tag">Proiezione Pacifico 360°</span>
                             </div>
 
                             <div class="accordion-bottom-content">
                                 <div>
                                     <h3>HAWAII</h3>
-                                    <p class="accordion-desc">Oceano, campi sul mare e sessioni intensive tra vulcani e spiagge bianche.</p>
+                                    <p class="accordion-desc">Oceano tropicale, sabbia calda e brezza marina sincronizzata sul vetro per un match al caldo del Pacifico.</p>
                                 </div>
                                 <div class="accordion-cta-pill">
                                     <span>SELEZIONA VIAGGIO</span>
-                                    <div class="cta-icon-circle">↗</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1089,19 +1734,20 @@
                         <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=85" alt="Islanda Padel" class="accordion-bg">
                         <div class="accordion-overlay">
                             <div class="accordion-top-badges">
-                                <span class="glass-pill-tag">Nordic Magic</span>
-                                <span class="glass-pill-tag">Aurora & Ice</span>
-                                <span class="glass-pill-tag">da € 2.150</span>
+                                <span class="glass-pill-tag">Essenza Pino Nordico</span>
+                                <span class="glass-pill-tag">Clima Glaciale 16°C</span>
+                                <span class="glass-pill-tag">Audio 3D Vento del Nord</span>
+                                <span class="glass-pill-tag">Aurora Boreale 360°</span>
                             </div>
 
                             <div class="accordion-bottom-content">
                                 <div>
                                     <h3>ISLANDA</h3>
-                                    <p class="accordion-desc">Partite sotto l'aurora boreale e campi circondati da ghiacciai e geyser incandescenti.</p>
+                                    <p class="accordion-desc">Partita immersa nelle proiezioni d'aurora boreale, echi di ghiacciai e folate fresche di vento del nord.</p>
                                 </div>
                                 <div class="accordion-cta-pill">
                                     <span>SELEZIONA VIAGGIO</span>
-                                    <div class="cta-icon-circle">↗</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1112,19 +1758,20 @@
                         <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1200&q=85" alt="Marocco Padel" class="accordion-bg">
                         <div class="accordion-overlay">
                             <div class="accordion-top-badges">
-                                <span class="glass-pill-tag">Desert & Luxury</span>
-                                <span class="glass-pill-tag">Warm Sunset</span>
-                                <span class="glass-pill-tag">da € 1.450</span>
+                                <span class="glass-pill-tag">Essenza Spezie Calde</span>
+                                <span class="glass-pill-tag">Clima Deserto 30°C</span>
+                                <span class="glass-pill-tag">Audio 3D Moresco</span>
+                                <span class="glass-pill-tag">Tramonto Dune 360°</span>
                             </div>
 
                             <div class="accordion-bottom-content">
                                 <div>
                                     <h3>MAROCCO</h3>
-                                    <p class="accordion-desc">Campi nel deserto di Agafay, riad di lusso e cene esclusive al tramonto sulle dune.</p>
+                                    <p class="accordion-desc">Vivi l'atmosfera del deserto al tramonto, musica moresca direzionale e note di spezie calde durante il gioco.</p>
                                 </div>
                                 <div class="accordion-cta-pill">
                                     <span>SELEZIONA VIAGGIO</span>
-                                    <div class="cta-icon-circle">↗</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1135,19 +1782,20 @@
                         <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=1200&q=85" alt="Perù Padel" class="accordion-bg">
                         <div class="accordion-overlay">
                             <div class="accordion-top-badges">
-                                <span class="glass-pill-tag">Andean Expedition</span>
-                                <span class="glass-pill-tag">Sacred Valley</span>
-                                <span class="glass-pill-tag">da € 2.390</span>
+                                <span class="glass-pill-tag">Fragranza Legno Sandalo</span>
+                                <span class="glass-pill-tag">Clima Alpino 22°C</span>
+                                <span class="glass-pill-tag">Audio 3D Natura Andina</span>
+                                <span class="glass-pill-tag">Vette Andine 360°</span>
                             </div>
 
                             <div class="accordion-bottom-content">
                                 <div>
                                     <h3>PERÙ</h3>
-                                    <p class="accordion-desc">Gioca nella Valle Sacra degli Inca tra montagne maestose e cultura millenaria.</p>
+                                    <p class="accordion-desc">Gioca tra le vette andine della Valle Sacra con proiezioni di montagne maestose e vapori balsamici di sandalo.</p>
                                 </div>
                                 <div class="accordion-cta-pill">
                                     <span>SELEZIONA VIAGGIO</span>
-                                    <div class="cta-icon-circle">↗</div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1158,22 +1806,19 @@
         </section>
 
         <!-- Feature Section PalaVillage -->
+
         <section id="away-palavillage" style="background-color: #161616;">
             <div class="container">
-                <div class="feature-card">
-                    <div class="grid-2">
-                        <div>
-                            <h2>CAMPUS PALAVILLAGE</h2>
-                            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
-                                Il nostro hub di riferimento dotato dei primi campi da padel panoramici immersivi al mondo. 
-                                Qui tecnologia e sport si fondeno per regalarti l'esperienza AWAY prima di partire.
-                            </p>
-                            <a href="palavillage.html" class="btn">Scopri il PalaVillage</a>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80" alt="PalaVillage Away" style="width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-lg);">
-                        </div>
+                                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1600&q=85" alt="Campus PalaVillage Away" class="feature-bg-img">
+                    <div class="feature-card-content">
+                        <h2>CAMPUS PALAVILLAGE</h2>
+                        <p>
+                            L'unico hub di riferimento al PalaVillage (Torino) dotato dei primi campi da padel panoramici immersivi al mondo. È qui che prende vita l'esperienza AWAY: scendi in campo e vivi il tuo viaggio.
+                        </p>
+                        <a href="palavillage.html" class="btn">Scopri il PalaVillage</a>
                     </div>
+                </div>
                 </div>
             </div>
         </section>
@@ -1185,7 +1830,7 @@
             <div>
                 <h3>AWAY</h3>
                 <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
-                    La prima piattaforma che fonde viaggi sportivi di lusso, kit di padel personalizzati e gamification su App.
+                    Campi da padel panoramici ed immersivi al PalaVillage: proiezioni a 360°, suoni direzionali ed essenze olfattive per vivere un viaggio sensoriale ad ogni partita.
                 </p>
             </div>
             <div>
