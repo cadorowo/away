@@ -356,32 +356,49 @@
             font-weight: 700;
         }
 
-        /* 3D Fan Angles Spaced Across Horizontal Viewport */
+        /* 3D Fan Angles & Preserved Position Hovers (No X-Jumping / No Flickering) */
         .card-hawaii {
             transform: rotateZ(-16deg) rotateY(18deg) translateX(-380px) translateY(15px) translateZ(-40px);
             z-index: 2;
+        }
+        .card-hawaii:hover {
+            transform: rotateZ(-6deg) rotateY(8deg) translateX(-380px) translateY(-20px) translateZ(140px) scale(1.08) !important;
+            z-index: 50 !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95) !important;
         }
 
         .card-islanda {
             transform: rotateZ(-5deg) rotateY(8deg) translateX(-130px) translateY(-18px) translateZ(50px);
             z-index: 5;
         }
+        .card-islanda:hover {
+            transform: rotateZ(0deg) rotateY(0deg) translateX(-130px) translateY(-35px) translateZ(160px) scale(1.08) !important;
+            z-index: 50 !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95) !important;
+        }
 
         .card-marocco {
             transform: rotateZ(5deg) rotateY(-8deg) translateX(130px) translateY(-8px) translateZ(70px);
             z-index: 6;
+        }
+        .card-marocco:hover {
+            transform: rotateZ(0deg) rotateY(0deg) translateX(130px) translateY(-35px) translateZ(160px) scale(1.08) !important;
+            z-index: 50 !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95) !important;
         }
 
         .card-peru {
             transform: rotateZ(16deg) rotateY(-18deg) translateX(380px) translateY(15px) translateZ(-20px);
             z-index: 3;
         }
-
-        .deck-card:hover {
-            transform: scale(1.12) translateY(-25px) translateZ(140px) !important;
+        .card-peru:hover {
+            transform: rotateZ(6deg) rotateY(-8deg) translateX(380px) translateY(-20px) translateZ(140px) scale(1.08) !important;
             z-index: 50 !important;
             border-color: rgba(255, 255, 255, 0.4) !important;
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95) !important;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95) !important;
         }
 
         .hero-content {
