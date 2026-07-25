@@ -1326,21 +1326,7 @@
         }
 
     
-        /* 100% FULL-WIDTH HORIZONTAL IMAGES (NO LATERAL SPACES/MARGINS) */
-        .hero-bg-mask {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            height: 100% !important;
-            z-index: 1 !important;
-            overflow: hidden !important;
-            pointer-events: none !important;
-            border-radius: 0 0 36px 36px !important;
-            transform: none !important;
-            margin: 0 !important;
-        }
+        
 
         .hero-bg-mask img {
             width: 100% !important;
@@ -1442,6 +1428,31 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
         }
 
+    
+        /* HERO BACKGROUND MASK WITH LATERAL DISTANCE / MARGINS */
+        .hero-bg-mask {
+            position: absolute !important;
+            top: 0 !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 3.5rem) !important;
+            max-width: 1360px !important;
+            height: 100% !important;
+            z-index: 1 !important;
+            overflow: hidden !important;
+            pointer-events: none !important;
+            border-radius: 0 0 36px 36px !important;
+            margin: 0 !important;
+        }
+
+        .hero-bg-mask img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            filter: brightness(0.75) !important;
+            border-radius: 0 0 36px 36px !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1505,10 +1516,6 @@
             </div>
             <div class="hero-content">
                 <h1>L'APP GAMIFICATION AWAY</h1>
-                <p>
-                    Hai acquistato un viaggio o uno slot sul sito? Usa l'App AWAY per sincronizzare il tuo ordine, 
-                    scegliere data e ora del match, personalizzare clima ed essenze e collezionare Punti Viaggio.
-                </p>
                 <div style="display: flex; gap: 1.25rem; margin-top: 0.5rem;">
                     <a href="#download" class="btn">Scarica L'App iOS & Android</a>
                     <a href="#app-mockups" class="btn btn-outline">Esplora Le Schermate</a>
