@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esperienze Extra & Upsell | AWAY</title>
+    <title>Away Gear Kit Upsell | AWAY</title>
     
     <style>
         /* Canvas & Pure Charcoal Tokens */
@@ -254,74 +254,6 @@
             font-weight: bold;
         }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            padding: 10.5rem 2rem 5rem 2rem;
-            text-align: center;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background-color: #161616 !important;
-        }
-
-        .hero-bg-mask {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%) !important;
-            width: calc(100% - 3.5rem) !important;
-            max-width: 1360px !important;
-            height: 100% !important;
-            z-index: 1;
-            overflow: hidden !important;
-            pointer-events: none;
-            border-radius: 0 0 36px 36px !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.82);
-            border-radius: 0 0 36px 36px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            letter-spacing: -0.04em;
-            margin-bottom: 1rem;
-        }
-
-        .hero-content p {
-            display: inline-block !important;
-            background: rgba(16, 16, 16, 0.65) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            border-radius: 999px !important;
-            padding: 0.85rem 2.25rem !important;
-            max-width: 820px !important;
-            margin: 1.5rem auto !important;
-            color: rgba(255, 255, 255, 0.92) !important;
-            line-height: 1.65 !important;
-            font-size: 1.15rem;
-        }
-
         /* Container Layouts */
         .container {
             max-width: 1320px;
@@ -329,264 +261,206 @@
             padding: 8rem 2rem 5rem 2rem;
         }
 
-        /* TYPOGRAPHY STATEMENT SECTION */
-        .typography-statement-section {
-            padding: 7.5rem 2rem;
-            background-color: #161616 !important;
-        }
-
-        .statement-grid {
-            max-width: 1320px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 5rem;
-            align-items: flex-start;
-        }
-
-        .statement-index {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: var(--color-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.25rem;
-            display: block;
-        }
-
-        .statement-desc {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.75;
-            margin-bottom: 2.25rem;
-            max-width: 400px;
-        }
-
-        .statement-heading {
-            font-size: 2.85rem;
-            line-height: 1.25;
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 400;
-            text-transform: none;
-            letter-spacing: -0.02em;
-        }
-
-        .statement-heading strong {
-            color: #FFFFFF;
-            font-weight: 900;
-        }
-
-        .btn-statement {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.75rem 1.6rem;
-            background-color: #222222;
-            color: #FFFFFF;
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .btn-statement:hover {
-            background-color: #2A2A2A;
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .circle-arrow {
-            width: 32px;
-            height: 32px;
-            background-color: #FFFFFF;
-            color: #161616;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.9rem;
-        }
-
-        /* UPSELL BENTO GRID */
-        .upsell-bento {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1.75rem;
-            margin-top: 3.5rem;
-        }
-
-        .upsell-card {
+        /* KIT UPSELL SHOWCASE CARD */
+        .kit-upsell-showcase {
             background-color: var(--color-surface-card);
             border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.35s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 3.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1.15fr;
+            gap: 4rem;
+            align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 1rem;
         }
 
-        .upsell-card:hover {
-            background-color: var(--color-surface-hover);
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.2);
+        .kit-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
         }
 
-        .upsell-card.col-8 { grid-column: span 8; }
-        .upsell-card.col-4 { grid-column: span 4; }
-        .upsell-card.col-6 { grid-column: span 6; }
-
-        .upsell-card img {
-            width: 100% !important;
-            height: 320px !important;
-            object-fit: cover !important;
-            border-radius: 24px !important;
-            margin-bottom: 1.75rem;
-            border: none !important;
+        .kit-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
         }
 
-        .upsell-tag {
-            align-self: flex-start;
+        .kit-badge {
+            display: inline-block;
             padding: 0.4rem 1.1rem;
             background: rgba(179, 229, 255, 0.1);
             border-radius: var(--radius-pill);
             font-family: var(--font-mono);
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--color-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             margin-bottom: 1.25rem;
         }
 
-        .upsell-card h3 {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .upsell-card p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .upsell-price-bar {
+        .kit-price-tag {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .upsell-price {
-            font-family: var(--font-mono);
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #FFFFFF;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .btn-add-extra {
-            display: inline-flex;
-            align-items: center;
+            align-items: baseline;
             gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #FFFFFF;
-            border-radius: var(--radius-pill);
-            font-weight: 700;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin: 1.25rem 0 1.75rem 0;
         }
 
-        .btn-add-extra:hover, .btn-add-extra.added {
-            background: var(--color-accent);
-            border-color: var(--color-accent);
-        }
-
-        /* BOTTOM ACTION FLOATING BAR */
-        .bottom-action-bar {
-            position: sticky;
-            bottom: 2rem;
-            z-index: 999;
-            max-width: 1000px;
-            margin: 4rem auto 0 auto;
-            background: rgba(22, 22, 22, 0.92);
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 999px;
-            padding: 1.1rem 2.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-        }
-
-        .bar-info {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .bar-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .bar-price {
+        .kit-price-val {
             font-family: var(--font-mono);
-            font-size: 2rem;
+            font-size: 3rem;
             font-weight: 900;
             color: var(--color-secondary);
             font-variant-numeric: tabular-nums;
         }
 
-        .bar-actions {
+        .kit-price-sub {
+            color: var(--text-muted);
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .kit-features-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2.25rem;
+        }
+
+        .kit-features-list li {
             display: flex;
             align-items: center;
             gap: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
         }
 
-        .btn-checkout-bar {
-            padding: 0.9rem 2rem;
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background-color: rgba(179, 229, 255, 0.15);
+            color: var(--color-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        /* CUSTOMIZATION PREVIEW SELECTORS */
+        .custom-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .option-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .option-pills {
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .option-pill {
+            padding: 0.55rem 1.1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-pill);
+            color: #FFFFFF;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .option-pill.active, .option-pill:hover {
+            background: var(--color-secondary);
+            color: #161616;
+            border-color: var(--color-secondary);
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 0.65rem 1.1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-pill);
+            color: #FFFFFF;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .name-input:focus {
+            border-color: var(--color-secondary);
+        }
+
+        /* ACTIONS */
+        .upsell-actions-row {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .btn-add-kit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.15rem 2.25rem;
             background-color: var(--color-accent);
             color: #FFFFFF;
             border-radius: var(--radius-pill);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(238, 56, 16, 0.4);
+            box-shadow: 0 8px 25px rgba(238, 56, 16, 0.4);
             text-decoration: none;
         }
 
-        .btn-checkout-bar:hover {
+        .btn-add-kit:hover {
             background-color: #D62D07;
             transform: translateY(-2px);
         }
 
-        .btn-skip {
+        .btn-skip-kit {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.1rem 1.8rem;
+            background-color: transparent;
             color: var(--text-muted);
-            font-size: 0.88rem;
-            text-decoration: underline;
-            padding: 0.5rem 1rem;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.25s ease;
         }
 
-        .btn-skip:hover {
+        .btn-skip-kit:hover {
             color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* Footer */
@@ -694,95 +568,83 @@
     </header>
 
     <main>
-        <!-- UPSELL BENTO GRID SECTION -->
+        <!-- KIT UPSELL SECTION -->
         <section class="container">
             <div style="margin-bottom: 3rem;">
-                <h1 style="font-size: 3.25rem; margin-bottom: 0.5rem;">ESPERIENZE EXTRA</h1>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">Seleziona le attività ed i servizi esclusivi da aggiungere al pacchetto viaggio.</p>
+                <h1 style="font-size: 3.25rem; margin-bottom: 0.5rem;">AGGIUNGI L'AWAY GEAR KIT</h1>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Completa il tuo pacchetto viaggio con l'equipaggiamento da padel personalizzato ed il tag NFC per sblocco campo.</p>
             </div>
 
-            <div class="upsell-bento">
-                <!-- Extra 1: Masterclass Pro Player -->
-                <div class="upsell-card col-8">
-                    <span class="upsell-tag">Coaching VIP</span>
-                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=85" alt="Pro Player Masterclass">
-                    <div>
-                        <h3>Masterclass Privata con Pro Player WPT</h3>
-                        <p>
-                            Sessione individuale di 2 ore in campo con un maestro professionista del circuito internazionale, corredata da analisi video dinamica della tecnica di gioco.
-                        </p>
-                        <div class="upsell-price-bar">
-                            <span class="upsell-price">+ € 180,00</span>
-                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
-                                + Aggiungi Extra
-                            </button>
+            <div class="kit-upsell-showcase">
+                <!-- Left: Kit Photo -->
+                <div class="kit-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1000&q=85" alt="Away Gear Kit Showcase">
+                </div>
+
+                <!-- Right: Kit Product Details & Customization -->
+                <div>
+                    <span class="kit-badge">Custom Sensory Kit</span>
+                    <h2>Away Gear Kit Custom</h2>
+                    
+                    <div class="kit-price-tag">
+                        <span class="kit-price-val">+ € 30,00</span>
+                        <span class="kit-price-sub">/ Una tantum per viaggio</span>
+                    </div>
+
+                    <ul class="kit-features-list">
+                        <li>
+                            <div class="feature-icon">✓</div>
+                            <span>Racchetta Pro Carbon 12K con bilanciamento personalizzato</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">✓</div>
+                            <span>Borsa Termica impermeabile con scomparto racchette</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">✓</div>
+                            <span>2 Maglie Tecniche traspiranti con il tuo nome stampato</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">✓</div>
+                            <span>Tag NFC integrato per sblocco Smart Locker & playlist sensoriale</span>
+                        </li>
+                    </ul>
+
+                    <!-- Customization Selectors -->
+                    <div class="custom-options-grid">
+                        <div class="option-group">
+                            <label>Bilanciamento Racchetta</label>
+                            <div class="option-pills">
+                                <button class="option-pill active">Controllo</button>
+                                <button class="option-pill">Potenza</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label>Taglia Apparel</label>
+                            <div class="option-pills">
+                                <button class="option-pill">S</button>
+                                <button class="option-pill active">M</button>
+                                <button class="option-pill">L</button>
+                                <button class="option-pill">XL</button>
+                            </div>
+                        </div>
+
+                        <div class="option-group" style="grid-column: span 2;">
+                            <label>Nome Stampato Sulle Maglie</label>
+                            <input type="text" class="name-input" value="ROSSI" placeholder="Es. ROSSI">
                         </div>
                     </div>
-                </div>
 
-                <!-- Extra 2: SPA Olfattorio -->
-                <div class="upsell-card col-4">
-                    <span class="upsell-tag">Sensory Recovery</span>
-                    <h3>Percorso SPA Olfattorio</h3>
-                    <p>
-                        Massaggio muscolare decontratturante post-match abbinato ad un percorso di aromaterapia personalizzato con le essenze della tua destinazione.
-                    </p>
-                    <div class="upsell-price-bar">
-                        <span class="upsell-price">+ € 120,00</span>
-                        <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
-                            + Aggiungi Extra
-                        </button>
+                    <!-- Actions -->
+                    <div class="upsell-actions-row">
+                        <a href="checkout-entrambi.html" class="btn-add-kit">
+                            <span>Aggiungi Kit & Vai Al Checkout (+ € 30,00) ↗</span>
+                        </a>
+                        <a href="checkout-destinazione.html" class="btn-skip-kit">
+                            <span>Solo Viaggio (Senza Kit) ↗</span>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Extra 3: Luxury Racket Test -->
-                <div class="upsell-card col-6">
-                    <span class="upsell-tag">Gear Test</span>
-                    <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=800&q=80" alt="Test Rachetta Luxury">
-                    <div>
-                        <h3>Test Racchetta Luxury & Hard-Case</h3>
-                        <p>
-                            Prova durante il viaggio una seconda racchetta in carbonio 18K ad alta rigidità con custodia rigida da viaggio personalizzata con le tue cifre.
-                        </p>
-                        <div class="upsell-price-bar">
-                            <span class="upsell-price">+ € 95,00</span>
-                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
-                                + Aggiungi Extra
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Extra 4: Executive Driver -->
-                <div class="upsell-card col-6">
-                    <span class="upsell-tag">VIP Transfer</span>
-                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80" alt="Executive Driver Transfer">
-                    <div>
-                        <h3>Executive Chauffeur & VIP Transfer</h3>
-                        <p>
-                            Servizio di autista privato in berlina executive per tutti i trasferimenti dall'aeroporto al resort e per i tuoi spostamenti verso l'arena di gioco.
-                        </p>
-                        <div class="upsell-price-bar">
-                            <span class="upsell-price">+ € 140,00</span>
-                            <button class="btn-add-extra" onclick="this.classList.toggle('added'); this.textContent = this.classList.contains('added') ? 'Aggiunto ✓' : '+ Aggiungi Extra';">
-                                + Aggiungi Extra
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BOTTOM FLOATING ACTION BAR -->
-            <div class="bottom-action-bar">
-                <div class="bar-info">
-                    <span class="bar-label">Totale Con Extra:</span>
-                    <span class="bar-price">€ 1.880,00</span>
-                </div>
-                <div class="bar-actions">
-                    <a href="checkout-entrambi.html" class="btn-skip">Salta Extra</a>
-                    <a href="checkout-entrambi.html" class="btn-checkout-bar">
-                        <span>Conferma & Vai Al Checkout ↗</span>
-                    </a>
                 </div>
             </div>
         </section>
