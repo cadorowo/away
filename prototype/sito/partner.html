@@ -89,10 +89,19 @@
             align-items: center;
         }
 
+        .header-logo .logo {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-decoration: none !important;
+        }
+
         .header-logo .brand-logo-img {
-            height: 38px;
-            width: auto;
-            display: block;
+            height: 28px !important;
+            width: auto !important;
+            max-height: 32px !important;
+            object-fit: contain !important;
+            display: block !important;
         }
 
         /* Central Glass Pill Nav */
@@ -252,10 +261,9 @@
         /* Hero Section */
         .hero {
             position: relative;
-            padding: 10.5rem 2rem 6rem 2rem;
-            margin-top: -6rem;
+            padding: 11rem 2rem 6rem 2rem;
             text-align: center;
-            min-height: 65vh;
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             align-items: center;
