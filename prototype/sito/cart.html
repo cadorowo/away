@@ -64,6 +64,150 @@
             text-wrap: balance;
         }
 
+        /* UPSell Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 780px;
+            border-radius: 32px;
+            overflow: hidden;
+            background-color: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .modal-hero {
+            position: relative;
+            height: 260px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.25rem;
+        }
+
+        .modal-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.1);
+            z-index: 1;
+        }
+
+        .modal-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(22, 22, 22, 0.95) 100%);
+            z-index: 2;
+        }
+
+        .modal-hero-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .modal-body {
+            padding: 2.25rem;
+            background: #161616;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1.75rem;
+        }
+
+        .btn-checkout-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.1rem 2rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 25px rgba(238, 56, 16, 0.35);
+        }
+
+        .btn-checkout-primary:hover {
+            background-color: #D62D07;
+            border-color: #D62D07;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(238, 56, 16, 0.5);
+        }
+
         h1 { font-size: 4.5rem; line-height: 1.05; }
         h2 { font-size: 2.75rem; line-height: 1.1; }
         h3 { font-size: 1.75rem; line-height: 1.2; }
@@ -1401,6 +1545,29 @@
             text-align: center !important;
         }
 
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1472,15 +1639,15 @@
                         <img src="https://images.unsplash.com/photo-1542259009477-d625272157b7?auto=format&fit=crop&w=400&q=80" alt="Hawaii Travel Package" class="cart-item-img">
                         <div class="cart-item-info">
                             <div class="cart-item-tags">
-                                <span class="item-tag">7 Notti / 8 Giorni</span>
-                                <span class="item-tag">2 Persone</span>
+                                <span class="item-tag">Partita 90 Minuti</span>
+                                <span class="item-tag">PalaVillage Torino</span>
                             </div>
-                            <h3>Hawaii Padel Experience</h3>
-                            <p class="cart-item-desc">Resort 5★ Pacific Beach, 90 min match quotidiano con audio Spotify e diffusori Olfattorio.</p>
+                            <h3>Hawaii Immersive Padel</h3>
+                            <p class="cart-item-desc">Slot 90 min con proiezioni visive 360°, audio 3D Spotify e diffusori ambientali Olfattorio.</p>
                         </div>
                         <div class="cart-item-price">
-                            <span class="price-val">€ 1.850,00</span>
-                            <button class="remove-btn" onclick="alert('Rimuovere il pacchetto viaggio dal carrello?')">Rimuovi</button>
+                            <span class="price-val">€ 140,00</span>
+                            <button class="remove-btn" onclick="alert('Rimuovere il pacchetto dal carrello?')">Rimuovi</button>
                         </div>
                     </div>
 
@@ -1493,7 +1660,7 @@
                                 <span class="item-tag">NFC Tagged</span>
                             </div>
                             <h3>Away Gear Kit Custom</h3>
-                            <p class="cart-item-desc">Racchetta Pro Carbon 12K, Borsa Termica, 2 Maglie Tecniche con stampa nome personalizzata.</p>
+                            <p class="cart-item-desc">Essenza Olfattorio Spray 100ml, Speaker Bluetooth Immersivo, Overgrip & Laccetto Custom da campo con Tag NFC.</p>
                         </div>
                         <div class="cart-item-price">
                             <span class="price-val">€ 30,00</span>
@@ -1509,7 +1676,7 @@
                     <div style="margin-top: 1.5rem;">
                         <div class="summary-row">
                             <span>Subtotale Selezionato</span>
-                            <span>€ 1.880,00</span>
+                            <span>€ 170,00</span>
                         </div>
                         <div class="summary-row">
                             <span>Garanzia Campo Coperto</span>
@@ -1524,22 +1691,65 @@
 
                         <div class="total-row">
                             <h4>Totale Preventivo</h4>
-                            <span class="total-val">€ 1.880,00</span>
+                            <span class="total-val">€ 170,00</span>
                         </div>
 
                         <!-- CTA BUTTONS -->
-                        <a href="upsell.html" class="btn-checkout">
-                            <span>Aggiungi Away Gear Kit</span>
-                        </a>
-                        <a href="checkout-entrambi.html" class="btn-upsell-link">
-                            <span>Vai Al Checkout Diretto</span>
-                        </a>
+                        <button onclick="openUpsellModal()" class="btn-checkout" style="cursor: pointer; border: none; width: 100%; text-transform: uppercase; letter-spacing: 0.05em;">
+                            <span>Procedi al Checkout</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- UPSell Popup Modal -->
+        <div id="upsell-modal" class="modal-overlay">
+            <div class="modal-card">
+                <button class="modal-close-btn" onclick="closeUpsellModal()">✕</button>
+                
+                <div class="modal-hero">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=85" alt="Away Gear Kit Showcase" class="modal-hero-bg">
+                    <div class="modal-hero-overlay"></div>
+                    <div class="modal-hero-content">
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem;">
+                            <span style="background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.25); color: #B3E5FF; padding: 0.35rem 1rem; border-radius: 999px; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">OFFERTA ESCLUSIVA CARRELLO</span>
+                            <div style="font-family: var(--font-display); font-size: 2.25rem; font-weight: 900; color: #FFFFFF; font-variant-numeric: tabular-nums;">+ € 30,00</div>
+                        </div>
+                        <h2 style="font-size: 2.25rem; color: #FFFFFF; font-weight: 900; margin-bottom: 0;">AGGIUNGI L'AWAY GEAR KIT</h2>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <p style="color: rgba(255, 255, 255, 0.88); font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                        Potenzia la tua partita sensoriale: Olfattorio Spray 100ml personalizzato, Speaker Bluetooth Immersivo 3D per il campo e laccetto custom con Tag NFC.
+                    </p>
+
+                    <div class="modal-actions" style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
+                        <a href="configuratore-kit.html" class="btn-checkout-primary" style="width: 100%; text-align: center; justify-content: center; padding: 1.15rem 2rem;">
+                            <span>Configura Kit & Aggiungi (+ € 30,00) ⚙</span>
+                        </a>
+
+                        <a href="checkout-destinazione.html" class="btn-tertiary" style="display: flex; width: 100%; text-align: center; justify-content: center; padding: 0.95rem 1.5rem; font-size: 0.88rem; border-radius: 999px;" onclick="closeUpsellModal()">
+                            No grazie, procedi solo con la partita (€ 140,00)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        function openUpsellModal() {
+            document.getElementById('upsell-modal').classList.add('active');
+        }
+        function closeUpsellModal() {
+            document.getElementById('upsell-modal').classList.remove('active');
+        }
+        </script>
     </main>
 
+    <!-- Footer -->
+    <!-- Footer -->
     <!-- Footer -->
     <footer>
         <div class="footer-grid">

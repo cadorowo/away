@@ -1114,8 +1114,6 @@
 
         /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
@@ -1126,8 +1124,6 @@
         }
 
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
@@ -1146,6 +1142,8 @@
 
         /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
         .btn-secondary,
+        .cta-pill-white,
+        .header-actions .cta-pill-white,
         .accordion-cta-pill {
             background-color: #FFFFFF !important;
             color: #161616 !important;
@@ -1477,8 +1475,6 @@
            ========================================================= */
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip),
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit {
             background-color: #EE3810 !important;
@@ -1490,8 +1486,6 @@
 
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip):hover,
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover {
             background-color: #D62D07 !important;
@@ -1512,6 +1506,8 @@
         }
 
         .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
         .accordion-cta-pill:hover {
             background-color: #F2F2F2 !important;
             background: #F2F2F2 !important;
@@ -1587,6 +1583,29 @@
             text-align: center !important;
         }
 
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1650,16 +1669,16 @@
             </div>
             <div class="hero-content">
                 <h1>L'APP GAMIFICATION AWAY</h1>
-                <div style="display: flex; gap: 1.25rem; margin-top: 0.5rem;">
-                    <a href="#download" class="btn">Scarica L'App iOS & Android</a>
-                    <a href="#app-mockups" class="btn btn-outline">Esplora Le Schermate</a>
+                <div style="display: flex; gap: 1.25rem; margin-top: 1.25rem; justify-content: center; align-items: center;">
+                    <a href="#download" class="btn btn-primary">Scarica L'App iOS & Android</a>
+                    <a href="#app-mockups" class="btn btn-outline">Esplora Le Funzionalità</a>
                 </div>
             </div>
         </section>
 
         <!-- App UI Previews Showcase (3 Phone Mockups) -->
         <section id="app-mockups" class="container">
-            <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+            <div class="section-header">
                 <h2>Esplora l'Interfaccia App</h2>
                 <p style="color: var(--text-muted); font-size: 1.1rem;">
                     Un'esperienza digitale fluida progettata per accompagnarti prima, durante e dopo ogni match immersivo.
@@ -1667,7 +1686,7 @@
             </div>
 
             <div class="mockups-grid">
-                <!-- Phone 1: Home Hub -->
+                <!-- Phone 1: Match In Arrivo -->
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -1675,64 +1694,64 @@
                             <h4 class="screen-title">Match In Arrivo</h4>
                             <p class="screen-desc">PalaVillage - Campo Immersivo #2</p>
 
-                            <div class="screen-ui-box">
+                            <div class="screen-ui-box" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
                                 <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Destinazione</div>
-                                <div style="font-size: 1.1rem; font-weight: 800; color: #161616 !important; font-weight: 800;">HAWAII TROPICAL</div>
-                                <div style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 0.5rem;">24 Luglio 2026 | 18:30</div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #FFFFFF !important;">HAWAII TROPICAL</div>
+                                <div style="font-size: 0.8rem; color: #B3E5FF !important; margin-top: 0.5rem; font-weight: 700;">24 Luglio 2026 | 18:30</div>
                             </div>
                         </div>
 
-                        <div class="screen-ui-box" style="margin-top: auto;">
-                            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Sensory Preset</div>
-                            <div style="font-size: 0.88rem; color: #FFFFFF; font-weight: bold;">Cocco & Onde Pacifico (Sync On)</div>
+                        <div class="screen-ui-box" style="margin-top: auto; background: rgba(179, 229, 255, 0.12); border: 1px solid rgba(179, 229, 255, 0.3);">
+                            <div style="font-size: 0.75rem; color: #B3E5FF !important; text-transform: uppercase; font-weight: 700;">Preset Sensoriale</div>
+                            <div style="font-size: 0.88rem; color: #FFFFFF !important; font-weight: 800;">Cocco & Onde Pacifico 360°</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phone 2: Bacheca Passaporto (Stamps) -->
+                <!-- Phone 2: Punti & Destinazioni -->
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
                     <div class="phone-screen" style="background: linear-gradient(180deg, #1C242B 0%, #161616 100%);">
                         <div>
-                            <h4 class="screen-title">Timbri Collezionati</h4>
-                            <p class="screen-desc">4 Tappe Visitate su 12</p>
+                            <h4 class="screen-title">Punti & Destinazioni</h4>
+                            <p class="screen-desc">4 Mete Esplorate su 12</p>
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem;">
-                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px dashed rgba(255,255,255,0.2);">
-                                    <div style="font-size: 0.75rem; font-weight: 900; color: var(--color-secondary);">HAWAII</div>
-                                    <div style="font-size: 0.65rem; color: var(--text-muted);">TIMBRATO</div>
+                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px solid rgba(179,229,255,0.3);">
+                                    <div style="font-size: 0.75rem; font-weight: 900; color: #B3E5FF !important;">HAWAII</div>
+                                    <div style="font-size: 0.65rem; color: #FFFFFF;">SBLOCCATO</div>
                                 </div>
-                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px dashed rgba(255,255,255,0.2);">
-                                    <div style="font-size: 0.75rem; font-weight: 900; color: var(--color-secondary);">ISLANDA</div>
-                                    <div style="font-size: 0.65rem; color: var(--text-muted);">TIMBRATO</div>
+                                <div style="background: rgba(255,255,255,0.06); padding: 0.85rem; border-radius: 12px; text-align: center; border: 1px solid rgba(179,229,255,0.3);">
+                                    <div style="font-size: 0.75rem; font-weight: 900; color: #B3E5FF !important;">ISLANDA</div>
+                                    <div style="font-size: 0.65rem; color: #FFFFFF;">SBLOCCATO</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="screen-ui-box">
+                        <div class="screen-ui-box" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
                             <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Status Giocatore</div>
-                            <div style="font-size: 1.1rem; font-weight: 900; color: #161616 !important; font-weight: 800;">GLOBETROTTER PRO</div>
+                            <div style="font-size: 1.1rem; font-weight: 900; color: #FFFFFF !important; font-weight: 800;">GLOBETROTTER PRO</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Phone 3: Travel Points -->
+                <!-- Phone 3: Saldo Punti & Ranking -->
                 <div class="phone-mockup">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
                         <div>
-                            <h4 class="screen-title">Saldo Punti</h4>
-                            <p class="screen-desc">Guadagnati giocati al PalaVillage</p>
+                            <h4 class="screen-title">Punti & Classifica</h4>
+                            <p class="screen-desc">Ranking PalaVillage #12</p>
 
-                            <div class="screen-ui-box">
+                            <div class="screen-ui-box" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);">
                                 <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Punti Accumulati</div>
-                                <div class="screen-ui-stat">4.850</div>
-                                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">Prossimo Sconto Viaggio: 5.000 Pts</div>
+                                <div class="screen-ui-stat" style="color: #B3E5FF !important;">4.850</div>
+                                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">Prossimo Badge: 5.000 Pts</div>
                             </div>
                         </div>
 
-                        <div class="screen-ui-box" style="background: var(--color-accent); border: none;">
-                            <div style="font-size: 0.82rem; font-weight: 900; color: #FFFFFF; text-transform: uppercase;">Riscatta Premio Viaggio</div>
+                        <div class="screen-ui-box" style="background: rgba(179, 229, 255, 0.15); border: 1px solid rgba(179, 229, 255, 0.4);">
+                            <div style="font-size: 0.82rem; font-weight: 900; color: #B3E5FF; text-transform: uppercase; text-align: center;">Riscatta Eventi & Premi</div>
                         </div>
                     </div>
                 </div>
@@ -1742,7 +1761,7 @@
         <!-- Main App Features Section -->
         <section id="app-features">
             <div class="container">
-                <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+                <div class="section-header">
                     <h2>Tutto il tuo Padel a Portata di Tap</h2>
                     <p style="color: var(--text-muted); font-size: 1.1rem;">
                         Controllo totale dell'esperienza di gioco, gestione delle playlist e premi fedeltà integrati.
@@ -1752,26 +1771,26 @@
                 <div class="features-grid">
                     <!-- Feature 1 -->
                     <div class="feature-card">
-                        <h3>Prenotazioni Rapide</h3>
-                        <p>Inserisci il numero d'ordine del viaggio acquistato sul sito per bloccare il tuo slot orario ed il campo panoramico in pochi secondi.</p>
+                        <h3>Prenotazione Fast Slot</h3>
+                        <p>Seleziona la destinazione desiderata, il clima ed il tuo slot orario da 90 minuti nei campi panoramici del PalaVillage in pochi tap.</p>
                     </div>
 
                     <!-- Feature 2 -->
                     <div class="feature-card">
-                        <h3>Controllo Kit Sensoriale</h3>
-                        <p>Sincronizza le tue playlist musicali ad alta fedeltà, gestisci le essenze profumate erogate ed adatta le luci del campo.</p>
+                        <h3>Sincronizzazione NFC & Kit</h3>
+                        <p>Sfiora il Tag NFC del tuo Away Gear Kit per impostare le fragranze olfattive, la playlist acustica e le proiezioni 360° prima di scendere in campo.</p>
                     </div>
 
                     <!-- Feature 3 -->
                     <div class="feature-card">
-                        <h3>Esperienze & Punti</h3>
-                        <p>Colleziona i timbri digitali per ogni viaggio visitato in campo ed accumula Punti Viaggio da convertire in viaggi reali.</p>
+                        <h3>Punti AWAY & Ranking</h3>
+                        <p>Guadagna Punti ad ogni vittoria ed esperienza immersiva per sbloccare in modo esclusivo eventi della community e premi o prodotti ufficiali.</p>
                     </div>
 
                     <!-- Feature 4 -->
                     <div class="feature-card">
-                        <h3>Notifiche Smart</h3>
-                        <p>Ricevi alert tempestivi sulle nuove mete sbloccate, promemoria per le partite imminenti ed inviti per clinic esclusive.</p>
+                        <h3>Notifiche Smart & Inviti</h3>
+                        <p>Ricevi alert tempestivi sulle nuove mete sbloccate, promemoria per i match imminenti e badge esclusivi per tornei locali.</p>
                     </div>
                 </div>
             </div>
@@ -1780,7 +1799,7 @@
         <!-- Interactive Modes Showcase -->
         <section id="app-showcase">
             <div class="container">
-                <div style="text-align: center; max-width: 760px; margin: 0 auto 3.5rem auto;">
+                <div class="section-header">
                     <h2>Oltre la Partita: Impara e Gioca</h2>
                     <p style="color: var(--text-muted); font-size: 1.1rem;">
                         Modi di gioco interattivi basati sulla tecnologia proiettiva del PalaVillage.
@@ -1788,35 +1807,33 @@
                 </div>
 
                 <div class="modes-split">
-                    <!-- Discover World -->
+                    <!-- Curiosità & Storie delle Mete -->
                     <div class="mode-box">
                         <div class="mode-box-header">
-                            <h3>Scopri il Mondo</h3>
+                            <h3>Curiosità & Storie delle Mete</h3>
                             <p>
-                                L'app arricchisce l'esperienza sul campo offrendo curiosità geografiche, trivia e pillole storiche 
-                                sincronizzate con la mappa immersiva in cui stai giocando.
+                                Sfiora il Tag NFC del tuo equipaggiamento per accedere a pillole culturali, curiosità geografiche ed aneddoti storici della destinazione in cui stai giocando.
                             </p>
                         </div>
                         <div class="mode-demo-area">
-                            <span style="font-size: 0.8rem; color: var(--color-secondary); text-transform: uppercase; font-weight: 800;">Fun Fact Islandese</span>
-                            <h4 style="font-size: 1.1rem; margin: 0.5rem 0; color: #161616 !important; font-weight: 800;">100% Energia Rinnovabile</h4>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Sapevi che la totalità dell'energia elettrica in Islanda proviene da fonti idroelettriche e geotermiche?</p>
+                            <span style="font-size: 0.8rem; color: #B3E5FF !important; text-transform: uppercase; font-weight: 800;">Curiosità Hawaii</span>
+                            <h4 style="font-size: 1.1rem; margin: 0.5rem 0; color: #FFFFFF !important; font-weight: 800;">Vulcani & Barriera Corallina</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Sapevi che la sabbia nera delle Hawaii è creata dal raffreddamento istantaneo della lava basaltica nelle acque del Pacifico?</p>
                         </div>
                     </div>
 
-                    <!-- Target Mode Minigames -->
+                    <!-- Mini-Giochi & Quiz Tattici -->
                     <div class="mode-box">
                         <div class="mode-box-header">
-                            <h3>Sfida i Minigiochi</h3>
+                            <h3>Mini-Giochi & Quiz Tattici</h3>
                             <p>
-                                Il campo si trasforma in un videogioco gigante. Usa l'app per avviare sfide di precisione o riflessi 
-                                basate sulle proiezioni interattive sul vetro e scala le classifiche locali.
+                                Mettiti alla prova pre e post match con quiz a risposta rapida sulla tattica di padel e sfide interattive per scaldare i riflessi.
                             </p>
                         </div>
-                        <div class="mode-demo-area" style="background: linear-gradient(135deg, #241A1A 0%, #161616 100%); border-color: rgba(238,56,16,0.3);">
-                            <span style="font-size: 0.8rem; color: #B3E5FF !important; text-transform: uppercase; font-weight: 800;">Mode Attiva: TARGET PRECISION</span>
+                        <div class="mode-demo-area" style="background: rgba(255, 255, 255, 0.04); border-color: rgba(179, 229, 255, 0.3);">
+                            <span style="font-size: 0.8rem; color: #B3E5FF !important; text-transform: uppercase; font-weight: 800;">Mode Attiva: QUIZ TATTICO PADEL</span>
                             <div style="font-size: 1.8rem; font-weight: 900; color: #FFFFFF; font-family: var(--font-mono); margin: 0.5rem 0;">RECORD: 1.200 PTS</div>
-                            <span class="btn" style="padding: 0.5rem 1.25rem; font-size: 0.75rem; background-color: #B3E5FF !important;">Avvia Da App</span>
+                            <a href="#app-mockups" class="btn btn-secondary" style="padding: 0.5rem 1.25rem; font-size: 0.75rem;">Avvia Da App</a>
                         </div>
                     </div>
                 </div>
@@ -1828,28 +1845,28 @@
             <div class="container">
                 <div class="gamification-split">
                     <div>
-                        <h2 style="font-size: 2.5rem; margin-top: 0.75rem;">Eventi Community & Punti Viaggio</h2>
+                        <h2 style="font-size: 2.5rem; margin-top: 0.75rem;">Eventi & Prodotti Esclusivi Punti AWAY</h2>
                         <p style="color: var(--text-muted); font-size: 1.05rem;">
-                            Giocando nei campi immersivi AWAY sblocchi timbri sul tuo Passaporto ed accumuli Punti Viaggio per accedere ad inviti riservati.
+                            Giocando nei campi immersivi AWAY accumuli Punti AWAY per accedere in modo esclusivo ad eventi della community, tornei e premi speciali.
                         </p>
 
                         <div class="gamification-list">
                             <div class="gamification-item">
-                                <div class="item-icon-pill">✓</div>
+                                <div class="item-icon-pill" style="background-color: rgba(179, 229, 255, 0.18) !important; color: #B3E5FF !important; border: 1px solid rgba(179, 229, 255, 0.3) !important;">✓</div>
                                 <div class="item-content">
-                                    <h4>Tornei Esclusivi Sbloccabili</h4>
-                                    <p>Usa i tuoi Punti Viaggio per iscriverti a tornei speciali a tema (es. Torneo Hawaii) con premi fisici e digitali.</p>
+                                    <h4>Tornei & Prodotti Esclusivi</h4>
+                                    <p>Usa i tuoi Punti AWAY per sbloccare l'iscrizione esclusiva a tornei speciali a tema ed accedere a premi fisici o digitali riservati.</p>
                                 </div>
                             </div>
                             <div class="gamification-item">
-                                <div class="item-icon-pill">✓</div>
+                                <div class="item-icon-pill" style="background-color: rgba(179, 229, 255, 0.18) !important; color: #B3E5FF !important; border: 1px solid rgba(179, 229, 255, 0.3) !important;">✓</div>
                                 <div class="item-content">
                                     <h4>Community Clinic</h4>
                                     <p>Partecipa a lezioni esclusive con maestri federali e campioni di padel sbloccando gli inviti tramite i tuoi punti accumulati.</p>
                                 </div>
                             </div>
                             <div class="gamification-item">
-                                <div class="item-icon-pill">✓</div>
+                                <div class="item-icon-pill" style="background-color: rgba(179, 229, 255, 0.18) !important; color: #B3E5FF !important; border: 1px solid rgba(179, 229, 255, 0.3) !important;">✓</div>
                                 <div class="item-content">
                                     <h4>Partite con Ospiti Speciali</h4>
                                     <p>Raggiungi le soglie punti indicate nell'App per sfidare influencer e sportivi professionisti in partite speciali.</p>
@@ -1866,13 +1883,29 @@
                 </div>
             </div>
         </section>
+                <!-- Feature Section PalaVillage -->
+        <section id="away-palavillage" style="background-color: #161616; padding: 7.5rem 2rem;">
+            <div class="container">
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1600&q=85" alt="Campus PalaVillage Away" class="feature-bg-img">
+                    <div class="feature-card-content">
+                        <h2>CAMPUS PALAVILLAGE</h2>
+                        <p>
+                            L'unico hub di riferimento al PalaVillage (Torino) dotato dei primi campi da padel panoramici immersivi al mondo. È qui che prende vita l'esperienza AWAY: scendi in campo e vivi il tuo viaggio.
+                        </p>
+                        <a href="palavillage.html" class="btn btn-primary">Scopri il PalaVillage</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- App Download Section -->
         <section id="download">
             <div class="container">
                 <div class="download-banner">
                     <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1600&q=85" alt="Scarica App AWAY" class="download-bg-img">
                     <div class="download-banner-content">
-                        <h2 style="font-size: 3.25rem; margin-bottom: 1rem; color: #161616 !important; font-weight: 800;">Scarica L'App AWAY</h2>
+                        <h2 style="font-size: 3.25rem; margin-bottom: 1rem; color: #FFFFFF !important; font-weight: 800;">Scarica L'App AWAY</h2>
                         <p style="color: rgba(255, 255, 255, 0.88); max-width: 620px; margin: 0 auto 2.5rem auto; font-size: 1.15rem; line-height: 1.65;">
                             Porta la tua esperienza di padel immersivo ovunque ti trovi. Disponibile per iOS e Android.
                         </p>
@@ -1886,6 +1919,8 @@
         </section>
     </main>
 
+    <!-- Footer -->
+    <!-- Footer -->
     <!-- Footer -->
     <footer>
         <div class="footer-grid">

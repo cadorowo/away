@@ -63,6 +63,169 @@
             text-shadow: none;
         }
 
+        /* High-Fidelity Selection Cards (Inspired by Reference UI) */
+        .config-option-card {
+            position: relative;
+            height: 190px;
+            border-radius: 24px;
+            overflow: hidden;
+            background-color: var(--color-surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.25rem;
+        }
+
+        .config-option-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(179, 229, 255, 0.45);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+        }
+
+        .config-option-card.selected {
+            border: 2px solid #B3E5FF !important;
+            box-shadow: 0 0 25px rgba(179, 229, 255, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .config-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.55) contrast(1.1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        .config-option-card:hover .config-card-bg {
+            transform: scale(1.06);
+            filter: brightness(0.68) contrast(1.15);
+        }
+
+        .config-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(16, 16, 16, 0.88) 100%);
+            z-index: 2;
+        }
+
+        .config-card-header {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .config-card-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.35rem 0.85rem;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #B3E5FF;
+        }
+
+        .config-card-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+        }
+
+        .config-option-card.selected .config-card-action {
+            background: #B3E5FF;
+            color: #161616;
+            border-color: #B3E5FF;
+        }
+
+        .config-card-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .config-card-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
+            margin-bottom: 0.15rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-wrap: balance;
+        }
+
+        .config-card-sub {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+        }
+
+        .config-summary-card {
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            padding: 2.25rem !important;
+            background-color: var(--color-surface-card) !important;
+            border-radius: 28px !important;
+            position: sticky;
+            top: 7.5rem;
+            box-shadow: var(--shadow-md) !important;
+        }
+
+        .btn-checkout-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1.1rem 2rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 25px rgba(238, 56, 16, 0.35);
+        }
+
+        .btn-checkout-primary:hover {
+            background-color: #D62D07;
+            border-color: #D62D07;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(238, 56, 16, 0.5);
+        }
+
         h1 { font-size: 4.5rem; line-height: 1.05; }
         h2 { font-size: 2.75rem; line-height: 1.1; }
         h3 { font-size: 1.75rem; line-height: 1.2; }
@@ -1036,8 +1199,6 @@
 
         /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
@@ -1048,8 +1209,6 @@
         }
 
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
@@ -1068,6 +1227,8 @@
 
         /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
         .btn-secondary,
+        .cta-pill-white,
+        .header-actions .cta-pill-white,
         .accordion-cta-pill {
             background-color: #FFFFFF !important;
             color: #161616 !important;
@@ -1347,8 +1508,6 @@
            ========================================================= */
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip),
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit {
             background-color: #EE3810 !important;
@@ -1360,8 +1519,6 @@
 
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip):hover,
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover {
             background-color: #D62D07 !important;
@@ -1382,6 +1539,8 @@
         }
 
         .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
         .accordion-cta-pill:hover {
             background-color: #F2F2F2 !important;
             background: #F2F2F2 !important;
@@ -1457,6 +1616,29 @@
             text-align: center !important;
         }
 
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1514,169 +1696,276 @@
         </div>
     </header>
 
-    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 6rem 2rem;">
+    <main style="max-width: 1200px; margin: 0 auto; padding: 7.5rem 2rem 6rem 2rem;">
         
         <!-- Back navigation link -->
-        <div style="margin-bottom: 2rem;">
-            <a href="upsell.html" style="font-family: var(--font-display); font-weight: bold; text-decoration: none; font-size: 1rem;">← Torna all'offerta Kit</a>
+        <div style="margin-bottom: 2.5rem;">
+            <a href="upsell.html" style="font-family: var(--font-display); font-weight: bold; text-decoration: none; font-size: 1rem; color: #FFFFFF;">← Torna all'offerta Kit</a>
         </div>
 
         <div class="details-grid">
-            <!-- Left Column: Specs & Gallery -->
+            <!-- Left Column: Selection Cards -->
             <div>
-                <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Configura il tuo Kit</h1>
-                <p style="font-size: 1.3rem; font-weight: bold; margin-bottom: 3rem;">Scegli la fragranza, il colore dello speaker e la stampa del laccetto per un'esperienza su misura.</p>
+                <h1 style="font-size: 3.5rem; margin-bottom: 0.75rem; text-wrap: balance;">Configura il tuo Kit</h1>
+                <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 3rem; text-wrap: pretty;">
+                    Scegli la fragranza sensoriale, la finitura dello speaker immersivo ed il laccetto da campo per un equipaggiamento su misura.
+                </p>
 
-                <!-- Fragranza -->
-                <h3 style="margin-bottom: 1.5rem;">1. Scegli la Fragranza</h3>
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 3rem;">
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Brezza Oceanica</h4>
-                        </div>
+                <!-- SECTION 1: Fragranza Olfattoria -->
+                <div style="margin-bottom: 3.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <span class="config-card-pill">Step 01</span>
+                        <h3 style="margin-bottom: 0; font-size: 1.75rem;">Fragranza Olfattoria (100ml)</h3>
                     </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Pino Nordico</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;">
+                        <!-- Option 1: Brezza Oceanica -->
+                        <div class="config-option-card" onclick="selectOption('fragrance', 'Brezza Oceanica', this)">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Brezza Oceanica" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Olfattorio</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Brezza Oceanica</div>
+                                <div class="config-card-sub">Note fresche di zaffiro e sale marino</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Spezie Calde</h4>
+
+                        <!-- Option 2: Pino Nordico (Selected Default) -->
+                        <div class="config-option-card selected" onclick="selectOption('fragrance', 'Pino Nordico', this)">
+                            <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=600&q=80" alt="Pino Nordico" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Olfattorio</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Pino Nordico</div>
+                                <div class="config-card-sub">Essenze balsamiche di bosco glaciale</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">S. Sandalo</h4>
+
+                        <!-- Option 3: Spezie Calde -->
+                        <div class="config-option-card" onclick="selectOption('fragrance', 'Spezie Calde', this)">
+                            <img src="https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=600&q=80" alt="Spezie Calde" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Olfattorio</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Spezie Calde</div>
+                                <div class="config-card-sub">Accordi orientali di ambra e zafferano</div>
+                            </div>
+                        </div>
+
+                        <!-- Option 4: Legno Sandalo -->
+                        <div class="config-option-card" onclick="selectOption('fragrance', 'Legno Sandalo', this)">
+                            <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80" alt="Legno Sandalo" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Olfattorio</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Legno Sandalo</div>
+                                <div class="config-card-sub">Note legnose e profonde della Valle Sacra</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Colore Speaker -->
-                <h3 style="margin-bottom: 1.5rem;">2. Colore Speaker</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem;">
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Ocean Blue</h4>
-                        </div>
+                <!-- SECTION 2: Colore Speaker Bluetooth Immersivo -->
+                <div style="margin-bottom: 3.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <span class="config-card-pill">Step 02</span>
+                        <h3 style="margin-bottom: 0; font-size: 1.75rem;">Speaker Bluetooth Immersivo</h3>
                     </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Desert Sand</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+                        <!-- Option 1: Ocean Blue (Selected Default) -->
+                        <div class="config-option-card selected" onclick="selectOption('speaker', 'Ocean Blue', this)">
+                            <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=600&q=80" alt="Ocean Blue" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Speaker 3D</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Ocean Blue</div>
+                                <div class="config-card-sub">Finitura Blu Cobalto Opaco</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Volcanic Ash</h4>
+
+                        <!-- Option 2: Desert Sand -->
+                        <div class="config-option-card" onclick="selectOption('speaker', 'Desert Sand', this)">
+                            <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80" alt="Desert Sand" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Speaker 3D</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Desert Sand</div>
+                                <div class="config-card-sub">Finitura Sabbia Dorata</div>
+                            </div>
+                        </div>
+
+                        <!-- Option 3: Volcanic Ash -->
+                        <div class="config-option-card" onclick="selectOption('speaker', 'Volcanic Ash', this)">
+                            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Volcanic Ash" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Speaker 3D</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Volcanic Ash</div>
+                                <div class="config-card-sub">Finitura Nero Ossidiana Matte</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Stampa Laccetto -->
-                <h3 style="margin-bottom: 1.5rem;">3. Stampa Laccetto</h3>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">Pattern AWAY</h4>
-                        </div>
+                <!-- SECTION 3: Overgrip & Stampa Laccetto Custom -->
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <span class="config-card-pill">Step 03</span>
+                        <h3 style="margin-bottom: 0; font-size: 1.75rem;">Overgrip & Laccetto Custom</h3>
                     </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 3px solid var(--text-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; border-top: 3px solid var(--text-color);">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">AWAY X PALAVILLAGE</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;">
+                        <!-- Option 1: Pattern AWAY -->
+                        <div class="config-option-card" onclick="selectOption('strap', 'Pattern AWAY', this)">
+                            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=600&q=80" alt="Pattern AWAY" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Custom Strap</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Pattern AWAY</div>
+                                <div class="config-card-sub">Grafica Monogram Brand</div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div style="cursor: pointer; position: relative; height: 100px; background-color: var(--secondary-color); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;">
-                        <span style="font-family: monospace; font-size: 4rem; font-weight: bold; opacity: 0.3;">X</span>
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--bg-color); padding: 0.5rem; text-align: center; ">
-                            <h4 style="font-size: 0.85rem; margin-bottom: 0;">"Play the World"</h4>
+
+                        <!-- Option 2: AWAY X PALAVILLAGE (Selected Default) -->
+                        <div class="config-option-card selected" onclick="selectOption('strap', 'AWAY X PALAVILLAGE', this)">
+                            <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=600&q=80" alt="AWAY X PALAVILLAGE" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Custom Strap</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">AWAY x PALAVILLAGE</div>
+                                <div class="config-card-sub">Edizione Ufficiale Torino</div>
+                            </div>
+                        </div>
+
+                        <!-- Option 3: Play the World -->
+                        <div class="config-option-card" onclick="selectOption('strap', 'Play the World', this)">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Play the World" class="config-card-bg">
+                            <div class="config-card-overlay"></div>
+                            <div class="config-card-header">
+                                <span class="config-card-pill">Custom Strap</span>
+                                <div class="config-card-action">✓</div>
+                            </div>
+                            <div class="config-card-content">
+                                <div class="config-card-title">Play The World</div>
+                                <div class="config-card-sub">Tipografia Agonistica Bold</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Side Booking Card -->
+            <!-- Right Column: Order Summary Card -->
             <div>
-                <div style="border: 2px solid var(--border-color); padding: 2.5rem; background-color: var(--bg-color); position: sticky; top: 2rem;">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 1rem;">Riepilogo Kit</h3>
+                <div class="config-summary-card">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 1rem;">Riepilogo Kit</h3>
                     
                     <div style="margin-bottom: 2rem;">
-                        <p style="font-size: 0.9rem; text-transform: uppercase; font-family: var(--font-display); font-weight: bold; margin-bottom: 0.5rem;">Totale Aggiuntivo</p>
-                        <p style="font-size: 2.5rem; font-weight: 900; font-family: var(--font-display);">+ € 30,00</p>
+                        <p style="font-size: 0.8rem; text-transform: uppercase; font-weight: 800; color: var(--text-muted); margin-bottom: 0.35rem; letter-spacing: 0.05em;">Totale Aggiuntivo</p>
+                        <p style="font-size: 2.75rem; font-weight: 900; font-family: var(--font-display); color: #FFFFFF; font-variant-numeric: tabular-nums;">+ € 30,00</p>
                     </div>
 
-                    <ul style="list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
-                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Fragranza:</strong> Pino Nordico</li>
-                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Colore:</strong> Ocean Blue</li>
-                        <li style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.95rem;"><strong>Laccetto:</strong> AWAY X PALAVILLAGE</li>
+                    <ul style="list-style: none; margin-bottom: 2.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <li style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Fragranza:</span>
+                            <strong id="summary-fragrance" style="color: #B3E5FF;">Pino Nordico</strong>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Speaker:</span>
+                            <strong id="summary-speaker" style="color: #B3E5FF;">Ocean Blue</strong>
+                        </li>
+                        <li style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 0.65rem;">
+                            <span style="color: var(--text-muted);">Laccetto:</span>
+                            <strong id="summary-strap" style="color: #B3E5FF;">AWAY x PALAVILLAGE</strong>
+                        </li>
                     </ul>
 
-                    <a href="checkout-entrambi.html" class="btn" style="width: 100%; font-size: 1.1rem; padding: 1.2rem;">Conferma e Vai al Pagamento</a>
+                    <a href="checkout-entrambi.html" id="summary-cta-link" class="btn-checkout-primary">
+                        <span>Conferma e Vai Al Checkout</span>
+                        <span style="font-size: 1.1rem;">↗</span>
+                    </a>
                 </div>
             </div>
         </div>
+
+        <script>
+        function selectOption(group, value, element) {
+            const container = element.parentElement;
+            const cards = container.querySelectorAll('.config-option-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+
+            if (group === 'fragrance') {
+                document.getElementById('summary-fragrance').innerText = value;
+            } else if (group === 'speaker') {
+                document.getElementById('summary-speaker').innerText = value;
+            } else if (group === 'strap') {
+                document.getElementById('summary-strap').innerText = value;
+            }
+        }
+        </script>
     </main>
 
     <!-- Footer -->
-                <footer style="padding: 4rem 2rem;  margin-top: 2rem;">
-        <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; text-align: left; max-width: 1200px; margin: 0 auto; padding-bottom: 2rem;">
+                <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
             <div>
-                <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">AWAY</h3>
-                <p style="margin-bottom: 2rem; line-height: 1.6;">Campi da padel panoramici ed immersivi al PalaVillage: proiezioni a 360°, suoni direzionali ed essenze olfattive per vivere un viaggio sensoriale ad ogni partita.</p>
-                <div style="display: flex; gap: 1rem;">
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                    <span style="display: inline-block; width: 48px; height: 48px; border: 2px solid var(--border-color); text-align: center; line-height: 44px; font-weight: bold;">X</span>
-                </div>
+                <h3>AWAY</h3>
+                <p style="color: var(--text-muted); margin: 1.25rem 0 2rem 0; font-size: 0.95rem;">
+                    Campi da padel panoramici ed immersivi al PalaVillage: proiezioni a 360°, suoni direzionali ed essenze olfattive per vivere un viaggio sensoriale ad ogni partita.
+                </p>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Navigazione</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="servizio.html" style="text-decoration: none;">Servizio</a>
-                    <a href="destinazioni.html" style="text-decoration: none;">Destinazioni</a>
-                    <a href="app.html" style="text-decoration: none;">App</a>
-                    <a href="partner.html" style="text-decoration: none;">Partner</a>
-                </div>
+                <h4>Navigazione</h4>
+                <a href="servizio.html">Servizio</a>
+                <a href="destinazioni.html">Destinazioni</a>
+                <a href="app.html">App Gamification</a>
+                <a href="partner.html">Partner B2B</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Supporto</h4>
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                    <a href="palavillage.html" style="text-decoration: none;">PalaVillage</a>
-                    <a href="aiuto.html" style="text-decoration: none;">Aiuto & FAQ</a>
-                </div>
+                <h4>Supporto</h4>
+                <a href="palavillage.html">PalaVillage</a>
+                <a href="aiuto.html">Aiuto & FAQ</a>
             </div>
             <div>
-                <h4 style="margin-bottom: 1.5rem; font-size: 1.2rem;">Newsletter</h4>
-                <p style="margin-bottom: 1.5rem;">[Testo invito newsletter]</p>
-                <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Iscrizione simulata!');">
-                    <input type="email" placeholder="La tua email" style="padding: 1rem; border: 2px solid var(--border-color); width: 100%; font-family: var(--font-main);">
-                    <button type="submit" class="btn" style="padding: 1rem 2rem;">Iscriviti</button>
+                <h4>Newsletter</h4>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem;">Iscriviti per sbloccare mete segrete e sconti sui viaggi.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Grazie per esserti iscritto alla newsletter AWAY!');">
+                    <input type="email" placeholder="La tua email" required>
+                    <button type="submit" class="btn btn-secondary" style="width: 100%;">Iscriviti Ora</button>
                 </form>
             </div>
         </div>
-        <div style="max-width: 1200px; margin: 0 auto; margin-top: 2rem; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-            <p>&copy; [Anno] AWAY. Tutti i diritti riservati.</p>
-            <div style="display: flex; gap: 1.5rem;">
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="font-size: 0.9rem; text-decoration: none;">Termini di Servizio</a>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AWAY. Tutti i diritti riservati.</p>
+            <div>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Privacy Policy</a>
+                <a href="#" style="color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.5rem;">Termini & Condizioni</a>
             </div>
         </div>
     </footer>

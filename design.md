@@ -56,8 +56,8 @@ Ogni pulsante presente nel prototipo deve appartenere a uno (ed uno solo) dei tr
 
 | Livello | Nome & Variante | Stile Visivo (CSS) | Destinazione d'Uso |
 | :--- | :--- | :--- | :--- |
-| **Tier 1** | **Primary Conversion CTA** | Background `#EE3810`, testo `#FFFFFF`, border `#EE3810`, pillola `999px`. Hover: `#D62D07`. | Azioni di conversione primaria **SOLO**: Hero Primary CTA, Checkout (`.btn-checkout`), Download App (`.cta-pill-white`), PalaVillage Campus CTA. |
-| **Tier 2** | **Secondary Exploration CTA** | Background `#FFFFFF` (Pillola Bianca Solida), testo `#161616`, border `#FFFFFF`, pillola `999px`. Hover: `#F2F2F2`. | Azioni di selezione & esplorazione: *SELEZIONA VIAGGIO* negli Accordion, form Newsletter nel footer, bottoni di navigazione secondaria. |
+| **Tier 1** | **Primary Conversion CTA** | Background `#EE3810`, testo `#FFFFFF`, border `#EE3810`, pillola `999px`. Hover: `#D62D07`. | Azioni di conversione primaria **SOLO**: Hero Primary CTA, Checkout (`.btn-checkout`), PalaVillage Campus CTA. |
+| **Tier 2** | **Secondary Exploration CTA** | Background `#FFFFFF` (Pillola Bianca Solida), testo `#161616`, border `#FFFFFF`, pillola `999px`. Hover: `#F2F2F2`. | Azioni di selezione & esplorazione: Download App / Navbar CTA (`.cta-pill-white`), *SELEZIONA VIAGGIO* negli Accordion, form Newsletter nel footer, bottoni di navigazione secondaria. |
 | **Tier 3** | **Tertiary / Outline CTA** | Background `#222222` (Vetro Scuro), testo `#FFFFFF`, bordo `1px solid rgba(255, 255, 255, 0.25)`, pillola `999px`. Hover: `#2A2A2A`. | Bottoni nelle sezioni Typography Statement, Skip/Personalizza Kit (`.btn-statement`, `.btn-outline`, `.btn-skip`). |
 
 ---

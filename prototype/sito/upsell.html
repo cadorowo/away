@@ -261,25 +261,79 @@
             padding: 8rem 2rem 5rem 2rem;
         }
 
-        /* KIT UPSELL SHOWCASE CARD */
-        .kit-upsell-showcase {
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            padding: 3.5rem;
-            display: grid;
-            grid-template-columns: 1fr 1.15fr;
-            gap: 4rem;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            margin-top: 1rem;
-        }
-
-        .kit-img-wrap {
+        /* FULL-SIZE HERO IMAGE CONTAINER FOR UPSELL */
+        .upsell-full-card {
             position: relative;
             width: 100%;
-            height: 480px;
-            border-radius: var(--radius-lg);
+            min-height: 560px;
+            border-radius: 32px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .upsell-full-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.65) contrast(1.1);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        .upsell-full-card:hover .upsell-full-bg {
+            transform: scale(1.03);
+            filter: brightness(0.72) contrast(1.15);
+        }
+
+        .upsell-full-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(16, 16, 16, 0.94) 100%);
+            z-index: 2;
+        }
+
+        .upsell-full-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .btn-checkout-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 25px rgba(238, 56, 16, 0.35);
+        }
+
+        .btn-checkout-primary:hover {
+            background-color: #D62D07;
+            border-color: #D62D07;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(238, 56, 16, 0.5);
         }
 
         .kit-img-wrap img {
@@ -1269,6 +1323,29 @@
             text-align: center !important;
         }
 
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1325,91 +1402,42 @@
     </header>
 
     <main>
-        <!-- KIT UPSELL SECTION -->
-        <section class="container">
-            <div style="margin-bottom: 3rem;">
-                <h1 style="font-size: 3.25rem; margin-bottom: 0.5rem;">AGGIUNGI L'AWAY GEAR KIT</h1>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">Completa il tuo pacchetto viaggio con l'equipaggiamento da padel personalizzato ed il tag NFC per sblocco campo.</p>
-            </div>
+        <!-- KIT UPSELL SECTION (FULL SIZE IMAGE CONTAINER) -->
+        <section class="container" style="padding-top: 7.5rem;">
+            
+            <div class="upsell-full-card">
+                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=85" alt="Away Gear Kit Showcase" class="upsell-full-bg">
+                <div class="upsell-full-overlay"></div>
+                
+                <div class="upsell-full-content">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; margin-bottom: 1.25rem;">
+                        <span style="background: rgba(255,255,255,0.12); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); color: #B3E5FF; padding: 0.4rem 1.25rem; border-radius: 999px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;">UPGRADE ESPERIENZA IN CAMPO</span>
+                        <div style="font-family: var(--font-display); font-size: 2.75rem; font-weight: 900; color: #FFFFFF; font-variant-numeric: tabular-nums;">+ € 30,00</div>
+                    </div>
 
-            <div class="kit-upsell-showcase">
-                <!-- Left: Kit Photo -->
-                <div class="kit-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1000&q=85" alt="Away Gear Kit Showcase">
-                </div>
-
-                <!-- Right: Kit Product Details & Customization -->
-                <div>
-                    <span class="kit-badge">Custom Sensory Kit</span>
-                    <h2>Away Gear Kit Custom</h2>
+                    <h1 style="font-size: 3.75rem; margin-bottom: 0.75rem; color: #FFFFFF; text-wrap: balance; font-weight: 900; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">AGGIUNGI L'AWAY GEAR KIT</h1>
                     
-                    <div class="kit-price-tag">
-                        <span class="kit-price-val">+ € 30,00</span>
-                        <span class="kit-price-sub">/ Una tantum per viaggio</span>
-                    </div>
+                    <p style="color: rgba(255, 255, 255, 0.88); font-size: 1.15rem; margin-bottom: 2.5rem; max-width: 780px; text-wrap: pretty; line-height: 1.5;">
+                        Fragranza Olfattoria 100ml · Speaker Bluetooth Immersivo 3D · Overgrip & Laccetto Custom con Tag NFC per lo sblocco del campo.
+                    </p>
 
-                    <ul class="kit-features-list">
-                        <li>
-                            <div class="feature-icon">✓</div>
-                            <span>Racchetta Pro Carbon 12K con bilanciamento personalizzato</span>
-                        </li>
-                        <li>
-                            <div class="feature-icon">✓</div>
-                            <span>Borsa Termica impermeabile con scomparto racchette</span>
-                        </li>
-                        <li>
-                            <div class="feature-icon">✓</div>
-                            <span>2 Maglie Tecniche traspiranti con il tuo nome stampato</span>
-                        </li>
-                        <li>
-                            <div class="feature-icon">✓</div>
-                            <span>Tag NFC integrato per sblocco Smart Locker & playlist sensoriale</span>
-                        </li>
-                    </ul>
-
-                    <!-- Customization Selectors -->
-                    <div class="custom-options-grid">
-                        <div class="option-group">
-                            <label>Bilanciamento Racchetta</label>
-                            <div class="option-pills">
-                                <button class="option-pill active">Controllo</button>
-                                <button class="option-pill">Potenza</button>
-                            </div>
-                        </div>
-
-                        <div class="option-group">
-                            <label>Taglia Apparel</label>
-                            <div class="option-pills">
-                                <button class="option-pill">S</button>
-                                <button class="option-pill active">M</button>
-                                <button class="option-pill">L</button>
-                                <button class="option-pill">XL</button>
-                            </div>
-                        </div>
-
-                        <div class="option-group" style="grid-column: span 2;">
-                            <label>Nome Stampato Sulle Maglie</label>
-                            <input type="text" class="name-input" value="ROSSI" placeholder="Es. ROSSI">
-                        </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="upsell-actions-row">
-                        <a href="checkout-entrambi.html" class="btn-add-kit">
-                            <span>Aggiungi Kit & Vai Al Checkout (+ € 30,00)</span>
+                    <!-- CTAs -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center;">
+                        <a href="configuratore-kit.html" class="btn-checkout-primary" style="padding: 1.1rem 2.25rem; font-size: 1rem;">
+                            <span>Configura Kit & Aggiungi (+ € 30,00) ⚙</span>
                         </a>
-                        <a href="configuratore-kit.html" class="btn-skip-kit">
-                            <span>Personalizza Dettagli Kit ⚙</span>
-                        </a>
-                        <a href="checkout-destinazione.html" class="btn-skip-kit">
-                            <span>Solo Viaggio (Senza Kit)</span>
+                        <a href="checkout-destinazione.html" class="btn-tertiary" style="padding: 1.05rem 1.85rem; border-radius: 999px; font-weight: 700; font-size: 0.9rem;">
+                            No grazie, procedi solo con la partita (€ 140,00)
                         </a>
                     </div>
                 </div>
             </div>
+
         </section>
     </main>
 
+    <!-- Footer -->
+    <!-- Footer -->
     <!-- Footer -->
     <footer>
         <div class="footer-grid">

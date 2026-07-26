@@ -1283,8 +1283,6 @@
 
         /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
@@ -1295,8 +1293,6 @@
         }
 
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
@@ -1315,6 +1311,8 @@
 
         /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
         .btn-secondary,
+        .cta-pill-white,
+        .header-actions .cta-pill-white,
         .accordion-cta-pill {
             background-color: #FFFFFF !important;
             color: #161616 !important;
@@ -1624,8 +1622,6 @@
            ========================================================= */
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip),
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit {
             background-color: #EE3810 !important;
@@ -1637,8 +1633,6 @@
 
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip):hover,
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover {
             background-color: #D62D07 !important;
@@ -1659,6 +1653,8 @@
         }
 
         .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
         .accordion-cta-pill:hover {
             background-color: #F2F2F2 !important;
             background: #F2F2F2 !important;
@@ -1732,6 +1728,29 @@
         .section-header h2,
         .section-header p {
             text-align: center !important;
+        }
+
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
         }
 
     </style>
@@ -1998,6 +2017,8 @@
         </section>
     </main>
 
+    <!-- Footer -->
+    <!-- Footer -->
     <!-- Footer -->
     <footer>
         <div class="footer-grid">

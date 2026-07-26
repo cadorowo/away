@@ -651,21 +651,22 @@
 
         .btn-submit {
             padding: 1.1rem 2.5rem;
-            background-color: #B3E5FF !important;
-            color: #FFFFFF;
+            background-color: #EE3810 !important;
+            color: #FFFFFF !important;
             border-radius: var(--radius-pill);
             font-weight: 700;
             font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            border: none;
+            border: 1px solid #EE3810 !important;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(238, 56, 16, 0.4);
         }
 
         .btn-submit:hover {
-            background-color: #D62D07;
+            background-color: #D62D07 !important;
+            border-color: #D62D07 !important;
             transform: translateY(-2px);
         }
 
@@ -1054,8 +1055,6 @@
 
         /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
@@ -1066,8 +1065,6 @@
         }
 
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover,
         .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
@@ -1086,6 +1083,8 @@
 
         /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
         .btn-secondary,
+        .cta-pill-white,
+        .header-actions .cta-pill-white,
         .accordion-cta-pill {
             background-color: #FFFFFF !important;
             color: #161616 !important;
@@ -1365,8 +1364,6 @@
            ========================================================= */
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip),
         .btn-primary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
         .btn-checkout,
         .btn-add-kit {
             background-color: #EE3810 !important;
@@ -1378,8 +1375,6 @@
 
         .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip):hover,
         .btn-primary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
         .btn-checkout:hover,
         .btn-add-kit:hover {
             background-color: #D62D07 !important;
@@ -1400,6 +1395,8 @@
         }
 
         .btn-secondary:hover,
+        .cta-pill-white:hover,
+        .header-actions .cta-pill-white:hover,
         .accordion-cta-pill:hover {
             background-color: #F2F2F2 !important;
             background: #F2F2F2 !important;
@@ -1473,6 +1470,29 @@
         .section-header h2,
         .section-header p {
             text-align: center !important;
+        }
+
+    
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        }
+
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
         }
 
     </style>
@@ -1552,52 +1572,9 @@
             </div>
         </section>
 
-        <!-- TYPOGRAPHY STATEMENT SECTION (SEZIONE 2 REFERENCE STYLE) -->
-        <section class="typography-statement-section">
-            <div class="statement-grid">
-                <div>
-                    <span class="statement-index">(04) Trasparenza & Assistenza H24</span>
-                    <p class="statement-desc">
-                        Siamo al tuo fianco prima, durante e dopo ogni match. Risposte chiare, assistenza diretta e nessuna attesa.
-                    </p>
-                    <a href="#concierge-form" class="btn-statement">
-                        <span>Scrivi Al Concierge</span>
-                        <div class="circle-arrow"></div>
-                    </a>
-                </div>
-                <div>
-                    <h2 class="statement-heading">
-                        <strong>Nessun dubbio sul tuo prossimo viaggio</strong>: supporto umano dedicato ed assistenza digitale istantanea.
-                    </h2>
-                </div>
-            </div>
-        </section>
 
-        <!-- CATEGORIES GRID -->
-        <section class="container">
-            <div class="categories-grid">
-                <a href="#faq-section" class="cat-card">
-                    <span class="cat-number">(01) Viaggi</span>
-                    <h3>Prenotazioni & Mete</h3>
-                    <p>Modifica date, itinerari, assicurazione sportiva e sblocco destinazioni segrete.</p>
-                </a>
-                <a href="#faq-section" class="cat-card">
-                    <span class="cat-number">(02) Gear Kit</span>
-                    <h3>Racchette & Apparel</h3>
-                    <p>Personalizzazione telai, tabella taglie, spedizione a casa o ritiro Smart Locker.</p>
-                </a>
-                <a href="#faq-section" class="cat-card">
-                    <span class="cat-number">(03) Gamification</span>
-                    <h3>App & Punti</h3>
-                    <p>Accumulo punti in campo, sblocco badge digitali, passaporto NFC e classifiche.</p>
-                </a>
-                <a href="#faq-section" class="cat-card">
-                    <span class="cat-number">(04) B2B & Hub</span>
-                    <h3>PalaVillage & Partner</h3>
-                    <p>Convenzioni aziendali, pacchetti per agenzie e supporto concierge H24.</p>
-                </a>
-            </div>
-        </section>
+
+
 
         <!-- FAQ ACCORDION SECTION -->
 
@@ -1608,61 +1585,70 @@
                 <p style="color: var(--text-muted); font-size: 1.15rem;">
                     Seleziona un quesito per espandere i dettagli operativi.
                 </p>
-            </div>
-
-            <div class="faq-container">
+            </div>            <div class="faq-container">
                 <!-- Q1 -->
                 <div class="faq-item active">
                     <div class="faq-header">
-                        <h3>Come funziona la prenotazione di un pacchetto viaggio AWAY?</h3>
+                        <h3>Come funziona l'esperienza di padel immersivo AWAY?</h3>
                         <div class="faq-icon">+</div>
                     </div>
                     <div class="faq-body">
-                        Puoi configurare la tua esperienza direttamente online scegliendo la destinazione (Hawaii, Islanda o Marocco) ed aggiungendo l'Away Gear Kit personalizzato. Dopo la conferma, riceverai sull'App AWAY il tuo passaporto digitale NFC con i dettagli del soggiorno e gli slot di padel prenotati.
+                        L'esperienza AWAY comprende una partita di padel da 90 minuti disputata sui campi panoramici immersivi del PalaVillage a Torino. Durante il match, proiezioni visive a 360°, suoni direzionali 3D ed essenze olfattive diffuse in campo ricreano l'atmosfera della destinazione scelta.
                     </div>
                 </div>
 
                 <!-- Q2 -->
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Posso personalizzare le specifiche della racchetta e dell'abbigliamento?</h3>
+                        <h3>Cosa comprende l'Away Gear Kit Custom (€ 30,00)?</h3>
                         <div class="faq-icon">+</div>
                     </div>
                     <div class="faq-body">
-                        Assolutamente sì. Durante il processo di checkout o tramite il Configuratore Kit puoi selezionare il bilanciamento del telaio (Controllo o Potenza), il peso desiderato e la taglia dell'abbigliamento in fibra ecosostenibile con il tuo nome stampato.
+                        L'Away Gear Kit è composto da tre elementi esclusivi: 1. Spray Olfattorio da 100ml personalizzato con la fragranza della meta, 2. Speaker Bluetooth Immersivo 3D per il campo, 3. Overgrip & Laccetto custom con Tag NFC integrato per lo sblocco veloce dello slot.
                     </div>
                 </div>
 
                 <!-- Q3 -->
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Come accedo agli Smart Locker presso il PalaVillage Torino?</h3>
+                        <h3>Quali sono le destinazioni ufficiali ed i prezzi dei pacchetti?</h3>
                         <div class="faq-icon">+</div>
                     </div>
                     <div class="faq-body">
-                        All'arrivo al PalaVillage, apri l'App AWAY e seleziona il tuo kit in pronta consegna. Avvicina il tuo smartphone al sensore NFC dello Smart Locker: lo scomparto dedicato si sbloccherà automaticamente senza attese in cassa.
+                        Le 4 destinazioni ufficiali disponibili sono Hawaii, Islanda, Marocco e Perù. La sola partita immersiva ha un costo di € 140,00, l'Away Gear Kit costa € 30,00, mentre il Bundle Completo (Partita + Kit) è offerto a € 170,00.
                     </div>
                 </div>
 
                 <!-- Q4 -->
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Cosa succede in caso di maltempo nelle mete outdoor?</h3>
+                        <h3>Come ritiro l'Away Gear Kit allo Smart Locker del PalaVillage?</h3>
                         <div class="faq-icon">+</div>
                     </div>
                     <div class="faq-body">
-                        Tutti i pacchetti AWAY includono la Garanzia Match Coperto. In caso di condizioni meteo avverse, il match viene automaticamente riprogrammato presso la struttura indoor convenzionata più vicina o convertito in crediti viaggio sull'App.
+                        All'arrivo al PalaVillage di Torino, apri l'App AWAY e seleziona il tuo ordine. Avvicina lo smartphone o il laccetto con Tag NFC al lettore dello Smart Locker: lo scomparto contenente il tuo kit personalizzato si aprirà in automatico.
                     </div>
                 </div>
 
                 <!-- Q5 -->
                 <div class="faq-item">
                     <div class="faq-header">
-                        <h3>Come funzionano le convenzioni per agenzie di viaggio e tour operator B2B?</h3>
+                        <h3>Come si accumulano ed utilizzano i Punti AWAY sull'App?</h3>
                         <div class="faq-icon">+</div>
                     </div>
                     <div class="faq-body">
-                        Offriamo alle agenzie partner un portale di prenotazione dedicato con commissioni trasparenti, materiale promozionale ad alta risoluzione e supporto concierge riservato per gruppi aziendali e clientela VIP.
+                        Ogni euro speso genera Punti AWAY sull'App (es. +140 Punti per la partita o +170 Punti per il bundle completo). I punti accumulati consentono di sbloccare trofei digitali, promozioni esclusive ed eventi speciali della community.
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h3>Come funzionano le soluzioni B2B per aziende ed agenzie partner?</h3>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-body">
+                        Riserviamo alle aziende partner ed alle agenzie un supporto Concierge dedicato per l'organizzazione di tornei aziendali immersivi, eventi corporate su misura e pacchetti promozionali per la clientela VIP al PalaVillage.
                     </div>
                 </div>
             </div>
