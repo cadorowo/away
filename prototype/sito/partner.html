@@ -40,14 +40,12 @@
 
         html, body {
             background-color: #161616 !important;
-        }
-
-        body {
+            color: #FFFFFF;
             font-family: var(--font-display);
-            background-color: var(--bg-color);
-            color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
             padding-top: 0;
             overflow-x: hidden;
         }
@@ -59,12 +57,16 @@
             letter-spacing: -0.03em;
             margin-bottom: 1rem;
             color: #FFFFFF;
-            text-shadow: none;
+            text-wrap: balance;
         }
 
         h1 { font-size: 4.5rem; line-height: 1.05; }
         h2 { font-size: 2.75rem; line-height: 1.1; }
         h3 { font-size: 1.75rem; line-height: 1.2; }
+
+        p {
+            text-wrap: pretty;
+        }
 
         a {
             color: var(--text-color);
@@ -72,10 +74,14 @@
             transition: all 0.25s ease;
         }
 
+        .price-val, .price, .stat-number, .metric-val {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+        }
+
         /* Reference Glassmorphic Header */
         header.glass-header {
             background: transparent !important;
-            background-color: transparent !important;
             border: none !important;
             box-shadow: none !important;
             position: fixed;
@@ -90,16 +96,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: transparent;
         }
 
-        .header-logo .logo {
-            font-family: 'Maison Neue', system-ui, -apple-system, sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            letter-spacing: -0.05em;
-            color: #FFFFFF;
-            text-decoration: none;
+        .header-logo .brand-logo-img {
+            height: 32px;
+            width: auto;
+            display: block;
         }
 
         /* Central Glass Pill Nav */
@@ -107,13 +109,13 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            background: rgba(255, 255, 255, 0.09);
+            background: rgba(255, 255, 255, 0.09) !important;
             backdrop-filter: blur(24px) saturate(200%);
             -webkit-backdrop-filter: blur(24px) saturate(200%);
-            border: none;
+            border: none !important;
             border-radius: 999px;
             padding: 0.65rem 2.25rem;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
         }
 
         .glass-pill-nav a {
@@ -147,47 +149,44 @@
             top: calc(100% + 1rem);
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(22, 22, 22, 0.85);
+            background: rgba(22, 22, 22, 0.92);
             backdrop-filter: blur(28px) saturate(200%);
             -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 24px;
             padding: 1.5rem;
             gap: 1rem;
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            z-index: 1001;
         }
 
         .nav-item:hover .submenu-cards {
             display: flex;
-            flex-direction: row;
         }
 
         .menu-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #222222;
+            width: 180px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 1rem;
-            color: #FFFFFF;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 150px;
             text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
         }
 
         .menu-card:hover {
-            transform: translateY(-4px);
-            background-color: #2A2A2A;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-3px);
         }
 
         .menu-card img {
-            width: 120px;
-            height: 100px;
+            width: 100%;
+            height: 90px;
             object-fit: cover;
             border-radius: 10px;
-            margin-bottom: 0.75rem;
         }
 
         .menu-card .card-title {
@@ -225,361 +224,50 @@
             transform: translateY(-2px);
         }
 
-        .cta-pill-white {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
+        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
+        .header-actions .cta-pill-white,
+        .header-actions .btn-primary,
+        .header-actions a[href="app.html"]:not(.cart-btn) {
+            background-color: #EE3810 !important;
+            background: #EE3810 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #EE3810 !important;
+            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
             padding: 0.65rem 1.4rem;
-            background-color: #FFFFFF;
-            color: #161616 !important;
             border-radius: 999px;
             font-weight: 700;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             text-decoration: none;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .cta-pill-white:hover {
-            background-color: #F0F0F0;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-        .cta-arrow {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: #161616;
-            color: #FFFFFF;
-            border-radius: 50%;
-            font-size: 0.8rem;
-            font-weight: bold;
+            gap: 0.75rem;
         }
 
-        /* Hero Section & Radial Mask Overlay */
+        .header-actions .cta-pill-white:hover,
+        .header-actions .btn-primary:hover,
+        .header-actions a[href="app.html"]:not(.cart-btn):hover {
+            background-color: #D62D07 !important;
+            background: #D62D07 !important;
+            border-color: #D62D07 !important;
+            color: #FFFFFF !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        }
+
+        /* Hero Section */
         .hero {
             position: relative;
+            padding: 10.5rem 2rem 5.5rem 2rem;
             text-align: center;
-            padding: 10.5rem 2rem 5rem 2rem;
-            margin-top: 0;
-            background-color: #161616;
-            border-bottom: none;
             min-height: 65vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-        }
-
-        
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 960px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.75rem;
-        }
-
-        .hero-pill-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.45rem 1.25rem;
-            background-color: rgba(179, 229, 255, 0.12);
-            color: var(--color-secondary);
-            border: 1px solid rgba(179, 229, 255, 0.3);
-            border-radius: var(--radius-pill);
-            font-size: 0.82rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: #FFFFFF;
-            letter-spacing: -0.04em;
-            line-height: 1.05;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            max-width: 760px;
-            font-size: 1.15rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-        }
-
-        /* AGENZIE DI VIAGGIO SECTION */
-        .agency-bento {
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            padding: 4.5rem 4rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .agency-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-            margin: 2rem 0;
-        }
-
-        .agency-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.9rem 1.25rem;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 0.95rem;
-            color: #FFFFFF;
-        }
-
-        .agency-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background-color: rgba(179, 229, 255, 0.15);
-            color: var(--color-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            flex-shrink: 0;
-            font-size: 0.8rem;
-        }
-
-        /* SENSORY PARTNERS SECTION */
-        .partners-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            margin-top: 3.5rem;
-        }
-
-        .partner-card {
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            padding: 3rem 2.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.35s ease;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-6px);
-            background-color: var(--color-surface-hover);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .partner-badge {
-            display: inline-block;
-            padding: 0.4rem 1.1rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--color-secondary);
-            border-radius: var(--radius-pill);
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1.25rem;
-        }
-
-        .partner-img-wrap {
-            width: 100%;
-            height: 240px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .partner-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .partner-card:hover .partner-img-wrap img {
-            transform: scale(1.05);
-        }
-
-        /* B2B CONTACT CALLOUT */
-        .b2b-cta-card {
-            background: linear-gradient(135deg, #1E1E1E 0%, #262626 100%);
-            border-radius: var(--radius-lg);
-            padding: 4.5rem 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            text-align: center;
-            margin-top: 5rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 1rem 2.25rem;
-            background-color: #B3E5FF !important;
-            color: #FFFFFF;
-            font-weight: 700;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--color-accent);
-            cursor: pointer;
-            text-align: center;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            background-color: #D62D07;
-            border-color: #D62D07;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #161616;
-            color: #FFFFFF;
-            padding: 5rem 2rem 2.5rem 2rem;
-            
-            margin-top: 5rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 3.5rem;
-            max-width: 1240px;
-            margin: 0 auto;
-            padding-bottom: 3rem;
-            
-        }
-
-        .footer-grid h3 {
-            font-size: 2.25rem;
-            color: #FFFFFF;
-        }
-
-        .footer-grid h4 {
-            font-size: 1.1rem;
-            color: var(--color-secondary);
-            margin-bottom: 1.25rem;
-        }
-
-        .footer-grid a {
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .footer-grid a:hover {
-            color: var(--color-secondary);
-        }
-
-        .newsletter-form input {
-            padding: 0.9rem 1.25rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background-color: rgba(255, 255, 255, 0.08);
-            color: #FFFFFF;
-            width: 100%;
-            margin-bottom: 0.75rem;
-            font-family: var(--font-display);
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .footer-bottom {
-            max-width: 1240px;
-            margin: 2rem auto 0 auto;
-            display: flex;
-            justify-content: space-between;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.88rem;
-        }
-    
-        /* Craftsmanship Micro-Details (make-interfaces-feel-better) */
-        h1, h2, h3, h4 {
-            text-wrap: balance;
-        }
-
-        p, .hero p, .accordion-desc {
-            text-wrap: pretty;
-        }
-
-        .price-val, .price, .stat-number, .matrix-spec-list, .hero-price-strip {
-            font-variant-numeric: tabular-nums;
-            font-feature-settings: "tnum";
-        }
-
-        body {
-            -webkit-font-smoothing: antialiased;
-            padding-top: 0;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-        }
-
-    
-        
-        /* PURE CHARCOAL CANVAS, TRANSPARENT HEADERS & ZERO PHOTO BORDERS */
-        html, body, main, section, footer, .hero, .typography-statement-section, .fullscreen-edge-banner {
             background-color: #161616 !important;
-            background: #161616 !important;
-        }
-
-        header.glass-header {
-            background: transparent !important;
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        .glass-pill-nav {
-            background: rgba(255, 255, 255, 0.09) !important;
-            border: none !important;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
-        }
-
-        .hero-bg-mask, .hero-bg-mask img, .fullscreen-edge-banner, .fullscreen-edge-banner .banner-img, .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
         }
 
         .hero-bg-mask {
@@ -600,906 +288,475 @@
             width: 100% !important;
             height: 100% !important;
             object-fit: cover !important;
-            filter: brightness(0.88);
+            filter: brightness(0.80);
             border-radius: 0 0 36px 36px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
         }
 
-        .fullscreen-edge-banner {
-            width: calc(100vw - 4rem) !important;
+        .hero-content {
             position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: calc(-50vw + 2rem) !important;
-            margin-right: calc(-50vw + 2rem) !important;
-            height: 65vh;
-            min-height: 480px;
-            overflow: hidden !important;
-            border-radius: 36px !important;
-            margin-top: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 36px !important;
-            filter: brightness(0.95);
-        }
-
-        .bento-card img, .partner-img-wrap, .agency-bento img, .matrix-card img {
-            width: 100% !important;
-            height: 380px !important;
-            object-fit: cover !important;
-            border-radius: 28px !important;
-        }
-
-        
-
-    
-        /* GRAPHIC FULL-SIZE BACKGROUND IMAGES FOR TEXT COMPONENTS */
-        .typography-statement-section {
-            position: relative;
-            padding: 8.5rem 2rem;
-            margin: 4rem auto;
-            max-width: 1360px;
-            border-radius: 36px !important;
-            overflow: hidden !important;
-            background-color: #161616 !important;
-            background-image: none !important;
-            background-size: cover !important;
-            background-position: center !important;
-        }
-
-        .statement-grid {
-            position: relative;
-            z-index: 5;
-            max-width: 1240px;
+            z-index: 10;
+            max-width: 920px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 5rem;
-            align-items: flex-start;
-        }
-
-        .live-booking-card, .contact-support-card {
-            position: relative;
-            overflow: hidden !important;
-            border-radius: 36px !important;
-            background-image: linear-gradient(135deg, rgba(22, 22, 22, 0.85) 0%, rgba(22, 22, 22, 0.94) 100%), url('https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=85') !important;
-            background-size: cover !important;
-            background-position: center !important;
-        }
-
-    
-        /* GRAPHIC FULL-BLEED BACKGROUND CARDS */
-        .feature-card, .agency-bento, .graphic-full-card {
-            position: relative;
-            background-color: var(--color-surface-card);
-            border-radius: 32px !important;
-            min-height: 460px;
-            overflow: hidden !important;
-            border: none !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-            display: flex !important;
-            align-items: center !important;
-            padding: 0 !important;
-        }
-
-        .feature-card .feature-bg-img, .agency-bento .feature-bg-img, .graphic-full-card .feature-bg-img {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            z-index: 1 !important;
-            filter: brightness(0.85) !important;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-            border-radius: 32px !important;
-            border: none !important;
-        }
-
-        .feature-card:hover .feature-bg-img, .agency-bento:hover .feature-bg-img, .graphic-full-card:hover .feature-bg-img {
-            transform: scale(1.04) !important;
-        }
-
-        .feature-card::before, .agency-bento::before, .graphic-full-card::before {
-            content: "" !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            z-index: 2 !important;
-            background: linear-gradient(90deg, rgba(16, 16, 16, 0.95) 0%, rgba(16, 16, 16, 0.7) 55%, rgba(16, 16, 16, 0.15) 100%) !important;
-            pointer-events: none !important;
-        }
-
-        .feature-card-content, .agency-bento-content, .graphic-full-content {
-            position: relative !important;
-            z-index: 10 !important;
-            max-width: 650px !important;
-            padding: 4.5rem 4rem !important;
-        }
-
-        .feature-card-content h2, .agency-bento-content h2, .graphic-full-content h2 {
-            font-size: 3.25rem !important;
-            line-height: 1.08 !important;
-            margin-bottom: 1.25rem !important;
-            color: #FFFFFF !important;
-            letter-spacing: -0.04em !important;
-        }
-
-        .feature-card-content p, .agency-bento-content p, .graphic-full-content p {
-            color: rgba(255, 255, 255, 0.88) !important;
-            font-size: 1.15rem !important;
-            line-height: 1.7 !important;
-            margin-bottom: 2.25rem !important;
-            text-wrap: pretty !important;
-        }
-
-    
-        /* PERFECT HERO TEXT CENTERING */
-        .hero, .hero-content {
-            text-align: center !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-        }
-
-        .hero h1, .hero-content h1,
-        .hero h2, .hero-content h2,
-        .hero p, .hero-content p,
-        .hero span, .hero-content span,
-        .hero-cta-group, .hero-actions {
-            text-align: center !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            align-self: center !important;
-        }
-
-    
-        
-
-        .btn:not(.btn-outline):hover,
-        .btn-primary:hover,
-        .btn-secondary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
-        .btn-statement:hover,
-        .btn-checkout:hover,
-        .btn-add-kit:hover,
-        .accordion-cta-pill:hover,
-        .hero-content .btn:not(.btn-outline):hover {
-            background-color: #D62D07 !important;
-            border-color: #D62D07 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: none !important;
-        }
-
-        /* Keep internal circle arrow contrast white icon on orange button */
-        .btn-statement .circle-arrow,
-        .accordion-cta-pill .cta-icon-circle,
-        .cta-pill-white .cta-arrow {
-            background-color: #FFFFFF !important;
-            color: #EE3810 !important;
-        }
-
-    
-        /* FIX ACCORDION CTA PILL OVERFLOW & TEXT SQUISHING */
-        .accordion-cta-pill {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 0.75rem !important;
-            padding: 0.75rem 1.25rem !important;
-            background-color: #EE3810 !important;
-            color: #FFFFFF !important;
-            border-radius: 999px !important;
-            font-weight: 800 !important;
-            font-size: 0.82rem !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.04em !important;
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            max-width: 100% !important;
-            box-sizing: border-box !important;
-            width: auto !important;
-        }
-
-        .accordion-cta-pill span {
-            white-space: nowrap !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            display: inline-block !important;
-        }
-
-        .accordion-cta-pill .cta-icon-circle,
-        .accordion-cta-pill .circle-arrow {
-            flex-shrink: 0 !important;
-            width: 28px !important;
-            height: 28px !important;
-            min-width: 28px !important;
-            min-height: 28px !important;
-            border-radius: 50% !important;
-            background-color: #FFFFFF !important;
-            color: #EE3810 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            font-weight: 900 !important;
-            font-size: 0.85rem !important;
-        }
-
-    
-        /* COMPRESSED ACCORDION CTA BUTTON: ICON ONLY WHEN COLLAPSED */
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
-            padding: 0.6rem !important;
-            width: 44px !important;
-            height: 44px !important;
-            min-width: 44px !important;
-            min-height: 44px !important;
-            border-radius: 50% !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 0 !important;
-            background-color: #EE3810 !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
-            display: none !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
-            width: 28px !important;
-            height: 28px !important;
-            margin: 0 !important;
-            background-color: #FFFFFF !important;
-            color: #EE3810 !important;
-        }
-
-        /* ACTIVE / HOVERED ACCORDION CARD BUTTON: FULL EXPANDED PILL */
-        .accordion-card.active .accordion-cta-pill,
-        .accordion-card:hover .accordion-cta-pill {
-            padding: 0.75rem 1.4rem !important;
-            width: auto !important;
-            height: auto !important;
-            border-radius: 999px !important;
-            justify-content: space-between !important;
-            gap: 1rem !important;
-        }
-
-        .accordion-card.active .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow),
-        .accordion-card:hover .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
-            display: inline-block !important;
-            white-space: nowrap !important;
-            font-size: 0.85rem !important;
-            font-weight: 800 !important;
-        }
-
-    
-        /* REMOVE HOVER GLOW FROM ALL BUTTONS */
-        .btn:hover,
-        .btn-primary:hover,
-        .btn-secondary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
-        .btn-statement:hover,
-        .btn-checkout:hover,
-        .btn-add-kit:hover,
-        .accordion-cta-pill:hover,
-        .hero-content .btn:hover {
-            box-shadow: none !important;
-            filter: none !important;
-        }
-
-    
-        
-
-        .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
-            color: #161616 !important;
-        }
-
-        .accordion-cta-pill .cta-icon-circle,
-        .accordion-cta-pill .circle-arrow {
-            background-color: #161616 !important;
-            color: #FFFFFF !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
-            background-color: #161616 !important;
-            color: #FFFFFF !important;
-        }
-
-        /* SECONDARY STATEMENT BUTTON (.btn-statement) */
-        .btn-statement {
-            background-color: #222222 !important;
-            color: #FFFFFF !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            box-shadow: none !important;
-        }
-
-        .btn-statement:hover {
-            background-color: #2A2A2A !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
-            transform: translateY(-2px) !important;
-        }
-
-        .btn-statement .circle-arrow {
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-        }
-
-        /* SECONDARY GENERIC BUTTONS (.btn-secondary) */
-        .btn-secondary {
-            background-color: #222222 !important;
-            color: #FFFFFF !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            box-shadow: none !important;
-        }
-
-        .btn-secondary:hover {
-            background-color: #2A2A2A !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
-        }
-
-    
-        /* REMOVE BLUE BORDER ON CARD HOVER */
-        .deck-card:hover,
-        .accordion-card:hover,
-        .bento-card:hover,
-        .menu-card:hover,
-        .upsell-card:hover,
-        .feature-card:hover {
-            border-color: rgba(255, 255, 255, 0.25) !important;
-        }
-
-    
-        /* =========================================================
-           AWAY 3-TIER BUTTON SYSTEM ARCHITECTURE
-           ========================================================= */
-
-        /* 1. BOTTONI PRIMARI (Brand Accent Orange #EE3810) */
-        .btn-primary,
-        .btn-checkout,
-        .btn-add-kit,
-        .hero-content .btn:not(.btn-outline):not(.btn-secondary) {
-            background-color: #EE3810 !important;
-            color: #FFFFFF !important;
-            border: 1px solid #EE3810 !important;
-            box-shadow: none !important;
-        }
-
-        .btn-primary:hover,
-        .btn-checkout:hover,
-        .btn-add-kit:hover,
-        .hero-content .btn:not(.btn-outline):not(.btn-secondary):hover {
-            background-color: #D62D07 !important;
-            border-color: #D62D07 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: none !important;
-        }
-
-        .cta-pill-white .cta-arrow,
-        .btn-checkout .cta-arrow,
-        .btn-add-kit .cta-arrow {
-            background-color: #FFFFFF !important;
-            color: #EE3810 !important;
-        }
-
-        /* 2. BOTTONI SECONDARI (Solid White Pill #FFFFFF) */
-        .btn-secondary,
-        .cta-pill-white,
-        .header-actions .cta-pill-white,
-        .accordion-cta-pill {
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-            border: 1px solid #FFFFFF !important;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
-        }
-
-        .btn-secondary:hover,
-        .accordion-cta-pill:hover,
-        .accordion-card.active .accordion-cta-pill {
-            background-color: #F2F2F2 !important;
-            border-color: #F2F2F2 !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .accordion-cta-pill span:not(.cta-icon-circle):not(.circle-arrow) {
-            color: #161616 !important;
-        }
-
-        .accordion-cta-pill .cta-icon-circle,
-        .accordion-cta-pill .circle-arrow,
-        .btn-secondary .circle-arrow {
-            background-color: #161616 !important;
-            color: #FFFFFF !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill {
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-        }
-
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .cta-icon-circle,
-        .accordion-card:not(.active):not(:hover) .accordion-cta-pill .circle-arrow {
-            background-color: #161616 !important;
-            color: #FFFFFF !important;
-        }
-
-        /* 3. BOTTONI TERZIARI (Dark Glass / Outline #222222) */
-        .btn-tertiary,
-        .btn-statement,
-        .btn-outline,
-        .btn-skip,
-        .btn-skip-kit {
-            background-color: #222222 !important;
-            color: #FFFFFF !important;
-            border: 1px solid rgba(255, 255, 255, 0.2) !important;
-            box-shadow: none !important;
-        }
-
-        .btn-tertiary:hover,
-        .btn-statement:hover,
-        .btn-outline:hover,
-        .btn-skip:hover,
-        .btn-skip-kit:hover {
-            background-color: #2A2A2A !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
-            transform: translateY(-2px) !important;
-            box-shadow: none !important;
-        }
-
-        .btn-statement .circle-arrow,
-        .btn-tertiary .circle-arrow,
-        .btn-outline .circle-arrow {
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-        }
-
-    
-        /* B2B CONTACT CALLOUT WITH FULL BACKGROUND IMAGE */
-        .b2b-cta-card {
-            position: relative;
-            background: #161616 !important;
-            border-radius: 32px !important;
-            padding: 5.5rem 3rem !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            text-align: center;
-            margin-top: 5rem;
-            overflow: hidden !important;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .hero-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 1.25rem;
+            background-color: rgba(179, 229, 255, 0.12);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.3);
+            border-radius: var(--radius-pill);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4.25rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.25rem;
+            line-height: 1.05;
+        }
+
+        .hero-content p {
+            font-size: 1.18rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 760px;
+            margin-bottom: 2.25rem;
+            line-height: 1.65;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
             justify-content: center;
         }
 
-        .b2b-cta-card .b2b-bg-img {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            z-index: 1 !important;
-            filter: brightness(0.68) !important;
-            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        }
-
-        .b2b-cta-card:hover .b2b-bg-img {
-            transform: scale(1.04) !important;
-        }
-
-        .b2b-cta-card::before {
-            content: "" !important;
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            z-index: 2 !important;
-            background: radial-gradient(circle at center, rgba(16, 16, 16, 0.78) 0%, rgba(16, 16, 16, 0.95) 100%) !important;
-            pointer-events: none !important;
-        }
-
-        .b2b-card-content {
-            position: relative !important;
-            z-index: 10 !important;
-            max-width: 720px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-    
-        /* REMOVE CIRCLE ARROWS FROM ALL BUTTONS */
-        .circle-arrow,
-        .cta-arrow,
-        .cta-icon-circle {
-            display: none !important;
-        }
-
-    
-        /* HEADER LOGO IMAGE STYLING */
-        .header-logo .logo {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-decoration: none !important;
-        }
-
-        .header-logo .brand-logo-img {
-            height: 28px !important;
-            width: auto !important;
-            max-height: 32px !important;
-            object-fit: contain !important;
-            display: block !important;
-        }
-
-    
-        /* REVERTED AGENCY BENTO CARD TO ORIGINAL 2-COLUMN LAYOUT */
-        .agency-bento {
-            position: relative !important;
-            background-color: #222222 !important;
-            background: #222222 !important;
-            border-radius: var(--radius-lg) !important;
-            padding: 4rem 3rem !important;
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            display: grid !important;
-            grid-template-columns: 1.2fr 1fr !important;
-            gap: 4rem !important;
-            align-items: center !important;
-            overflow: visible !important;
-            box-shadow: var(--shadow-lg) !important;
-        }
-
-        .agency-bento::before {
-            display: none !important;
-        }
-
-        .agency-bento-content {
-            position: relative !important;
-            z-index: 2 !important;
-            max-width: 100% !important;
-        }
-
-    
-        /* COMPACT VERTICAL PADDING FOR TYPOGRAPHY STATEMENT SECTION */
-        .typography-statement-section {
-            padding: 7.5rem 2rem !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-        }
-
-    
-        
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.8) !important;
-            border-radius: 32px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-    
-        
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.75) !important;
-            border-radius: 0 0 36px 36px !important;
-            mask-image: none !important;
-            -webkit-mask-image: none !important;
-        }
-
-    
-        
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.75) !important;
-            border-radius: 0 0 36px 36px !important;
-        }
-
-        .fullscreen-edge-banner {
-            width: 100vw !important;
-            max-width: 100vw !important;
-            position: relative !important;
-            left: 50% !important;
-            right: 50% !important;
-            margin-left: -50vw !important;
-            margin-right: -50vw !important;
-            height: 65vh !important;
-            min-height: 480px !important;
-            overflow: hidden !important;
-            border-radius: 0 !important;
-            border: none !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .fullscreen-edge-banner .banner-img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            border-radius: 0 !important;
-        }
-
-    
-        /* BALANCED ELEGANT SECTION SPACING */
-        section {
-            padding: 7.5rem 2rem !important;
-        }
-
-        .hero {
-            padding-top: 10.5rem !important;
-            padding-bottom: 5.5rem !important;
-        }
-
-        .typography-statement-section {
-            padding: 8rem 2rem !important;
-        }
-
-        .section-header {
-            text-align: center !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            max-width: 840px !important;
-            margin-bottom: 3.5rem !important;
-        }
-
-    
-        /* STRICTLY REMOVE ALL CIRCLE BADGES FROM ACCORDION BUTTONS */
-        .cta-icon-circle,
-        .accordion-cta-circle,
-        .circle-arrow,
-        .cta-arrow {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-
-        .accordion-cta-pill {
-            padding: 0.85rem 1.85rem !important;
-            border-radius: 999px !important;
-            background-color: #FFFFFF !important;
-            color: #161616 !important;
-            font-weight: 800 !important;
-        }
-
-        .accordion-card:not(.active) .accordion-cta-pill {
-            padding: 0.65rem 1.25rem !important;
-        }
-
-        .accordion-card:not(.active) .accordion-cta-pill span {
-            display: inline-block !important;
-            font-size: 0.8rem !important;
-        }
-
-    
-        /* REMOVED HERO DESCRIPTION PILL CONTAINER ACROSS ALL PAGES */
-        .hero-content p {
-            display: block !important;
-            background: transparent !important;
-            background-color: transparent !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            border: none !important;
-            border-radius: 0 !important;
-            padding: 0 !important;
-            max-width: 820px !important;
-            margin: 1.5rem auto !important;
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-size: 1.2rem !important;
-            line-height: 1.6 !important;
-            box-shadow: none !important;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7) !important;
-        }
-
-    
-        /* HERO BACKGROUND MASK WITH LATERAL DISTANCE / MARGINS */
-        .hero-bg-mask {
-            position: absolute !important;
-            top: 0 !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: calc(100% - 3.5rem) !important;
-            max-width: 1360px !important;
-            height: 100% !important;
-            z-index: 1 !important;
-            overflow: hidden !important;
-            pointer-events: none !important;
-            border-radius: 0 0 36px 36px !important;
-            margin: 0 !important;
-        }
-
-        .hero-bg-mask img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            filter: brightness(0.75) !important;
-            border-radius: 0 0 36px 36px !important;
-        }
-
-    
-        
-
-        .gear-icon {
-            color: #B3E5FF !important;
-        }
-
-        .bento-tag:not(.btn),
-        .matrix-badge {
-            background-color: rgba(179, 229, 255, 0.15) !important;
-            color: #B3E5FF !important;
-            border: 1px solid rgba(179, 229, 255, 0.3) !important;
-        }
-
-    
-        /* =========================================================
-           PRIMARY BUTTONS: ALWAYS BRAND ACCENT ORANGE (#EE3810)
-           ========================================================= */
-        .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip),
-        .btn-primary,
-        .btn-checkout,
-        .btn-add-kit {
+        /* Buttons Standard */
+        .btn-primary-orange {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 1.05rem 2.2rem;
             background-color: #EE3810 !important;
-            background: #EE3810 !important;
             color: #FFFFFF !important;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: 1px solid #EE3810 !important;
-            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(238, 56, 16, 0.4);
+            text-decoration: none;
         }
 
-        .btn:not(.btn-secondary):not(.btn-outline):not(.btn-tertiary):not(.btn-statement):not(.btn-skip):hover,
-        .btn-primary:hover,
-        .btn-checkout:hover,
-        .btn-add-kit:hover {
+        .btn-primary-orange:hover {
             background-color: #D62D07 !important;
-            background: #D62D07 !important;
             border-color: #D62D07 !important;
-            color: #FFFFFF !important;
-            transform: translateY(-2px) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(238, 56, 16, 0.6);
         }
 
-        /* SECONDARY BUTTONS: SOLID WHITE PILL (#FFFFFF WITH #161616 TEXT) */
-        .btn-secondary,
-        .accordion-cta-pill {
+        .btn-secondary-white {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            padding: 1.05rem 2.2rem;
             background-color: #FFFFFF !important;
-            background: #FFFFFF !important;
             color: #161616 !important;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             border: 1px solid #FFFFFF !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
 
-        .btn-secondary:hover,
-        .cta-pill-white:hover,
-        .header-actions .cta-pill-white:hover,
-        .accordion-cta-pill:hover {
-            background-color: #F2F2F2 !important;
-            background: #F2F2F2 !important;
-            border-color: #F2F2F2 !important;
-            color: #161616 !important;
-            transform: translateY(-2px) !important;
+        .btn-secondary-white:hover {
+            background-color: #B3E5FF !important;
+            border-color: #B3E5FF !important;
+            transform: translateY(-2px);
         }
 
-        /* TERTIARY BUTTONS: DARK GLASS (#222222 WITH #FFFFFF TEXT) */
-        .btn-tertiary,
-        .btn-statement,
-        .btn-outline,
-        .btn-skip,
-        .btn-skip-kit {
-            background-color: #222222 !important;
-            background: #222222 !important;
-            color: #FFFFFF !important;
-            border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            box-shadow: none !important;
+        /* Container & Section Layouts */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 7.5rem 2rem !important;
         }
 
-        .btn-tertiary:hover,
-        .btn-statement:hover,
-        .btn-outline:hover,
-        .btn-skip:hover,
-        .btn-skip-kit:hover {
-            background-color: #2A2A2A !important;
-            background: #2A2A2A !important;
-            border-color: rgba(255, 255, 255, 0.45) !important;
-            color: #FFFFFF !important;
-            transform: translateY(-2px) !important;
+        .section-title-box {
+            text-align: center;
+            max-width: 820px;
+            margin: 0 auto 4rem auto;
         }
 
-    
-        /* =========================================================
-           UNIFIED BRAND LIGHT BLUE GLASS PILL TAGS
-           ========================================================= */
-        .bento-tag,
-        .matrix-badge,
-        .step-number-badge,
-        .statement-index {
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 0.45rem 1.25rem !important;
-            background: rgba(255, 255, 255, 0.06) !important;
-            background-color: rgba(255, 255, 255, 0.06) !important;
-            color: #B3E5FF !important;
-            border: 1px solid rgba(179, 229, 255, 0.4) !important;
-            border-radius: 999px !important;
-            font-family: var(--font-display) !important;
-            font-size: 0.8rem !important;
-            font-weight: 800 !important;
-            letter-spacing: 0.05em !important;
-            text-transform: uppercase !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            box-shadow: none !important;
+        .section-tag {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.85rem;
+            display: block;
         }
 
-    
-        /* CENTER ALL PRE-SECTION HEADERS & TITLES */
-        .section-header {
-            text-align: center !important;
-            margin-left: auto !important;
-            margin-right: auto !important;
-            max-width: 840px !important;
-            margin-bottom: 3.5rem !important;
+        /* BENTO GRID PARTNERSHIP PILLARS */
+        .bento-pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
         }
 
-        .section-header h2,
-        .section-header p {
-            text-align: center !important;
+        .bento-card-full {
+            position: relative;
+            background-color: var(--color-surface-card);
+            border-radius: 32px !important;
+            min-height: 480px;
+            overflow: hidden !important;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: transform 0.4s ease, border-color 0.4s ease;
         }
 
-    
-        /* HEADER ACTION "SCARICA APP" BUTTON: ALWAYS BRAND ORANGE (#EE3810) */
-        .header-actions .cta-pill-white,
-        .header-actions .btn-primary,
-        .header-actions a[href="app.html"]:not(.cart-btn) {
-            background-color: #EE3810 !important;
-            background: #EE3810 !important;
-            color: #FFFFFF !important;
-            border: 1px solid #EE3810 !important;
-            box-shadow: 0 4px 14px rgba(238, 56, 16, 0.35) !important;
+        .bento-card-full:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
-        .header-actions .cta-pill-white:hover,
-        .header-actions .btn-primary:hover,
-        .header-actions a[href="app.html"]:not(.cart-btn):hover {
-            background-color: #D62D07 !important;
-            background: #D62D07 !important;
-            border-color: #D62D07 !important;
-            color: #FFFFFF !important;
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 20px rgba(238, 56, 16, 0.5) !important;
+        .bento-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.72);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        .bento-card-full:hover .bento-bg-img {
+            transform: scale(1.05);
+        }
+
+        .bento-overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(22, 22, 22, 0.2) 0%, rgba(22, 22, 22, 0.85) 60%, rgba(22, 22, 22, 0.98) 100%);
+            pointer-events: none;
+        }
+
+        .bento-card-body {
+            position: relative;
+            z-index: 10;
+            padding: 3rem;
+        }
+
+        .bento-pillar-badge {
+            display: inline-block;
+            padding: 0.4rem 1.1rem;
+            background: rgba(179, 229, 255, 0.15);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.3);
+            border-radius: var(--radius-pill);
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 1.25rem;
+        }
+
+        .bento-card-body h3 {
+            font-size: 2rem;
+            margin-bottom: 0.85rem;
+            line-height: 1.2;
+        }
+
+        .bento-card-body p {
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.75rem;
+        }
+
+        .bento-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.92rem;
+            color: #FFFFFF;
+        }
+
+        .check-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: rgba(179, 229, 255, 0.2);
+            color: var(--color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        /* METRICS STRIP CARD */
+        .metrics-strip-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin-top: 5rem;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .metric-number {
+            font-family: var(--font-mono);
+            font-size: 3.25rem;
+            font-weight: 900;
+            color: var(--color-secondary);
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 700;
+        }
+
+        /* SENSORY PARTNERSHIP SHOWCASE CARDS */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .partner-showcase-card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s ease;
+        }
+
+        .partner-showcase-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .partner-img-box {
+            width: 100%;
+            height: 260px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .partner-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .partner-showcase-card:hover .partner-img-box img {
+            transform: scale(1.05);
+        }
+
+        /* FORM APPLICATION CARD */
+        .partner-form-card {
+            background-color: var(--color-surface-card);
+            border-radius: 36px;
+            padding: 4.5rem 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .form-info-side h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .form-info-side p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.65;
+        }
+
+        .contact-direct-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-direct-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+            color: #FFFFFF;
+        }
+
+        .partner-form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 1.1rem 1.4rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            color: #FFFFFF;
+            font-family: inherit;
+            font-size: 0.98rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #B3E5FF;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(179, 229, 255, 0.2);
+        }
+
+        .form-select option {
+            background-color: #161616;
+            color: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161616 !important;
+            color: #FFFFFF;
+            padding: 5rem 2rem 2.5rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3.5rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-bottom: 3rem;
+        }
+
+        .footer-grid h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-grid h4 { font-size: 1rem; color: var(--color-secondary); margin-bottom: 1.25rem; }
+
+        .footer-grid a {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid a:hover { color: #FFFFFF; }
+
+        .newsletter-form input {
+            padding: 0.85rem 1.2rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
+            width: 100%;
+            margin-bottom: 0.75rem;
+            font-family: inherit;
+        }
+
+        .footer-bottom {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
     </style>
 </head>
 <body>
 
-        <!-- Reference Glassmorphic Header -->
+    <!-- Reference Glassmorphic Header -->
     <header class="glass-header">
         <div class="header-logo">
             <a href="index.html" class="logo"><img src="assets/AWAY.png" alt="AWAY Logo" class="brand-logo-img"></a>
@@ -1545,116 +802,246 @@
             </a>
             <a href="app.html" class="cta-pill-white">
                 <span>Scarica App</span>
-                
             </a>
         </div>
     </header>
 
     <main>
-        <!-- Hero Section with Radial Mask Overlay -->
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero-bg-mask">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85" alt="Hero Mask Partner">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85" alt="Ecosistema Partner AWAY">
             </div>
             <div class="hero-content">
-                <h1>L'ECOSISTEMA AWAY</h1>
-                <a href="#b2b-form" class="btn" style="margin-top: 0.5rem;">Diventa Partner AWAY</a>
+                <span class="hero-pill-badge">B2B & ECOSISTEMA PARTNER</span>
+                <h1>PARTNER & OPPORTUNITÀ B2B</h1>
+                <p>
+                    Entra a far parte del primo hub mondiale di padel immersivo: soluzioni dedicate per agenzie di viaggio, tornei aziendali su misura, partnership sensoriali e brand placement al PalaVillage Torino.
+                </p>
+                <div class="hero-cta-group">
+                    <a href="#partner-form" class="btn-primary-orange">Diventa Partner B2B ↗</a>
+                    <a href="#pilastri-b2b" class="btn-secondary-white">Scopri I Pilastri</a>
+                </div>
             </div>
         </section>
-        <!-- AGENZIE DI VIAGGIO BENTO SECTION -->
-        <section id="agenzie-viaggio" class="container">
-            <div class="agency-bento">
-                <div class="agency-bento-content">
-                    <h2 style="font-size: 2.75rem;">AGENZIE DI VIAGGIO</h2>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; margin: 1rem 0 2rem 0; line-height: 1.6;">
-                        Collaboriamo con le migliori agenzie di viaggio e tour operator per la distribuzione dei pacchetti immersivi AWAY, offrendo itinerari sportivi esclusivi e supporto dedicato.
-                    </p>
-                    <div class="agency-list" style="margin-bottom: 2.5rem;">
-                        <div class="agency-item">
-                            <div class="agency-icon">✓</div>
-                            <span>Distribuzione integrata dei pacchetti di viaggio sportivi</span>
+
+        <!-- Bento Grid: I 4 Pilastri di Partnership B2B -->
+        <section id="pilastri-b2b" class="container">
+            <div class="section-title-box">
+                <span class="section-tag">Modelli di Sinergia</span>
+                <h2>I 4 PILASTRI DELL'ECOSISTEMA B2B</h2>
+                <p style="color: var(--text-muted); font-size: 1.15rem;">
+                    Dalle agenzie di viaggio ai brand di alta gamma, offriamo format integrati ad alto impatto esperienziale.
+                </p>
+            </div>
+
+            <div class="bento-pillars-grid">
+                <!-- Pillar 1: Tour Operator & Agenzie -->
+                <div class="bento-card-full">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=85" alt="Programma Agenzie di Viaggio" class="bento-bg-img">
+                    <div class="bento-overlay-gradient"></div>
+                    <div class="bento-card-body">
+                        <span class="bento-pillar-badge">Programma Agenzie</span>
+                        <h3>Tour Operator & Agenzie di Viaggio</h3>
+                        <p>
+                            Integra i pacchetti di viaggio sportivo AWAY nel tuo catalogo con slot prioritarie riservate e supporto prenotazioni B2B.
+                        </p>
+                        <div class="bento-checklist">
+                            <div class="check-item"><span class="check-badge">✓</span> Commissioni trasparenti su pacchetti & Kit</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Portale di prenotazione riservato per agenzie</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Materiale promozionale ad alta risoluzione</div>
                         </div>
-                        <div class="agency-item">
-                            <div class="agency-icon">✓</div>
-                            <span>Commissioni dedicate e supporto prenotazioni B2B</span>
-                        </div>
+                        <a href="#partner-form" class="btn-secondary-white" style="width: 100%;">Richiedi Affiliazione Agenzia</a>
                     </div>
-                    <a href="#b2b-form" class="btn">Richiedi Affiliazione Agenzia</a>
                 </div>
 
-                <div>
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Agenzie Partner Away" style="width: 100%; height: 380px; object-fit: cover; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.1);">
+                <!-- Pillar 2: Corporate & Team Building -->
+                <div class="bento-card-full">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=85" alt="Tornei Corporate & Team Building" class="bento-bg-img">
+                    <div class="bento-overlay-gradient"></div>
+                    <div class="bento-card-body">
+                        <span class="bento-pillar-badge">Corporate & Eventi</span>
+                        <h3>Tornei Aziendali & Team Building</h3>
+                        <p>
+                            Organizza tornei aziendali ed esperienze di team building indimenticabili affittando in esclusiva i campi 360° al PalaVillage.
+                        </p>
+                        <div class="bento-checklist">
+                            <div class="check-item"><span class="check-badge">✓</span> Proiezioni visive custom con logo aziendale</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Fragranze e soundscape brandizzati in campo</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Concierge dedicato & Catering Executive VIP</div>
+                        </div>
+                        <a href="#partner-form" class="btn-secondary-white" style="width: 100%;">Organizza Evento Aziendale</a>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: Partner Sensoriali & Tech -->
+                <div class="bento-card-full">
+                    <img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=1000&q=85" alt="Partner Sensoriali Spotify & Olfattorio" class="bento-bg-img">
+                    <div class="bento-overlay-gradient"></div>
+                    <div class="bento-card-body">
+                        <span class="bento-pillar-badge">Experience & Tech</span>
+                        <h3>Partner Sensoriali & Audio 360°</h3>
+                        <p>
+                            Co-sviluppiamo le atmosfere di gioco insieme ai brand leader nel campo dell'audio 3D e dell'alta profumeria olfattiva.
+                        </p>
+                        <div class="bento-checklist">
+                            <div class="check-item"><span class="check-badge">✓</span> Integrazione playlist ed audio 3D direzionale</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Diffusione essenze sincronizzate al cambio lato</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Co-branding sugli Spray Olfattori 100ml del Kit</div>
+                        </div>
+                        <a href="#partner-form" class="btn-secondary-white" style="width: 100%;">Proponi Partnership Tech</a>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Brand Placement & Smart Lockers -->
+                <div class="bento-card-full">
+                    <img src="https://images.unsplash.com/photo-1556742049-0a670fc8078a?auto=format&fit=crop&w=1000&q=85" alt="Brand Placement & Smart Lockers" class="bento-bg-img">
+                    <div class="bento-overlay-gradient"></div>
+                    <div class="bento-card-body">
+                        <span class="bento-pillar-badge">Brand Placement</span>
+                        <h3>Sponsorship & Merchandise Custom</h3>
+                        <p>
+                            Massimizza la visibilità del tuo brand attraverso posizionamenti fisici e digitali sugli Smart Locker NFC e nel Kit AWAY.
+                        </p>
+                        <div class="bento-checklist">
+                            <div class="check-item"><span class="check-badge">✓</span> Visibilità brand sugli Smart Locker del PalaVillage</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Customizzazione componenti Away Gear Kit</div>
+                            <div class="check-item"><span class="check-badge">✓</span> Banner digitali interattivi sull'App AWAY</div>
+                        </div>
+                        <a href="#partner-form" class="btn-secondary-white" style="width: 100%;">Diventa Sponsor Ufficiale</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics Strip -->
+            <div class="metrics-strip-card">
+                <div class="metric-item">
+                    <span class="metric-number">100%</span>
+                    <span class="metric-label">Campi Immersivi 360°</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">90m</span>
+                    <span class="metric-label">Durata Partita Sensoriale</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">4</span>
+                    <span class="metric-label">Mete Ufficiali (Hawaii, Islanda, Marocco, Perù)</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">&lt; 24h</span>
+                    <span class="metric-label">Risposta Concierge B2B</span>
                 </div>
             </div>
         </section>
 
-        <!-- PARTNER SENSORIALI SECTION -->
-        <section id="partner-sensoriali" class="container">
-            <div style="text-align: center; max-width: 760px; margin: 0 auto 3rem auto;">
-                <h2>Partner Sensoriali</h2>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">
-                    Tecnologie audio ed essenze olfattive sviluppate con i leader del settore per una totale immersione durante il match.
+        <!-- Official Partner Showcase Section -->
+        <section id="partner-showcase" class="container">
+            <div class="section-title-box">
+                <span class="section-tag">Sinergie Ufficiali</span>
+                <h2>PARTNER SENSORIALI D'ECCELLENZA</h2>
+                <p style="color: var(--text-muted); font-size: 1.15rem;">
+                    Tecnologie audio ed essenze olfattive sviluppate con i leader di settore per un'immersione totale durante ogni match.
                 </p>
             </div>
 
             <div class="partners-grid">
                 <!-- Spotify Card -->
-                <div class="partner-card">
+                <div class="partner-showcase-card">
                     <div>
-                        <span class="partner-badge" style="background: rgba(30, 215, 96, 0.15); color: #1DB954;">Audio Partner</span>
-                        <div class="partner-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Spotify Away Partner">
+                        <span class="bento-pillar-badge" style="background: rgba(30, 215, 96, 0.15); color: #1DB954; border-color: rgba(30, 215, 96, 0.3);">Audio Partner</span>
+                        <div class="partner-img-box">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80" alt="Spotify Audio Partner">
                         </div>
-                        <h3>Spotify: La Tua Colonna Sonora</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.75rem;">
-                            AWAY x Spotify: Playlist ed audio 3D dedicati per ogni destinazione per accompagnarti durante il match con diffusori direzionali ed in cuffia.
+                        <h3>Spotify: Colonna Sonora 360°</h3>
+                        <p style="color: var(--text-muted); margin-top: 0.85rem; line-height: 1.6;">
+                            Soundscape direzionali 3D e playlist ufficiali curate per ciascuna destinazione sensoriale per accompagnare la concentrazione dei giocatori durante gli scambi.
                         </p>
                     </div>
-                    <div style="margin-top: 2rem;">
-                        <span style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--color-secondary);">SYNC AUDIO 360° | PLAYLIST DEDICATE</span>
+                    <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem;">
+                        <span style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--color-secondary); font-weight: 700;">SYNC AUDIO DIREZIONALE | PLAYLIST DEDICATE</span>
                     </div>
                 </div>
 
                 <!-- Olfattorio Card -->
-                <div class="partner-card">
+                <div class="partner-showcase-card">
                     <div>
-                        <span class="partner-badge" style="background: rgba(238, 56, 16, 0.15); color: #B3E5FF !important;">Aroma Partner</span>
-                        <div class="partner-img-wrap">
-                            <img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80" alt="Olfattorio Away Partner">
+                        <span class="bento-pillar-badge" style="background: rgba(238, 56, 16, 0.15); color: #B3E5FF; border-color: rgba(238, 56, 16, 0.3);">Aroma Partner</span>
+                        <div class="partner-img-box">
+                            <img src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=800&q=80" alt="Olfattorio Fragrance Partner">
                         </div>
-                        <h3>Olfattorio: Le Essenze</h3>
-                        <p style="color: var(--text-muted); margin-top: 0.75rem;">
-                            Scopri le essenze esclusive abbinate ad ogni viaggio per amplificare l'immersione sensoriale in campo, erogate ed inalate durante i cambi campo.
+                        <h3>Olfattorio: Fragranze del Viaggio</h3>
+                        <p style="color: var(--text-muted); margin-top: 0.85rem; line-height: 1.6;">
+                            Essenze naturali ed estratti vegetali diffusi in campo mediante erogatori sincronizzati ai cambi lato, abbinati agli Spray Olfattori 100ml del Kit.
                         </p>
                     </div>
-                    <div style="margin-top: 2rem;">
-                        <span style="font-size: 0.82rem; font-family: var(--font-mono); color: #B3E5FF !important;">DISPENSER OLFATTIVO | ESSENZE NATURALI</span>
+                    <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem;">
+                        <span style="font-size: 0.82rem; font-family: var(--font-mono); color: var(--color-secondary); font-weight: 700;">DISPENSER OLFATTIVO | SPRAY CUSTOM 100ML</span>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- B2B CALLOUT / CONTACT SECTION -->
-        <section id="b2b-form" class="container">
-            <div class="b2b-cta-card">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=85" alt="Unisciti All'Ecosistema AWAY B2B" class="b2b-bg-img">
-                <div class="b2b-card-content">
-                    <h2 style="font-size: 3.25rem; margin-bottom: 1rem; color: #161616 !important; font-weight: 800;">Unisciti All'Ecosistema AWAY</h2>
-                    <p style="color: rgba(255, 255, 255, 0.88); max-width: 680px; margin: 0.5rem auto 2.5rem auto; font-size: 1.15rem; line-height: 1.65;">
-                        Sei un'agenzia di viaggio, un centro sportivo o un brand interessato ad entrare nell'ecosistema di padel immersivo? Contattaci per sviluppare sinergie dedicate.
+
+        <!-- B2B Partner Form Section -->
+        <section id="partner-form" class="container">
+            <div class="partner-form-card">
+                <div class="form-info-side">
+                    <span class="section-tag">Richiesta Contatto</span>
+                    <h2>ENTRA NELL'ECOSISTEMA AWAY</h2>
+                    <p>
+                        Sei un'agenzia di viaggio, un tour operator, una società o un brand interessato ad integrare le tue soluzioni con AWAY? Compila il modulo per un incontro dedicato con il nostro team B2B.
                     </p>
 
-                    <form class="newsletter-form" style="max-width: 540px; margin: 0 auto;" onsubmit="event.preventDefault(); alert('Grazie per aver inviato la richiesta B2B! Il team AWAY ti contatterà entro 24 ore.');">
-                        <input type="text" placeholder="Nome Azienda / Agenzia" required>
-                        <input type="email" placeholder="Email aziendale di contatto" required>
-                        <button type="submit" class="btn" style="width: 100%;">Invia Richiesta Partner B2B</button>
-                    </form>
+                    <div class="contact-direct-box">
+                        <div class="contact-direct-item">
+                            <span class="check-badge">✓</span>
+                            <span>Risposta riservata dal Concierge B2B entro 24 ore</span>
+                        </div>
+                        <div class="contact-direct-item">
+                            <span class="check-badge">✓</span>
+                            <span>Supporto personalizzato al PalaVillage Torino</span>
+                        </div>
+                    </div>
                 </div>
+
+                <form class="partner-form-fields" onsubmit="event.preventDefault(); alert('Grazie per la richiesta! Il Concierge B2B di AWAY ti contatterà entro 24 ore.');">
+                    <div class="form-group">
+                        <label>Nome Azienda / Agenzia</label>
+                        <input type="text" class="form-input" placeholder="Es. Mare & Sport Viaggi S.r.l." required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                        <div class="form-group">
+                            <label>Tipo di Partnership</label>
+                            <select class="form-select" required>
+                                <option value="" disabled selected>Seleziona Opzione</option>
+                                <option value="agenzia">Agenzia di Viaggio / Tour Operator</option>
+                                <option value="corporate">Torneo Aziendale / Team Building</option>
+                                <option value="tech">Partner Sensoriale / Tecnologico</option>
+                                <option value="sponsor">Brand Placement & Sponsorship</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Aziendale</label>
+                            <input type="email" class="form-input" placeholder="b2b@azienda.it" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefono Referente</label>
+                        <input type="tel" class="form-input" placeholder="+39 011 •••• ••••" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dettagli Progetto / Messaggio</label>
+                        <textarea class="form-textarea" rows="4" placeholder="Descrivi brevemente il vostro interesse o progetto..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary-orange" style="width: 100%; font-size: 1rem; margin-top: 0.5rem;">Invia Candidatura Partner ↗</button>
+                </form>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <!-- Footer -->
     <!-- Footer -->
     <footer>
         <div class="footer-grid">
