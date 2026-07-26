@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Home</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #161616;
+            --color-surface-card: #222222;
+            --color-surface-secondary: #262626;
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+            --color-accent: #EE3810;
+            --color-secondary: #B3E5FF;
+            --color-neutral-dark: #3E3E3E;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(22, 22, 22, 0.85);
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background-color: #0D0D0D;
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Top Integrated Profile Header */
+        header {
+            padding: 0.8rem 1.25rem;
+            min-height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(22, 22, 22, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+
+        .profile-quick-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar-ring {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--color-secondary);
+            background: linear-gradient(135deg, #262626 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* Simulation Switcher Header */
+        .state-switcher {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: rgba(238, 56, 16, 0.15);
+            color: #FF6B4A;
+            border-bottom: 1px solid rgba(238, 56, 16, 0.3);
+            padding: 0.4rem 1rem;
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-mono);
+            transition: background 0.2s ease;
+        }
+
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-bottom: 90px;
+        }
+
+        section {
+            padding: 1.25rem 1.5rem;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            text-wrap: balance;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h2 { font-size: 1.4rem; line-height: 1.1; }
+        h3 { font-size: 1.15rem; line-height: 1.2; }
+        h4 { font-size: 0.95rem; line-height: 1.3; }
+
+        p {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-bottom: 0.8rem;
+            text-wrap: pretty;
+            line-height: 1.5;
+        }
+
+        /* 3-Tier Button Architecture */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.9rem 2rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.85rem 1.8rem;
+            background-color: #FFFFFF;
+            color: #161616;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.75rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.4);
+            border-radius: 999px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            backdrop-filter: blur(12px);
+        }
+
+        .card {
+            background-color: var(--color-surface-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .card-glass {
+            background: rgba(22, 22, 22, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-md);
+        }
+
+        /* Asymmetric Bento Grid */
+        .bento-asymmetric {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.9rem;
+        }
+
+        .bento-wide {
+            grid-column: span 2;
+        }
+
+        .num {
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
+            font-family: var(--font-mono);
+        }
+
+        /* Horizontal Carousel */
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.9rem;
+            padding-bottom: 0.4rem;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
+
+        .tab-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(22, 22, 22, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            z-index: 100;
+        }
+
+        .tab-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.6rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            gap: 5px;
+            position: relative;
+            padding-top: 6px;
+        }
+
+        .tab-item.active { color: var(--text-color); }
+        .tab-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 24px;
+            height: 2px;
+            background: var(--color-accent);
+            border-radius: 999px;
+        }
+
+        .tab-icon { width: 22px; height: 22px; }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>AWAY 5G</span>
+        </div>
+
+        <!-- Simulation Switcher Header -->
+        <a href="telecomando.html" class="state-switcher">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="10 8 16 12 10 16 10 8"/>
+            </svg>
+            <span>Simula Partita in Corso (Telecomando)</span>
+        </a>
+
+        <!-- Brand Header Bar -->
+        <header>
+            <a href="home.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="AWAY.png" alt="AWAY Logo" style="height: 28px; width: auto; object-fit: contain;">
+            </a>
+
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <a href="punti.html" class="badge num" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; text-decoration: none;">
+                    450 PT
+                </a>
+                <button class="icon-btn" onclick="window.location.href='notifiche.html'" aria-label="Notifiche">
+                    <div class="notification-dot"></div>
+                    <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- User Welcome Greeting Section -->
+            <section style="display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; padding-bottom: 0.4rem;">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <a href="profilo.html" class="avatar-ring" style="text-decoration: none;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                    <div>
+                        <h3 style="font-size: 1.15rem; margin-bottom: 0.1rem; color: #FFF;">Bentornato, Alex</h3>
+                        <div style="font-size: 0.72rem; color: var(--color-secondary); font-weight: 700; text-transform: uppercase;">Membro Explorer</div>
+                    </div>
+                </div>
+            </section>
+            <!-- 1. HERO CARD FULL-BLEED (PROSSIMO MATCH) -->
+            <section style="padding-top: 1.25rem; padding-bottom: 0.8rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                    <h2>Prossima Avventura</h2>
+                    <span class="badge">CONFERMATO</span>
+                </div>
+
+                <div class="card" style="position: relative; height: 350px; overflow: hidden;">
+                    <!-- Unsplash Hawaii Photo -->
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Hawaii Tropical" style="position: absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                    <div style="position: absolute; inset:0; background: linear-gradient(180deg, rgba(22,22,22,0.15) 0%, rgba(22,22,22,0.95) 85%);"></div>
+
+                    <!-- Overlay Header -->
+                    <div style="position: absolute; top: 1rem; left: 1rem; right: 1rem; display: flex; justify-content: space-between; z-index: 10;">
+                        <span class="badge" style="background: rgba(22,22,22,0.7); backdrop-filter: blur(8px);">CAMPO 3 • PALAVILLAGE</span>
+                    </div>
+
+                    <!-- Glass Content Container -->
+                    <div class="card-glass" style="position: absolute; bottom: 1rem; left: 1rem; right: 1rem; padding: 1.1rem; z-index: 10;">
+                        <div class="num" style="font-size: 0.75rem; font-weight: 700; color: var(--color-secondary); text-transform: uppercase; margin-bottom: 0.2rem;">
+                            Venerdì 18 Luglio • 19:00
+                        </div>
+                        <h3 style="font-size: 1.3rem; margin-bottom: 0.3rem; color: #FFF;">Hawaii — Tropical Vibes</h3>
+                        <p style="font-size: 0.78rem; margin-bottom: 1rem; color: rgba(255,255,255,0.75); line-height: 1.4;">
+                            Esperienza sensoriale a 360° con brezza marina ed audio 3D.
+                        </p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <a href="prenotazioni.html" class="btn-primary">VEDI PRENOTAZIONE</a>
+                            <a href="telecomando.html" class="btn-outline" style="font-size: 0.75rem; padding: 0.6rem 1rem;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                </svg>
+                                TELECOMANDO IN-CAMPO
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. BENTO GRID ASIMMETRICO (ESPERIENZE) -->
+            <section style="padding-top: 0.5rem; padding-bottom: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                    <h2>Esperienze</h2>
+                    <a href="minigiochi.html" style="font-size: 0.75rem; color: var(--color-secondary); text-decoration: none; font-weight: 700;">VEDI TUTTE</a>
+                </div>
+
+                <div class="bento-asymmetric">
+                    <!-- Main Bento Card (Spans 2 Columns) -->
+                    <div class="bento-wide" style="position: relative; height: 180px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.12); padding: 1.1rem; display: flex; flex-direction: column; justify-content: space-between;">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&q=80" style="position: absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                        <div style="position: absolute; inset:0; background: linear-gradient(180deg, rgba(22,22,22,0.15) 0%, rgba(22,22,22,0.92) 85%);"></div>
+
+                        <div style="position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center;">
+                            <span class="badge" style="background: rgba(22,22,22,0.7);">MISSIONE ATTIVA</span>
+                            <span class="badge num" style="background: var(--color-secondary); color: #161616; border: none;">+50 PT</span>
+                        </div>
+
+                        <div style="position: relative; z-index: 10;">
+                            <h3 style="font-size: 1.15rem; color: #FFF; margin-bottom: 0.2rem;">Sfida del Ghiaccio</h3>
+                            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.75); margin-bottom: 0.6rem;">Memory Islanda: sblocca punti extra per la tua prossima sfida.</p>
+                            <a href="nfc-boarding-pass.html?next=gioca.html" class="btn-secondary" style="padding: 0.6rem 1rem; font-size: 0.75rem;">GIOCA ORA</a>
+                        </div>
+                    </div>
+
+                    <!-- Sub Bento Card 1 (Nuova Prenotazione) -->
+                    <a href="nuova-prenotazione.html" style="background: var(--color-surface-card); border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.08); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; height: 140px; text-decoration: none; color: inherit;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(179, 229, 255, 0.12); display: flex; align-items: center; justify-content: center;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 0.9rem; color: #FFF; margin-bottom: 0.1rem;">Nuovo Match</h4>
+                            <div style="font-size: 0.7rem; color: var(--color-secondary);">Prenota in 1 tap</div>
+                        </div>
+                    </a>
+
+                    <!-- Sub Bento Card 2 (Kit Sensoriale) -->
+                    <a href="seleziona-solo-kit.html" style="background: var(--color-surface-card); border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.08); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; height: 140px; text-decoration: none; color: inherit;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.06); display: flex; align-items: center; justify-content: center;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-color)" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 style="font-size: 0.9rem; color: #FFF; margin-bottom: 0.1rem;">Il Tuo Kit</h4>
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">Pino Nordico</div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 3. CAROSELLO DESTINAZIONI CONSIGLIATE -->
+            <section style="padding-top: 0; padding-bottom: 1.25rem;">
+                <h2 style="margin-bottom: 0.6rem;">Destinazioni Consigliate</h2>
+                <div class="carousel-track">
+                    <!-- Islanda -->
+                    <div style="flex: 0 0 220px; height: 160px; position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
+                        <img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=500&q=80" style="position: absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                        <div style="position: absolute; inset:0; background: linear-gradient(180deg, rgba(22,22,22,0.1) 0%, rgba(22,22,22,0.9) 85%);"></div>
+                        <span class="badge" style="align-self: flex-start; font-size: 0.6rem;">ISLANDA</span>
+                        <div style="position: relative; z-index: 10;">
+                            <h4 style="font-size: 0.95rem; color: #FFF; margin-bottom: 0.2rem;">Ghiaccio e Natura</h4>
+                            <a href="dettaglio-viaggio.html?dest=islanda" class="btn-secondary" style="padding: 0.45rem 0.8rem; font-size: 0.7rem;">SCOPRI</a>
+                        </div>
+                    </div>
+
+                    <!-- Marocco -->
+                    <div style="flex: 0 0 220px; height: 160px; position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
+                        <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=500&q=80" style="position: absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                        <div style="position: absolute; inset:0; background: linear-gradient(180deg, rgba(22,22,22,0.1) 0%, rgba(22,22,22,0.9) 85%);"></div>
+                        <span class="badge" style="align-self: flex-start; font-size: 0.6rem;">MAROCCO</span>
+                        <div style="position: relative; z-index: 10;">
+                            <h4 style="font-size: 0.95rem; color: #FFF; margin-bottom: 0.2rem;">Deserto e Magia</h4>
+                            <a href="dettaglio-viaggio.html?dest=marocco" class="btn-secondary" style="padding: 0.45rem 0.8rem; font-size: 0.7rem;">SCOPRI</a>
+                        </div>
+                    </div>
+
+                    <!-- Perù -->
+                    <div style="flex: 0 0 220px; height: 160px; position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?w=500&q=80" style="position: absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                        <div style="position: absolute; inset:0; background: linear-gradient(180deg, rgba(22,22,22,0.1) 0%, rgba(22,22,22,0.9) 85%);"></div>
+                        <span class="badge" style="align-self: flex-start; font-size: 0.6rem;">PERÙ</span>
+                        <div style="position: relative; z-index: 10;">
+                            <h4 style="font-size: 0.95rem; color: #FFF; margin-bottom: 0.2rem;">Mistero Andino</h4>
+                            <a href="dettaglio-viaggio.html?dest=peru" class="btn-secondary" style="padding: 0.45rem 0.8rem; font-size: 0.7rem;">SCOPRI</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. RANK CAPSULE & PROGRESS BAR -->
+            <section style="padding-top: 0;">
+                <div class="card" style="padding: 1.1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                        <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-color);">PROSSIMO REWARD: SCONTO 10%</div>
+                        <div class="num" style="font-size: 0.75rem; color: var(--color-secondary); font-weight: 700;">450 / 500 PT</div>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="width: 90%; height: 100%; background: var(--color-secondary); border-radius: 999px;"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Tab Bar -->
+        <nav class="tab-bar">
+            <a href="home.html" class="tab-item active">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span>Home</span>
+            </a>
+            <a href="prenotazioni.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="0" ry="0"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Prenotazioni</span>
+            </a>
+            <a href="minigiochi.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                </svg>
+                <span>Esperienze</span>
+            </a>
+            <a href="punti.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+                    <path d="M12 2a4 4 0 0 0-4 4v7a4 4 0 0 0-4-4z"></path>
+                </svg>
+                <span>Punti</span>
+            </a>
+            <a href="profilo.html" class="tab-item">
+                <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v-2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>Profilo</span>
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>

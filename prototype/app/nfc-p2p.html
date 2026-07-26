@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away - World Tour Connect</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #161616;
+            --color-surface-card: #222222;
+            --color-surface-secondary: #262626;
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+            --color-accent: #EE3810;
+            --color-secondary: #B3E5FF;
+            --color-neutral-dark: #3E3E3E;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(22, 22, 22, 0.85);
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background-color: #0D0D0D;
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-variant-numeric: tabular-nums;
+        }
+
+        header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(22, 22, 22, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            text-wrap: balance;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h2 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+
+        p {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            text-wrap: pretty;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.4);
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .p2p-container {
+            width: 240px;
+            height: 200px;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--color-surface-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+            gap: 1rem;
+        }
+
+        .phone-mock {
+            width: 75px;
+            height: 125px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--color-surface-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.65rem;
+            color: var(--text-color);
+            transition: all 0.5s ease;
+        }
+
+        .phone-left { transform: rotate(-5deg); }
+        .phone-right { transform: rotate(5deg); opacity: 0.5; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>AWAY 5G</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <a href="minigiochi.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                <span style="font-weight: 700; font-size: 0.75rem;">INDIETRO</span>
+            </a>
+            <div class="badge" style="font-variant-numeric: tabular-nums; margin-bottom: 0;">
+                450 PT
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="badge">MULTIGIOCATORE P2P</div>
+
+            <h2>Trova un Avversario</h2>
+            <p>Avvicina il retro del tuo smartphone a quello di un altro giocatore per connettervi via NFC e iniziare la sfida World Tour.</p>
+
+            <div class="p2p-container">
+                <div class="phone-mock phone-left" id="phone1">
+                    <span style="color: var(--color-secondary);">P1 (TU)</span>
+                </div>
+                <div id="connectIcon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                </div>
+                <div class="phone-mock phone-right" id="phone2">
+                    <span>P2</span>
+                </div>
+            </div>
+
+            <div id="status-text" style="font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; min-height: 1.5rem; text-transform: uppercase; color: var(--text-muted);">
+                RICERCA DISPOSITIVI...
+            </div>
+
+            <button onclick="simulateConnection()" class="btn-primary">SIMULA CONNESSIONE</button>
+        </main>
+    </div>
+
+    <script>
+        function simulateConnection() {
+            const p1 = document.getElementById('phone1');
+            const p2 = document.getElementById('phone2');
+            const icon = document.getElementById('connectIcon');
+            const status = document.getElementById('status-text');
+            
+            p1.style.transform = 'rotate(0deg) translateX(10px)';
+            p2.style.transform = 'rotate(0deg) translateX(-10px)';
+            p2.style.opacity = '1';
+            p2.style.borderColor = 'var(--color-secondary)';
+            status.textContent = 'Accoppiamento NFC...';
+            status.style.color = 'var(--color-secondary)';
+            
+            setTimeout(() => {
+                status.textContent = 'Giocatore 2 Connesso!';
+                icon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>`;
+                
+                setTimeout(() => {
+                    alert('Connessione P2P riuscita! Avversario trovato: Alex90.');
+                    window.location.href = 'minigiochi.html';
+                }, 800);
+            }, 1200);
+        }
+    </script>
+</body>
+</html>

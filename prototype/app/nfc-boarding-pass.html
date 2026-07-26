@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away - NFC Scan</title>
+    <style>
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Book.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Maison Neue Mono';
+            src: url('../../fonts/fonnts.com-Maison_Neue_Mono.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #161616;
+            --color-surface-card: #222222;
+            --color-surface-secondary: #262626;
+            --text-color: #FFFFFF;
+            --text-muted: #909090;
+            --color-accent: #EE3810;
+            --color-secondary: #B3E5FF;
+            --color-neutral-dark: #3E3E3E;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.12);
+            --font-display: 'Maison Neue', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Maison Neue Mono', monospace;
+            --radius-pill: 999px;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 20px 45px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(22, 22, 22, 0.85);
+            --glass-blur: blur(16px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background-color: #0D0D0D;
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        #app-frame {
+            width: 100%;
+            max-width: 430px;
+            height: 932px;
+            background-color: var(--bg-color);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .status-bar {
+            height: 44px;
+            padding: 0 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            flex-shrink: 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-variant-numeric: tabular-nums;
+        }
+
+        header {
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(22, 22, 22, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--text-color);
+            text-transform: uppercase;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-display);
+            font-weight: 900;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            text-wrap: balance;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h2 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+
+        p {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            text-wrap: pretty;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--color-secondary);
+            border: 1px solid rgba(179, 229, 255, 0.4);
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .nfc-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px solid rgba(179, 229, 255, 0.3);
+            background: rgba(179, 229, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .nfc-card {
+            width: 140px;
+            height: 90px;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: var(--color-surface-card);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            transform: rotate(-10deg);
+            position: absolute;
+            top: 105px;
+            left: 40px;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem 2.25rem;
+            background-color: var(--color-accent);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span>9:41</span>
+            <span>AWAY 5G</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <a href="javascript:history.back()" class="back-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </a>
+                <span class="logo">SCAN NFC</span>
+            </div>
+            <div class="badge" style="font-variant-numeric: tabular-nums; margin-bottom: 0;">
+                450 PT
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <div class="badge">VERIFICA DISPOSITIVO</div>
+
+            <h2>Avvicina il Boarding Pass</h2>
+            <p>Avvicina il tuo Boarding Pass NFC al retro dello smartphone per verificare la sessione di gioco.</p>
+
+            <div class="nfc-container">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 1rem; opacity: 0.8;">
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10m-4-20a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"></path>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                <div class="nfc-card" id="nfcCard">
+                    <span style="font-family: var(--font-display); font-weight: 900; font-size: 0.75rem; color: var(--color-secondary);">BOARDING PASS</span>
+                    <span style="font-size: 0.55rem; color: var(--text-muted); margin-top: 0.2rem;">AWAY • NFC TAG</span>
+                </div>
+            </div>
+
+            <div id="status-text" style="font-weight: 700; font-size: 0.85rem; margin-bottom: 1.5rem; min-height: 1.5rem; text-transform: uppercase; color: var(--text-muted);">
+                In attesa dell'NFC...
+            </div>
+
+            <button onclick="simulateTap()" class="btn-primary">SIMULA SCAN NFC</button>
+        </main>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextUrl = urlParams.get('next') || 'gioca.html';
+        const action = urlParams.get('action');
+
+        function simulateTap() {
+            const card = document.getElementById('nfcCard');
+            const status = document.getElementById('status-text');
+            
+            card.style.transform = 'rotate(0deg) scale(1.05)';
+            card.style.top = '65px';
+            card.style.left = '40px';
+            status.textContent = 'Rilevamento in corso...';
+            status.style.color = 'var(--color-secondary)';
+            
+            setTimeout(() => {
+                if (action === 'unlock') {
+                    status.textContent = 'Nuovo Viaggio Rilevato!';
+                } else {
+                    status.textContent = 'NFC Verificato!';
+                }
+                card.style.borderColor = 'var(--color-secondary)';
+                
+                setTimeout(() => {
+                    if (action === 'unlock') {
+                        alert('Viaggio sbloccato con successo! Hawaii - Tropical Vibes è ora disponibile.');
+                    }
+                    window.location.href = nextUrl;
+                }, 800);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

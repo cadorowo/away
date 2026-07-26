@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Away App - Figma Export High-Fidelity Prototype (24 Screens)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            color: #FFFFFF;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 3rem;
+        }
+
+        .figma-header {
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 1.5rem;
+        }
+
+        .figma-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+            color: #EE3810;
+        }
+
+        .figma-subtitle {
+            font-size: 1.1rem;
+            color: #B3E5FF;
+            font-weight: 500;
+        }
+
+        /* 4 Column Grid for Figma Import */
+        .figma-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 430px);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .artboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .artboard-label {
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #909090;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .artboard-num {
+            background: rgba(179, 229, 255, 0.15);
+            color: #B3E5FF;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Inner Frame Simulation */
+        .app-frame {
+            width: 430px;
+            height: 932px;
+            background-color: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 48px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #161616;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="figma-header">
+        <h1 class="figma-title">AWAY DIGITAL — MOBILE APP PROTOTYPE</h1>
+        <div class="figma-subtitle">High-Fidelity 24 Artboards Grid Export • Optimized for html.to.design Figma Plugin</div>
+    </div>
+
+    <div class="figma-grid">
+        <!-- 01: Home -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">01</span> Home Dashboard</div>
+            <div class="app-frame">
+                <iframe src="home.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 02: Prenotazioni -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">02</span> Le Mie Prenotazioni</div>
+            <div class="app-frame">
+                <iframe src="prenotazioni.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 03: Profilo -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">03</span> Profilo Utente & Stats</div>
+            <div class="app-frame">
+                <iframe src="profilo.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 04: Punti -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">04</span> Saldo Punti & Reward</div>
+            <div class="app-frame">
+                <iframe src="punti.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 05: Nuova Prenotazione -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">05</span> Nuova Prenotazione (Destinazioni)</div>
+            <div class="app-frame">
+                <iframe src="nuova-prenotazione.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 06: Prenota Slot -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">06</span> Prenota Slot & Campo</div>
+            <div class="app-frame">
+                <iframe src="prenota-slot.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 07: Seleziona Kit -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">07</span> Personalizzazione Kit Sensoriale</div>
+            <div class="app-frame">
+                <iframe src="seleziona-kit.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 08: Seleziona Solo Kit -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">08</span> Acquisto Standalone Kit</div>
+            <div class="app-frame">
+                <iframe src="seleziona-solo-kit.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 09: Checkout -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">09</span> Checkout Partita + Kit</div>
+            <div class="app-frame">
+                <iframe src="checkout.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 10: Checkout Solo Kit -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">10</span> Checkout Standalone Kit</div>
+            <div class="app-frame">
+                <iframe src="checkout-solo-kit.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 11: Checkout Solo Partita -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">11</span> Checkout Solo Partita</div>
+            <div class="app-frame">
+                <iframe src="checkout-solo-partita.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 12: Metodo Pagamento -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">12</span> Metodi di Pagamento Registrati</div>
+            <div class="app-frame">
+                <iframe src="metodo-pagamento.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 13: Minigiochi -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">13</span> Dashboard Esperienze & Gaming</div>
+            <div class="app-frame">
+                <iframe src="minigiochi.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 14: Gioca -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">14</span> Minigioco Memory Vulcanico</div>
+            <div class="app-frame">
+                <iframe src="gioca.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 15: Mappa Islanda -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">15</span> Mappa Interattiva Islanda</div>
+            <div class="app-frame">
+                <iframe src="mappa-islanda.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 16: Telecomando -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">16</span> Telecomando In-Campo</div>
+            <div class="app-frame">
+                <iframe src="telecomando.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 17: Accesso Campo -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">17</span> QR Code Accesso Campo</div>
+            <div class="app-frame">
+                <iframe src="accesso-campo.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 18: NFC Boarding Pass -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">18</span> Scan Boarding Pass NFC</div>
+            <div class="app-frame">
+                <iframe src="nfc-boarding-pass.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 19: NFC P2P -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">19</span> Scan Multigiocatore P2P NFC</div>
+            <div class="app-frame">
+                <iframe src="nfc-p2p.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 20: Dettaglio Viaggio -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">20</span> Dettaglio Esperienza Hawaii</div>
+            <div class="app-frame">
+                <iframe src="dettaglio-viaggio.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 21: Dettaglio Evento -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">21</span> Dettaglio Torneo Community</div>
+            <div class="app-frame">
+                <iframe src="dettaglio-evento.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 22: Dettaglio Storico -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">22</span> Dettaglio Partita Completata</div>
+            <div class="app-frame">
+                <iframe src="dettaglio-storico.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 23: Notifiche -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">23</span> Impostazioni Notifiche</div>
+            <div class="app-frame">
+                <iframe src="notifiche.html"></iframe>
+            </div>
+        </div>
+
+        <!-- 24: Modifica Profilo -->
+        <div class="artboard-container">
+            <div class="artboard-label"><span class="artboard-num">24</span> Edit Profilo Personale</div>
+            <div class="app-frame">
+                <iframe src="modifica-profilo.html"></iframe>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
