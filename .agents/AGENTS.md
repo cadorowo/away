@@ -7,7 +7,7 @@ L'agente DEVE garantire che tutte le pagine del progetto siano visivamente e str
    - Stile rigorosamente in scala di grigi, layout essenziale, placeholder con "X".
 
 2. **Modalità Prototyping High-Fidelity** (cartella `prototype/sito/`):
-   - Consultare e seguire rigorosamente: → [style_prototype.md](file:///Users/cadowo/Library/Mobile%20Documents/com~apple%20Docs/Documents/projects/vibes/away%20digital/.agents/style_prototype.md)
+   - Consultare e seguire rigorosamente: → [style_prototype.md](file:///Users/cadowo/Library/Mobile%20Documents/com~apple%20Docs/Documents/projects/vibes/away%20digital/.agents/style_prototype.md) e [design.md](file:///Users/cadowo/Library/Mobile%20Documents/com~apple%20Docs/Documents/projects/vibes/away%20digital/design.md)
    - Sfondo Canvas Charcoal (`#161616`), palette brand (`#161616`, `#B3E5FF`, `#EE3810`, `#3E3E3E`, `#909090`, `#F2F2F2`), tipografia Maison Neue, Pill shapes (`999px` / `24px` radius), elevazioni con box-shadow, glassmorphism e foto reali ad alta risoluzione da Unsplash.
 
 3. **Invarianza dei Contenuti & Sperimentazione di Layout**:
